@@ -1,0 +1,41 @@
+O que precisa ter para instalar o angular no computador:
+- node.js
+- angular CLI === npm i -g @angular/cli
+- instalar o TypeScript === npm i -g typescript
+
+================================================================================================================================================
+
+Comandos:
+- ng new nome-do-projeto == cria o novo projeto angular;
+- ng serve == roda a aplicação;
+- ng g c nome-do-componente == cria um novo componente. O "g" significa gerar, "c" significa componente;
+- ng g m node-do-modulo == cria um novo modulo. O "g" significa gerar, "m" significa módulo;
+
+================================================================================================================================================
+
+Componentes:
+- há duas formas de criar um componente, via CLI ou sem o CLI.
+- sem o CLI:
+    - é preciso criar o arquivo.component.ts dentro da pasta de componente;
+    - configurar o decorator @Component dentro do componente, colocando selector, template e css;
+    - importar classe do componente dentro de um modulo. (module.ts -> @NgModule -> declarations);
+    - dentro do arquivo html, colocar a <tag> com o mesmo nome configurado no selector do component;
+
+- com CLI:
+    - utilizar o comando ng g c nome-do-componente dentro da pasta onde deseja, assim será criada uma pasta com o arquivo do componente, css, html e de testes, tudo automaticamente;
+    - já adiciona o componente dentro do modulo da pasta desejada;
+
+================================================================================================================================================
+
+Modulos:
+- ajuda a organizar a aplicação, desenvolvendo diretórios para armazenar arquivos relacionados ao módulo.
+- o app.module.ts é o módulo raiz da aplicação.
+- dentro do módulo utilizasse o decorator @NgModule, nele é declarados alguns metadados, dentre eles o declarations, imports, providers, exports;
+    - declarations: listar todos os componentes, diretivas e pipes que serão utilizados no módulo;
+    - imports: adiciona outros módulos que serão utilizados dentro do módulo específico ou componentes que utilizam módulos externos ao módulo configurado;
+    - providers: declar os serviços que ficarão disponíveis para outros módulos;
+    - bootstrap: é declarado apenas no módulo raiz, o app.module;
+    - exports: exportar as declarações (componentes, diretivas e pipes) para outros módulos;
+- para criar um módulo é só utilizar o comando ng g m node-do-modulo;
+- para que seja possível compartilhar esse módulo com o restante da aplicação, é necessário importar ele dentro do módulo principal (app.module.ts) dentro do metadado "imports"
+e, dentro do módulo que quer exportar é necessário colocar o metadado "exports" e colocar o nome do componente dentro.
