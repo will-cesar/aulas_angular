@@ -9,7 +9,8 @@ Comandos:
 - ng new nome-do-projeto == cria o novo projeto angular;
 - ng serve == roda a aplicação;
 - ng g c nome-do-componente == cria um novo componente. O "g" significa gerar, "c" significa componente;
-- ng g m node-do-modulo == cria um novo modulo. O "g" significa gerar, "m" significa módulo;
+- ng g m nome-do-modulo == cria um novo modulo. O "g" significa gerar, "m" significa módulo;
+- ng g s nome-do-servico == cria um novo servico. O "g" significa gerar, "s" significa servico;
 
 ================================================================================================================================================
 
@@ -36,6 +37,59 @@ Modulos:
     - providers: declar os serviços que ficarão disponíveis para outros módulos;
     - bootstrap: é declarado apenas no módulo raiz, o app.module;
     - exports: exportar as declarações (componentes, diretivas e pipes) para outros módulos;
+    - providers: serviços fornecedores utilizados pelos componentes de dentro do módulo;
+
 - para criar um módulo é só utilizar o comando ng g m node-do-modulo;
 - para que seja possível compartilhar esse módulo com o restante da aplicação, é necessário importar ele dentro do módulo principal (app.module.ts) dentro do metadado "imports"
 e, dentro do módulo que quer exportar é necessário colocar o metadado "exports" e colocar o nome do componente dentro.
+
+================================================================================================================================================
+
+Templates: 
+- são os arquivos html dentro da pasta do componente
+- para passar variáveis de forma dinâmica entre componente e html é necessário criar ela dentro do arquivo do componente (component.ts);
+    - no arquivo html, pegar a variável pela interpolação {{ nome da variável declarada no component.ts }}
+
+Diretivas no template:
+- Loop:
+    - for: *ngFor="let nome-qualquer of nome-da-variavel"
+        - Exemplo: <li *ngFor="let curso of cursos">{{curso}}</li>
+
+================================================================================================================================================
+
+Serviços:
+- para criar um serviço é necessário criar um arquivo .service.ts;
+- comando para criar: ng g s nome-do-servico;
+    - será criado os arquivos nome-do-arquivo.service.spec.ts e nome-do-arquivo.service.ts.
+- para chamar um service dentro de um componente é necessário importar o mesmo dentro do arquivo do componente.ts desejado;
+
+Injeção de dependência:
+- fazer com que o angular forneça uma instância da classe de serviço, sem precisar instânciar manualmente;
+- o decorator @Injectable() fornece essa possibilidade de injetar a classe sem instânciar ela;
+- para fazer a injeção é necessário declarar a classe dentro do constructor no componente
+    - exemplo: constructor(private primeiroServico: PrimeiroServicoService) == declara a variavel "primeiroServico" do tipo "PrimeiroServicoService", que é a classe importada no arquivo
+    - o "private" guarda o escopo desse acesso da classe dentro do constructor;
+
+================================================================================================================================================
+
+Property Binding e Interpolação
+- Data Binding: uma forma de associar informações que estão no componente para o template, e vice e versa. Tipos:
+    - Interpolação "{{ valor }}": (componente -> template);
+    - Property binding "[propriedade]="valor": (componente -> template);
+        - (evento)="handler": (template -> componente);
+    - Two way data binding [(ngModel)]="propriedade";
+
+================================================================================================================================================    
+
+Class e style binding:
+- é possível criar uma váriavel dentro de um elemento html através da # mais o nome da variável
+    - exemplo <select #classe (change)="0">
+    - assim fica armazenado dentro da var classe as propriedades do elemento
+    - exemplos de class e style binding: projeto data-binding -> app -> data-binding -> data-binding.component.html
+
+================================================================================================================================================
+
+Event binding:
+- eventos pré definidos no angular;
+- https://developer.mozilla.org/pt-BR/docs/Web/API/Event;
+- exemplos em: projeto data-binding -> app -> data-binding -> data-binding.component.html;
