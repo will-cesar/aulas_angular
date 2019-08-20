@@ -23,7 +23,8 @@ Componentes:
     - dentro do arquivo html, colocar a <tag> com o mesmo nome configurado no selector do component;
 
 - com CLI:
-    - utilizar o comando ng g c nome-do-componente dentro da pasta onde deseja, assim será criada uma pasta com o arquivo do componente, css, html e de testes, tudo automaticamente;
+    - utilizar o comando ng g c nome-do-componente dentro da pasta onde deseja, assim será criada uma pasta com o arquivo do componente, css, html e de testes, 
+    tudo automaticamente;
     - já adiciona o componente dentro do modulo da pasta desejada;
 
 ================================================================================================================================================
@@ -40,8 +41,8 @@ Modulos:
     - providers: serviços fornecedores utilizados pelos componentes de dentro do módulo;
 
 - para criar um módulo é só utilizar o comando ng g m node-do-modulo;
-- para que seja possível compartilhar esse módulo com o restante da aplicação, é necessário importar ele dentro do módulo principal (app.module.ts) dentro do metadado "imports"
-e, dentro do módulo que quer exportar é necessário colocar o metadado "exports" e colocar o nome do componente dentro.
+- para que seja possível compartilhar esse módulo com o restante da aplicação, é necessário importar ele dentro do módulo principal (app.module.ts) 
+dentro do metadado "imports" e, dentro do módulo que quer exportar é necessário colocar o metadado "exports" e colocar o nome do componente dentro.
 
 ================================================================================================================================================
 
@@ -67,7 +68,8 @@ Injeção de dependência:
 - fazer com que o angular forneça uma instância da classe de serviço, sem precisar instânciar manualmente;
 - o decorator @Injectable() fornece essa possibilidade de injetar a classe sem instânciar ela;
 - para fazer a injeção é necessário declarar a classe dentro do constructor no componente
-    - exemplo: constructor(private primeiroServico: PrimeiroServicoService) == declara a variavel "primeiroServico" do tipo "PrimeiroServicoService", que é a classe importada no arquivo
+    - exemplo: constructor(private primeiroServico: PrimeiroServicoService) == declara a variavel "primeiroServico" do tipo "PrimeiroServicoService", 
+    que é a classe importada no arquivo;
     - o "private" guarda o escopo desse acesso da classe dentro do constructor;
 
 ================================================================================================================================================
@@ -93,3 +95,43 @@ Event binding:
 - eventos pré definidos no angular;
 - https://developer.mozilla.org/pt-BR/docs/Web/API/Event;
 - exemplos em: projeto data-binding -> app -> data-binding -> data-binding.component.html;
+
+================================================================================================================================================
+
+Two-way data binding:
+- junta o binding de propriedade e de evento em um lugar só;
+- [(ngModel)]="nome" dentro do elemento;
+- exemplos em: projeto data-binding -> app -> meu-form -> meu-form.component.html;
+- ngModel é uma diretiva do angular que pertence ao "FormsModule", onde precisa ser importado no module
+
+================================================================================================================================================
+
+Input properties:
+- é utilizado para passar dados pelo html para outro componente;
+- dentro de um componente pai, colocar um componente pelo seu seletor, dentro dele adicionar uma propriedade que tenha o mesmo nome da váriavel 
+dentro do componente filho, assim essa variável poderá ser acessada no html do componente filho.
+- dentro do componente filho é necessário utilizar o decorator @Input();
+    - no decorator é possível colocar o nome da propriedade externa, que é recebida, e o nome da propriedade interna, armazenada em uma variável;
+        - exemplo: @Input('nome') nomeCurso: string = '';
+
+- Exemplo: <app-curso [nome]="nomeDoCurso"></app-curso>
+    - Esse exemplo está em: data-binding -> app -> data-binding -> data-binding.component.html;
+    - o app-curso está em: data-binding -> app -> input-property -> input-property.component.html;
+
+================================================================================================================================================
+
+Output properties:
+- é utilizado para exibir os dados para fora do elemento, pelo componente pai;
+- Esse exemplo está em: data-binding -> app -> data-binding -> data-binding.component.html;
+- o app-curso está em: data-binding -> app -> input-property -> output-property.component.html; 
+
+================================================================================================================================================
+
+Ciclo de vida do componente:
+- ngOnChanges: ativado antes do ngOnInit e quando o valor property-binding é atualizado;
+- ngOnInit: quando o Component é inicializado;
+- ngDoCheck: ativado a cada ciclo de verificação de mudanças;
+- ngAfterContentInit: depois de inserir conteúdo externo na view;
+- ngAfterContentChecked: a cada verificação de conteúdo inserido;
+- ngAfterViewChecked: a cada verificação de conteúdo / conteúdo filho;
+- ngOnDestroy: antes da diretiva/component ser destruído;
