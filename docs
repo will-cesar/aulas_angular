@@ -9,8 +9,15 @@ Comandos:
 - ng new nome-do-projeto == cria o novo projeto angular;
 - ng serve == roda a aplicação;
 - ng g c nome-do-componente == cria um novo componente. O "g" significa gerar, "c" significa componente;
-- ng g m nome-do-modulo == cria um novo modulo. O "g" significa gerar, "m" significa módulo;
-- ng g s nome-do-servico == cria um novo servico. O "g" significa gerar, "s" significa servico;
+- ng g m nome-do-modulo == cria um novo modulo. O "m" significa módulo;
+- ng g s nome-do-servico == cria um novo servico. O "s" significa servico;
+- ng g d node-da-diretiva == cria uma nova diretiva. O "d" significa diretiva;
+- ng g p node-do-pipe == cria um novo pipe. O "p" significa pipe;
+- ng g class node-da-diretiva == cria uma nova class;
+- ng g interface node-do-interface == cria uma nova interface;
+- ng g enum node-do-enum == cria um novo enum;
+- ng build == gera o build de desenvolvimento;
+- ng build --prod == gera o build de produção; 
 
 ================================================================================================================================================
 
@@ -26,6 +33,13 @@ Componentes:
     - utilizar o comando ng g c nome-do-componente dentro da pasta onde deseja, assim será criada uma pasta com o arquivo do componente, css, html e de testes, 
     tudo automaticamente;
     - já adiciona o componente dentro do modulo da pasta desejada;
+
+================================================================================================================================================
+
+Comandos especiais:
+- ng lint: escanear todo o código, verificar boas práticas do style guides, erros como ponto e vírgula, etc;
+- ng test: executa os testes unitários no projeto;
+- ng e2e: executa os testes end 2 end no projeto;
 
 ================================================================================================================================================
 
@@ -135,3 +149,32 @@ Ciclo de vida do componente:
 - ngAfterContentChecked: a cada verificação de conteúdo inserido;
 - ngAfterViewChecked: a cada verificação de conteúdo / conteúdo filho;
 - ngOnDestroy: antes da diretiva/component ser destruído;
+
+================================================================================================================================================
+
+Utilizando pré-processadores:
+- Sass, Lass, stylus
+- é possível gerar um novo projeto já com esses pré processadores instalados:
+    - ng new nome-do-projeto --style=sass;
+    - ng new nome-do-projeto --style=less;
+    - ng new nome-do-projeto --style=stylus;
+
+- ou utilizar já em um projeto existente:
+    - ng set defaults.styleExt scss;
+    - ng set defaults.styleExt less;
+    - ng set defaults.styleExt styl;
+
+================================================================================================================================================
+
+Gerando build de desenvolvimento:
+- ng build;
+- o build é gerado dentro do diretório dist;
+- apresentam 3 arquivos:
+    - index.html == index.html limpo;
+    - main.bundle.js == possui todo o código fonte da aplicação (css e html);
+    - polyfills.bundle.js == código auxiliar ao browser para ler a aplicação;
+
+Gerando build de produção:
+- ng build --prod;
+- minifica o código js da aplicação;
+- css e templates html já minificados e incluídos em main.bundle.js
