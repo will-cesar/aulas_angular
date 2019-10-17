@@ -65,10 +65,22 @@ Templates:
 - para passar variáveis de forma dinâmica entre componente e html é necessário criar ela dentro do arquivo do componente (component.ts);
     - no arquivo html, pegar a variável pela interpolação {{ nome da variável declarada no component.ts }}
 
-Diretivas no template:
-- Loop:
-    - for: *ngFor="let nome-qualquer of nome-da-variavel"
-        - Exemplo: <li *ngFor="let curso of cursos">{{curso}}</li>
+================================================================================================================================================
+
+Diretivas:
+- Diretivas são instruções;
+- Diretivas estruturais:
+    - Loop:
+        - for: *ngFor="let nome-qualquer of nome-da-variavel"
+            - Exemplo: <li *ngFor="let curso of cursos">{{curso}}</li>
+
+    - Condição:
+        - if: *ngIf=""
+            - Exemplo: <p *ngIf="var > 0"></p>
+
+- Diretivas de atributos:
+    - Interage com os elementos em que foram aplicadas;
+    - ng-class e ng-style;
 
 ================================================================================================================================================
 
