@@ -18,3 +18,20 @@
 
 <br>
 <button (click)="onMostrarCursos()">Mostrar ou esconder cursos</button>
+
+<h5>Hidden como alternativa</h5>
+<!-- 
+  Hidden é uma alternativa para não deixar custoso o uso do DOM.
+  Com o hidden, o elemento aparece no dom, mas não será exibido na tela 
+  O hidden é um Property Binding, ou seja, uma propriedade existente no html que poderá ser usada dentro da estrutura,
+  assim poderá ser ativada ou não conforme a variável .
+  Se for uma árvore de elementos pequenas, com um ou outro elemento, vale a pena usar o property binding, se for contrário, o ngIf
+-->
+
+<div [hidden]="!mostrarCursos">
+  Lista de cursos aqui.
+</div>
+
+<div [hidden]="mostrarCursos">
+  Não existem cursos para serem listados.
+</div>
