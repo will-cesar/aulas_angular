@@ -82,6 +82,10 @@ Diretivas:
     - Interage com os elementos em que foram aplicadas;
     - ng-class e ng-style;
 
+- ngSwitch, ngSwitchCase e ngSwitchDefault:
+    - utilizado no caso de switch and case;
+    - Olhar exemplo em diretivas -> diretiva-ngswitch;
+
 ================================================================================================================================================
 
 Serviços:
