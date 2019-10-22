@@ -194,3 +194,9 @@ Gerando build de produção:
 - ng build --prod;
 - minifica o código js da aplicação;
 - css e templates html já minificados e incluídos em main.bundle.js
+
+================================================================================================================================================
+
+Operador Elvis:
+- Utilizado para identificar caso seja um valor nulo ou não e exibir na tela
+- Exemplo: diretivas -> operador-elvis

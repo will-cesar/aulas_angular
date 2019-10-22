@@ -7,3 +7,4 @@ Observações:
 - primeiro-projeto: aulas 1 a 8
 - data-binding: aulas 9 a 16
 - diretivas: aulas 25 a 30
+- operador elvis: aula 31

@@ -1,0 +1,5 @@
+<p>Descrição: {{ tarefa.desc }}</p>
+<p>Responsável: {{ tarefa.responsavel != null ? tarefa.responsavel.nome : '' }}</p>
+<!-- Operador elvis -->
+<!-- Utilizado para identificar caso seja um valor nulo ou não e exibir na tela -->
+<p>Responsável: {{ tarefa.responsavel?.usuario?.nome }}</p>
