@@ -200,3 +200,9 @@ Gerando build de produção:
 Operador Elvis:
 - Utilizado para identificar caso seja um valor nulo ou não e exibir na tela
 - Exemplo: diretivas -> operador-elvis
+
+================================================================================================================================================
+
+ng-content:
+- Utilizado para passar a informação digitada dentro do seletor principal do componente para dentro do html do componente
+- Exemplo: diretivas -> exemplo-ng-content.component e diretivas -> app.component.html
