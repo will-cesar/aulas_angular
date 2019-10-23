@@ -206,3 +206,17 @@ Operador Elvis:
 ng-content:
 - Utilizado para passar a informação digitada dentro do seletor principal do componente para dentro do html do componente
 - Exemplo: diretivas -> exemplo-ng-content.component e diretivas -> app.component.html
+
+================================================================================================================================================
+
+Diretiva de atributo:
+- com o ng g d nome-da-diretiva é possível criar uma diretiva nova no projeto
+- utiliza o decorator de @Directive;
+- no seletor é possível filtrar o tipo de elemento que você quer usar, exemplo:
+    - selector: p[nomeDoSeletor];
+    -           button[nomeDoSeletor];
+- é preciso criar um construtor instanciando o ElementRef, que é responsável por referenciar o elemento no DOM;
+- ElementRef => Referencia do elemento. Utilizado como injeção de dependencia;
+- o grande problema do ElementRef são vulnerabilidades na aplicação devido o acesso diretamente ao elemento pelo DOM;
+- por isso há como utilizar o Renderer também para a mesma função;
+- exemplo: diretivas -> shared -> fundo-amarelo.directive.ts
