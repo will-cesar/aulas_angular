@@ -219,4 +219,18 @@ Diretiva de atributo:
 - ElementRef => Referencia do elemento. Utilizado como injeção de dependencia;
 - o grande problema do ElementRef são vulnerabilidades na aplicação devido o acesso diretamente ao elemento pelo DOM;
 - por isso há como utilizar o Renderer também para a mesma função;
-- exemplo: diretivas -> shared -> fundo-amarelo.directive.ts
+- Seta o elemento dentro de algum método vindo da injeção de dependencia com 3 elementos ('elemento renderizado', 'nome do atributo', 'valor');
+- exemplo: diretivas -> shared -> fundo-amarelo.directive.ts;
+
+================================================================================================================================================
+
+HostListener e HostBinding
+- HostListener "escuta" o elemento host, ou seja, o elemento hospedeiro da diretiva;
+- pode colocar o nome do evento que será "escutado" no elemento;
+- metadado + nome do evento + function
+    - exemplo: diretivas -> shared -> highlight-mouse;  
+
+- HostBinding é um metadado que permite que faça a associação de um determinado atributo da diretiva para um determinado atributo do html
+- metadado + tipo de atributo + variável;
+- associa o atributo a uma variável;
+    - exemplo: diretivas -> shared -> highlight-mouse;
