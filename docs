@@ -228,9 +228,17 @@ HostListener e HostBinding
 - HostListener "escuta" o elemento host, ou seja, o elemento hospedeiro da diretiva;
 - pode colocar o nome do evento que será "escutado" no elemento;
 - metadado + nome do evento + function
-    - exemplo: diretivas -> shared -> highlight-mouse;  
+    - exemplo: diretivas -> shared -> highlight-mouse.diretives.ts;  
 
 - HostBinding é um metadado que permite que faça a associação de um determinado atributo da diretiva para um determinado atributo do html
 - metadado + tipo de atributo + variável;
 - associa o atributo a uma variável;
-    - exemplo: diretivas -> shared -> highlight-mouse;
+    - exemplo: diretivas -> shared -> highlight-mouse.diretives.ts;
+
+================================================================================================================================================
+
+Diretiva Input com property binding
+- com o metadado @Input é posivel colocar um valor na diretiva dentro do html.
+- exemplo: <p [highlight]="'red'" [dafaultColor]="'grey'">
+- assim, o valor colocado no html é passado para o arquivo .ts e tratado conforme solicitado
+- exemplo: diretivas -> shared -> highlight.diretives.ts;
