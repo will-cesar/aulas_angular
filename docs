@@ -242,3 +242,15 @@ Diretiva Input com property binding
 - exemplo: <p [highlight]="'red'" [dafaultColor]="'grey'">
 - assim, o valor colocado no html é passado para o arquivo .ts e tratado conforme solicitado
 - exemplo: diretivas -> shared -> highlight.diretives.ts;
+
+================================================================================================================================================
+
+Diretiva de estrutura:
+- com o ng g d nome-da-diretiva é possível criar uma diretiva de estrutura nova no projeto;
+- uma diretiva que irá modificar a estrutura do DOM;
+- exemplo: diretivas -> shared -> ng-else.diretives.ts;
+    - Utilizado o metadado @Input para receber um valor;
+    - utiliza o "set" para "escutar" toda vez q ele for setado, modificado;
+    - quando modificado, o "set" modifica o valor do template da diretiva;
+    - TemplateRef: faz referencia ao template;
+    - ViewContainerRef: faz referencia ao container da view, ou seja, o conteúdo q será renderizado;
