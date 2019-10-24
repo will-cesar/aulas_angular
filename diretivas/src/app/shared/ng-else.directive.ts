@@ -15,8 +15,8 @@ export class NgElseDirective {
   }
 
   constructor(
-    private _templateRef: TemplateRef<any>,
-    private _viewContainerRef: ViewContainerRef
+    private _templateRef: TemplateRef<any>, // pega o conteúdo que há a diretiva no html
+    private _viewContainerRef: ViewContainerRef // pega o elemento que há a diretiva no html
   ) { }
 
 }
