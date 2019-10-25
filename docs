@@ -254,3 +254,19 @@ Diretiva de estrutura:
     - quando modificado, o "set" modifica o valor do template da diretiva;
     - TemplateRef: faz referencia ao template;
     - ViewContainerRef: faz referencia ao container da view, ou seja, o conteúdo q será renderizado;
+
+================================================================================================================================================
+
+Serviços:
+- Classes responsáveis por buscar dados no servidor e enfiar dados ao mesmo;
+- serviços também são uteis para não repetição de código na aplicação;
+- fornece lógica de negócio e evita código duplicado;
+- também podera utilizar classes utilitárias;
+- o construtor é o primeiro método que é executado, pois constroe a classe;
+
+- Injeção de dependencia:
+- a injeção de dependencia cria a instância do service, dentro do construtor, passando a referencia dessa instância para que uma outra classe
+possa utilizar também;
+- O decorator @Injectable() diz para o angular que é uma classe injetável; Exemplo: servicos -> cursos -> cursos.service;
+- é necessário declarar nos providers do module que será utilizado o serviço com injeção;
+    - exemplo sem e com o uso de injeção de dependencia: servicos -> cursos -> cursos.component;

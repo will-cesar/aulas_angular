@@ -6,6 +6,5 @@ Link: https://www.youtube.com/watch?v=tPOMG0D57S0&list=PLGxZ4Rq3BOBoSRcKWEdQACbU
 Observações:
 - primeiro-projeto: aulas 1 a 8
 - data-binding: aulas 9 a 16
-- diretivas: aulas 25 a 30
-- operador elvis: aula 31
-- ng-content: aula 32
+- diretivas: aulas 25 a 36
+- serviços: aulas 37 a 42
