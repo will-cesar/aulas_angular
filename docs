@@ -263,6 +263,8 @@ Serviços:
 - fornece lógica de negócio e evita código duplicado;
 - também podera utilizar classes utilitárias;
 - o construtor é o primeiro método que é executado, pois constroe a classe;
+- quando declarada uma variável "static", não é preciso instânciar o serviço para acessar ela em outro componente;
+    - servicos -> cursos -> cursos.service
 
 - Injeção de dependencia:
 - a injeção de dependencia cria a instância do service, dentro do construtor, passando a referencia dessa instância para que uma outra classe
@@ -270,3 +272,43 @@ possa utilizar também;
 - O decorator @Injectable() diz para o angular que é uma classe injetável; Exemplo: servicos -> cursos -> cursos.service;
 - é necessário declarar nos providers do module que será utilizado o serviço com injeção;
     - exemplo sem e com o uso de injeção de dependencia: servicos -> cursos -> cursos.component;
+
+- Padrão singleton:
+- ter apenas uma instância da classe para toda a aplicação;
+- dividir em módulos, declarar os componentes dentro desses módulos, exportar os mesmos e declarar o módulo no app.component;
+- assim terão componentes replicáveis dentro da aplicação, mas com apenas uma instância dentro do módulo;
+- com cada componente declarando no provider um serviço, e esse serviço seja replicado em diversos componente, cada um se comportará da maneira
+em que o componente manipula o serviço, apenas afetando aquele componente, e não outros componente da aplicação;  
+- é preciso declarar o "providers: []" dentro do decorator @Component;
+    - exemplo: servicos -> criar-curso // servicos -> cursos; 
+
+================================================================================================================================================
+
+Pipes:
+- é como se fosse um filtro de front, onde há formatações de valores dentro do DOM sem passar pelo ts
+- nos pipes é possível colocar parâmetros neles
+    - por exemplo nos pipes de number, nele é possível formatar casas decimais 
+    - exemplo: {{ variavel | number:'2.1-2' }}
+        - o primeiro '2' representa a quantidade de inteiros que irá aparecer
+        - pós o ponto "." é possível colocar um número mínimo de casas decimais até a o número máximo
+    
+    - por exemplo pipe de data
+    - exemplo: {{ variavel | date:'dd/MM/yyyy' }}
+
+- para criar um pipe é necessário utilizar o comando ng g p nome-do-pipe
+- também é necessário declarar ele no modulo que será utilizado (no declarations)
+    - exemplo de pipe criado: pipes -> camel-case.pipe.ts
+
+- internacionalização nos pipes
+- é possível setar uma localização padrão para os pipes da aplicação
+    - é necessário adicionar um novo provider dentro do módulo desejado
+    - exemplo:
+        {
+            provide: LOCALE_ID,
+            useValue: 'pt'
+        }
+    - necessário importar o "registerLocaleData" do @angular/common
+    - importar o "localePt" do "@angular/common/locales/pt" 
+    - e chamar o método registerLocaleData com os parâmetros
+        - exemplo: registerLocaleData(localePt, 'pt');
+        - pipes -> app.modules.ts
