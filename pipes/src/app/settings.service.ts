@@ -6,4 +6,8 @@ import { Injectable } from '@angular/core';
 export class SettingsService {
 
   constructor() { }
+
+  getLocale() {
+    return 'pt';
+  }
 }

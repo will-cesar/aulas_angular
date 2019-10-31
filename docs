@@ -312,3 +312,9 @@ Pipes:
     - e chamar o método registerLocaleData com os parâmetros
         - exemplo: registerLocaleData(localePt, 'pt');
         - pipes -> app.modules.ts
+
+- também é possível utilizar pipes em loops
+
+- Pipe puro:
+- um pipe puro não olha as modificações do valor que é passado como parâmetro para o médoto de transform
+    - exemplo: pipes -> filtro-array.pipe // pipes -> exemplos-pipes.component
