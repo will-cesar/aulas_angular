@@ -318,3 +318,8 @@ Pipes:
 - Pipe puro:
 - um pipe puro não olha as modificações do valor que é passado como parâmetro para o médoto de transform
     - exemplo: pipes -> filtro-array.pipe // pipes -> exemplos-pipes.component
+
+- Pipe impuro:
+- o pipe impuro olha as modificações do valor mara o método transform
+    - exemplo: pipes -> filtro-array-impuro
+    - nesse exemplo, é utilizado o "extends" do FiltroArrayPipe, dessa forma é herdado para dentro do método as outras functions do método extendido

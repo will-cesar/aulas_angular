@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { timeout } from 'q';
 
 @Component({
   selector: 'app-exemplos-pipes',
@@ -24,6 +25,23 @@ export class ExemplosPipesComponent implements OnInit {
     this.livros.push(valor);
     console.log(this.livros);
   }
+
+  obterCursos() {
+    if (this.livros.length === 0 || this.filtro === undefined || this.filtro.trim() === '') {
+      return this.livros;
+    }
+
+    return this.livros.filter((v) => {
+      if (v.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0) {
+        return true;
+      }
+      return false;
+    });
+  }
+
+  valorAsync = new Promise((resolve, reject) => {
+    setTimeout(() => resolve('Valor assincrono'), 2000)
+  });
 
   constructor() { }
 

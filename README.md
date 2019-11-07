@@ -9,3 +9,4 @@ Observações:
 - diretivas: aulas 25 a 36
 - serviços: aulas 37 a 42
 - pipes: aulas 43 a 48
+- rotas: aulas 49 a 70
