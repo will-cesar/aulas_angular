@@ -1,0 +1,19 @@
+<nav>
+  <div>
+    <ul>
+      <li [routerLinkActive]="['active']">
+        <a [routerLink]="['/']">Home</a>
+      </li>
+
+      <li [routerLinkActive]="['active']">
+        <a [routerLink]="['/login']">Login</a>
+      </li>
+
+      <li [routerLinkActive]="['active']">
+        <a [routerLink]="['/cursos']">Cursos</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>

@@ -323,3 +323,22 @@ Pipes:
 - o pipe impuro olha as modificações do valor mara o método transform
     - exemplo: pipes -> filtro-array-impuro
     - nesse exemplo, é utilizado o "extends" do FiltroArrayPipe, dessa forma é herdado para dentro do método as outras functions do método extendido
+
+================================================================================================================================================
+
+Rotas:
+- é gerado automaticamente pelo angular cli um arquivo chamado app-routing.module
+- nele é possível configurar as rotas principais da aplicação;
+- para configurar, é necessário criar uma varial de rotas, instanciando o "Routes" e aplicando cada objeto especificando qual é a rota a ser utilizada
+    - path: o caminho para o determinado componente;
+    - component: renderiza um componente;
+- exemplo: rotas -> app-routing.modules.ts;
+
+[routerLink]:
+- é utilizado para redirecionar para a url que desejar, como se fosse o "href"
+- exemplo: rotas -> app.component.html;
+
+[routerLinkActive]:
+- utilizado para sinalizar qual é a rota ativa no momento;
+- é possível adicionar uma classe no elemento sinalizado;
+- exemplo: rotas -> app.component.html;
