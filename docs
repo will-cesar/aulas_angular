@@ -342,3 +342,10 @@ Rotas:
 - utilizado para sinalizar qual é a rota ativa no momento;
 - é possível adicionar uma classe no elemento sinalizado;
 - exemplo: rotas -> app.component.html;
+
+ActivatedRoute:
+- classe do angular onde é possível capturar um atributo dentro da rota;
+    - exemplo: rotas -> curso-detalhe.component
+
+Router:
+- é possível redirecionar para qual rota desejar através da classe "Router", que é importanda e instanciada no construtor

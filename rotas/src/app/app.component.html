@@ -12,8 +12,17 @@
       <li [routerLinkActive]="['active']">
         <a [routerLink]="['/cursos']">Cursos</a>
       </li>
+
+      <li [routerLinkActive]="['active']">
+        <a [routerLink]="['/curso', idCurso.value]">Curso com id</a>
+      </li>
     </ul>
   </div>
 </nav>
+
+<div>
+  <label>Entre com o id do curso:</label>
+  <input type="" value="" #idCurso>
+</div>
 
 <router-outlet></router-outlet>
