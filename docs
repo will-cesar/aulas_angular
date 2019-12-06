@@ -349,3 +349,12 @@ ActivatedRoute:
 
 Router:
 - é possível redirecionar para qual rota desejar através da classe "Router", que é importanda e instanciada no construtor
+
+Lazy loading:
+- é utilizado para carregar apenas o modulo por vez, quando entrar na rota
+- no "app-routing.module.ts" é necessário criar uma rota padrão para o módulo, onde dentro do modulo havera outro arquivo routing
+    - nesse arquivo routing interno do modulo, é configurada as rotas filhas dele
+- no "app-routing.module.ts" colocar assim:
+    - Exemplo: { path: 'cursos', loadChildren: './cursos/cursos.module#CursosModule'}
+    - loadChildren para carregar as rotas filhas desse modulo em questão
+    - é necessário também retirar dos imports do app.module o modulo que está configurado para o lazy loading 

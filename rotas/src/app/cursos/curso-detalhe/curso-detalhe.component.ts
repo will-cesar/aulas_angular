@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { CursosService } from '../cursos/cursos.service';
+import { CursosService } from '../cursos.service';
 
 @Component({
   selector: 'app-curso-detalhe',
@@ -26,7 +26,6 @@ export class CursoDetalheComponent implements OnInit {
     // this.inscricao = this.route.params.subscribe((params: any) => { // método dinâmico de pegar a url
     //   this.id = params['id'];
     // });
-    debugger
 
     this.inscricao = this.route.params.subscribe((params: any) => { 
         this.id = params['id'];
@@ -34,7 +33,7 @@ export class CursoDetalheComponent implements OnInit {
         this.curso = this.cursoService.getCurso(this.id);
 
         if (!this.curso) {
-          this.router.navigate(['/não-encontrado']);
+          this.router.navigate(['/cursos/não-encontrado']);
         }
       });
   }
