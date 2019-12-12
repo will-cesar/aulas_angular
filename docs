@@ -358,3 +358,53 @@ Lazy loading:
     - Exemplo: { path: 'cursos', loadChildren: './cursos/cursos.module#CursosModule'}
     - loadChildren para carregar as rotas filhas desse modulo em questão
     - é necessário também retirar dos imports do app.module o modulo que está configurado para o lazy loading 
+
+Guarda de rotas:
+- é um tipo de serviço que implementa um determinado um método que é usado como um guarda de rota
+- os guardas de rotas sempre precisam ser chamados nos "providers" dos modulos
+- é injetado diretamente na rota pelo atributo "canActivate"
+    - esse atributo espera o nome da classe onde está configurado o guarda de rota
+    - dentro dessa classe é configurado o método "canActivate", que o mesmo espera dois atributos
+- exemplo: rotas -> guards -> auth.guard.ts // rotas -> app-routing.module.ts
+
+canActivate:
+- parametro utilizado para verificar um modulo por inteiros
+
+canActivateChild:
+- verifica as rotas filhas de um modulo
+- exemplo: rotas -> alunos -> alunos.routing.module.ts // rotas -> guards -> alunos.guard.ts
+
+CanDeactivate:
+- verifica se o usuário pode desativar uma rota específica
+- é utilizado quando "trava" o redirecionamento para uma outra rota, nisso é possível validar se deseja trocar de rota ou não
+    - exemplo: rotas -> guards -> alunos-deactivate.guard.ts // rotas -> alunos -> aluno-form -> aluno-form.component.ts  
+
+Resolver:
+- utilizado para obter informações antes do componente ser renderizado
+- é útil para carregar informações dos services, assim os resultados aparecem no html de forma mais rápida
+    - exemplos: rotas -> alunos -> guards -> aluno-detalhe.resolver.ts // 
+                rotas -> alunos -> alunos.routing.module.ts
+
+canLoad:
+- verifica se o usuário tem permissão para carregar o script do módulo
+    - exemplo: rotas -> guards -> auth.guard.ts
+
+Rota para "Página não encontrada":
+- Exemplo: rotas -> app-routing.module.ts
+
+Rota "home":
+- redirecionar as rotas vazias para uma com "/home"
+- utilizar os atributos "redirectTo", onde será o endereço que for direcionado
+- "pathMatch" onde serão verificados os pacotes de rotas
+    - exemplo: rotas -> app-routing.module.ts
+
+================================================================================================================================================
+
+Interface:
+- é um arquivo typescript onde é possível implementar métodos que podem ser utilizados em outros componentes quando for ativado;
+    - exemplo: rotas -> guards -> iform-candeactivate.ts // 
+               rotas -> guards -> alunos-deactivate.guard.ts //
+               rotas -> alunos -> aluno-form -> aluno-form.component.ts
+
+================================================================================================================================================
+

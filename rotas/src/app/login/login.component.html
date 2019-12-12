@@ -1,1 +1,13 @@
-<p>login works!</p>
+<p>Login</p>
+
+<div style="width: 100%;margin-bottom: 30px;">
+    <input id="usuario" type="text" [(ngModel)]="usuario.nome">
+    <label for="usuario">Usuário</label>
+</div>
+
+<div style="width: 100%;margin-bottom: 30px;">
+    <input id="senha" type="password" [(ngModel)]="usuario.senha">
+    <label for="senha">Senha</label>
+</div>
+
+<button type="submit" (click)="fazerLogin()">Login</button>
