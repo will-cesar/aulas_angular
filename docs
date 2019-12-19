@@ -346,6 +346,8 @@ Rotas:
 ActivatedRoute:
 - classe do angular onde é possível capturar um atributo dentro da rota;
     - exemplo: rotas -> curso-detalhe.component
+    - também pode ser utilizado com o snapshot da rota
+        - ex: "this.route.snapshot.params['id'];"
 
 Router:
 - é possível redirecionar para qual rota desejar através da classe "Router", que é importanda e instanciada no construtor
@@ -408,3 +410,5 @@ Interface:
 
 ================================================================================================================================================
 
+Forms:
+- 

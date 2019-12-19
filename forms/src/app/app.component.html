@@ -1,0 +1,15 @@
+<ul class="nav">
+  <li class="nav-item">
+    <a class="nav-link" [routerLink]="['/']">Angular Forms</a>
+  </li>
+  <li class="nav-item" [routerLinkActive]="active">
+    <a class="nav-link" [routerLink]="['/templateForm']">Form - Template Driven</a>
+  </li>
+  <li class="nav-item" [routerLinkActive]="active">
+    <a class="nav-link" [routerLink]="['/dataForm']">Form - Data Driven</a>
+  </li>
+</ul>
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
