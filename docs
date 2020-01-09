@@ -411,4 +411,10 @@ Interface:
 ================================================================================================================================================
 
 Forms:
-- 
+- o angular apresenta um formato específico para utilizar formulários dentro da sua estrutura.
+- o [(ngModel)] dentro do input é utilizado para guardar as informações e atualizar elas nas variáveis
+- forms template x reactive (data driven)
+    - Orientado a template: Fomulário é criado e configurado no HTML. Angular deduz um FormGroup a partir do HTML
+        - exemplos: forms -> app -> template-form
+        
+    - Orientado a dados: Formulário é criado programaticamente e é sincronizado com o DOM/HTML
