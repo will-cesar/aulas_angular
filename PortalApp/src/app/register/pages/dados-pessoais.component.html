@@ -1,0 +1,160 @@
+<div class="register-step">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 offset-md-1">
+                <h1 class="desktophighlightdark-grey register-title">Faça seu cadastro</h1>
+                <span class="textdark-grey register-subtitle hidden-md-down">É muito rápido! Preencha com seu nome, CPF, e-mail e telefone.</span>
+                <span class="textdark-grey register-subtitle hidden-md-up">Preencha seus dados pessoais.</span>
+            </div>
+            <div class="col-md-6 form-box">
+                <form [formGroup]="form" name="resume-form" class="floating-form">
+                    <div class="floating-label">
+                        <input class="floating-input" formControlName="name" name="name" type="text" (focus)="onFocus()" (blur)="onBlur()" placeholder=" ">
+                        <label>Nome Completo</label>
+                        <span class="obs-campo-erro" *ngIf="verifyInvalidAndTouched('name')">Nome inválido</span>
+                    </div>
+                    <div class="floating-label half-input">
+                        <input class="floating-input" formControlName="document" name="document" type="text"
+                            (focus)="onFocus()" (blur)="onBlur()" mask="099.099.099-09" placeholder=" ">
+                        <label>CPF</label><span class="obs-campo-erro" *ngIf="verifyInvalidAndTouched('document')">CPF
+                            inválido</span>
+                    </div>
+                    <div class="floating-label">
+                        <input class="floating-input" formControlName="email" (focus)="onFocus()" (blur)="onBlur()"
+                            name="email" type="email" placeholder=" ">
+                        <label>E-mail</label><span class="obs-campo-erro"
+                            *ngIf="verifyInvalidAndTouched('email')">E-mail
+                            inválido</span>
+                    </div>
+                    <div class="floating-label half-input">
+                        <input class="floating-input" formControlName="tel" name="tel" mask="(00) 00009-0000"
+                            type="text" (focus)="onFocus()" (blur)="onBlur()" placeholder=" ">
+                        <label>Telefone</label><span class="obs-campo-erro"
+                            *ngIf="verifyInvalidAndTouched('tel')">Celular
+                            inválido</span>
+                    </div>
+                    <div class="floating-label register-checkbox">
+                        <input type="checkbox" [checked]="true" name="termos-compromisso"
+                            formControlName="termsAndConditions" id="termos-compromisso">
+                        <div>Aceito os <a href="{{mediaRepository}}{{termsUrl}}" target="_blank">termos de compromisso.</a>
+                        </div>
+                        <span class="obs-campo-erro" *ngIf="verifyInvalidAndTouched('termsAndConditions')">Aceite
+                            obrigatório</span>
+                    </div>
+                    <!-- <div class="floating-label register-checkbox">
+                        <input type="checkbox" [checked]="true" name="termos-compartilhamento"
+                            formControlName="termsShareData" id="termos-compartilhamento">
+                        <div>Aceito os <span (click)="openDados(contentDados)">termos de compartilhamento de dados para
+                                tratamento.</span></div>
+                        <span class="obs-campo-erro" *ngIf="verifyInvalidAndTouched('termsShareData')">Aceite
+                            inválido</span>
+                    </div> -->
+                    <div class="floating-label">
+                        <div class="form-buttom">
+                            <button type="submit" (click)="onSubmit()" name="submit"
+                                class="button-secundary buttontextpink">Continuar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #contentCompromisso let-modal>
+    <div class="modal-header">
+        <h4 class="tittledark-grey" id="modal-termos-compromisso">Termos de compromisso.</h4>
+        <div class="textdark-grey">O que está contemplado na Cobertura completa:</div>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body coverage-modal">
+        <ul>
+            <li>
+                <div class="titulo-item">Roubo e Furto</div>
+                <span class="textdark-grey">Se o carro for roubado e não fo encontrado, o seguro cobre e não deixa você
+                    no prejuízo.</span>
+            </li>
+            <li>
+                <div class="titulo-item">Assistência 24h</div>
+                <span class="textdark-grey">Com essa cobertura um guincho vai até o lugar em que o carro está, para
+                    buscar você ou um mecânico para fazer o carro funciona.</span>
+            </li>
+            <li>
+                <div class="titulo-item">Dano a terceiros</div>
+                <span class="textdark-grey">No caso de colisão ou acidente que tenha machucado alguém, você fica
+                    protejido de gastos até R$ 50.000.</span>
+            </li>
+            <li>
+                <div class="titulo-item">Colisão</div>
+                <span class="textdark-grey">No caso de colisão sem conserto, a covertura de perda total reembolsa o
+                    valor e você não fica ano prejuízo.</span>
+            </li>
+        </ul>
+    </div>
+    <!-- <div class="modal-footer">
+        <div class="textdark-grey">Documento com todas as informações sobre o Seguro</div>
+        <button type="button" class="button-secundary buttontextpink"
+            (click)="modal.close('Save click')">Download</button>
+    </div> -->
+</ng-template>
+<ng-template #contentDados let-modal>
+    <div class="modal-header">
+        <h4 class="tittledark-grey" id="modal-termos-dados">Termos de compartilhamento de dados para tratamento.</h4>
+        <div class="textdark-grey">O que está contemplado na Cobertura completa:</div>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body coverage-modal">
+        <ul>
+            <li>
+                <div class="titulo-item">Roubo e Furto</div>
+                <span class="textdark-grey">Se o carro for roubado e não fo encontrado, o seguro cobre e não deixa você
+                    no prejuízo.</span>
+            </li>
+            <li>
+                <div class="titulo-item">Assistência 24h</div>
+                <span class="textdark-grey">Com essa cobertura um guincho vai até o lugar em que o carro está, para
+                    buscar você ou um mecânico para fazer o carro funciona.</span>
+            </li>
+            <li>
+                <div class="titulo-item">Dano a terceiros</div>
+                <span class="textdark-grey">No caso de colisão ou acidente que tenha machucado alguém, você fica
+                    protejido de gastos até R$ 50.000.</span>
+            </li>
+            <li>
+                <div class="titulo-item">Colisão</div>
+                <span class="textdark-grey">No caso de colisão sem conserto, a covertura de perda total reembolsa o
+                    valor e você não fica ano prejuízo.</span>
+            </li>
+        </ul>
+    </div>
+    <!-- <div class="modal-footer">
+        <div class="textdark-grey">Documento com todas as informações sobre o Seguro</div>
+        <button type="button" class="button-secundary buttontextpink"
+            (click)="modal.close('Save click')">Download</button>
+    </div> -->
+</ng-template>
+<app-breadCrumb *ngIf="showBreadcrumbMobile" breadCrumbStatus="" step1Status="active" step2Status="" step3Status=""
+    step4Status="" finalizacaoSimulador="" #breadCrumbComponent>
+</app-breadCrumb>
+
+
+
+
+<ng-template id="error-modal" #errorModal let-modal>
+    <div class="modal-header">
+        <h1 class="proposal-title">Erro na validação de dados:</h1>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="container">
+            <div class="row">
+                <div [innerHTML]="errorContent"></div>
+            </div>
+        </div>
+    </div>
+</ng-template>

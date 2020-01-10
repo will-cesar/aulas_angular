@@ -1,0 +1,240 @@
+<app-destaqueImagem id="simulador-destaque" imagemDestaqueMobile="/wp-content/uploads/2019/12/simulador_mobile_novo.png"
+    imagemDestaqueDesktop="/wp-content/uploads/2019/12/simulador_desk_novo.png"
+    tituloDestaque="Seu carro está a poucos passos de você" corTituloDestaque="#FF7900"
+    subTituloDestaque="Simule agora e escolha a melhor opção para você." corSubTituloDestaque="#fff"
+    descricaoDestaque="" corDescricaoDestaque="" startReservation="true" #destaqueImagemComponent>
+</app-destaqueImagem>
+<app-breadCrumb *ngIf="session" breadCrumbStatus="" step1Status="active" step2Status="" step3Status="" step4Status=""
+    finalizacaoSimulador="" hasBanner="has-banner" #breadCrumbComponent>
+</app-breadCrumb>
+<div id="slider-planos" class="slider-planos slider-passo-1">
+    <div class="container">
+        <div class="row title-row">
+            <div class="col-md-7">
+                <h1 class="desktophighlightdark-grey">Escolha seu carro</h1>
+            </div>
+            <div class="col-md-3 offset-md-2 hidden-sm-down">
+                <a *ngIf="showCaroussel" (click)="toggleCarousel()" class="button-secundary buttontextpink">
+                    Veja todos os carros
+                </a>
+                <a *ngIf="!showCaroussel" (click)="toggleCarousel()" class="button-secundary buttontextpink">
+                    Veja menos carros
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div (click)="toggleFiltro()" class="model-filter">
+                    <img src="/assets/images/simulador/filter-icon.svg" />
+                    <span>{{textoFiltro}}</span>
+                </div>
+            </div>
+        </div>
+        <app-loading loaderClass="progress-loader" *ngIf="vehicleModelsList$.length == 0"></app-loading>
+        <div (click)="toggleFundo()" class="fundo" [ngClass]="fundoModalAberto && filtroAberto ? '' : 'fundo-hidden'">
+        </div>
+        <div class="lista-modelos row" [ngClass]="!filtroAberto ? 'hidden-modelos' : ''">
+            <div class="close-details-modal" [ngClass]="!filtroAberto ? 'hide' : ''" (click)="toggleFiltro()"></div>
+            <div class="col-md-2" *ngFor="let slide of vehicleClassList$">
+                <div (click)="filtrarModelo($event, slide.class, slide.brand.name);" class="item-modelo">
+                    <img src="{{mediaRepository}}{{ slide.vehicleModels[0]?.featuredPhoto }}" />
+                    <div class="nome-marca">{{slide.brand.name}}</div>
+                    <div class="nome-modelo">{{slide.class}}</div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="currentFilter.length > 0" class="row">
+            <div class="col">
+                <div class="desktopsubtittledark-grey current-filter">{{currentFilter}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="container container-carrousel">
+        <div *ngIf="!showCaroussel && innerWidth > 767" class="row">
+            <div *ngFor="let slide of vehicleModelsList$ | filterlist: modeloFiltro" class="slide col col-md-3">
+                <div class="slide-content" [ngClass]="selectedClass$?.modelId == slide.modelId ? 'active' : ''">
+                    <div class="car-flag" *ngIf="slide.importantText.length > 0">{{slide.importantText}}</div>
+                    <img src="{{mediaRepository}}{{ slide.featuredPhoto }}" alt="" width="100%">
+                    <div class="subtextdark-grey marca-classe">{{slide.brand}} {{slide.class}}</div>
+                    <div class="subtextdark-grey modelo"><strong>{{slide.model | className}}</strong>
+                        {{slide.model | classSpecifications}}</div>
+                    <perfect-scrollbar style="max-height: 100px;min-height: 100px;">
+                        <ul>
+                            <li class="textdark-grey" *ngFor="let serialItem of slide.vehicleSerialItems">
+                                {{serialItem.name}}
+                            </li>
+                        </ul>
+                    </perfect-scrollbar>
+                    <div class="preco-plano">
+                        <div [ngStyle]="{'visibility' : slide.priceOf !== null ? 'visible' : 'hidden'}" class="preco-de subtextdark-grey">de {{slide.priceOf  | currency:'BRL':true }}</div>
+                        <div class="preco-por subtextdark-grey">por <span
+                                class="desktopsubtittledark-grey">{{ slide.priceBy  | currency:'BRL':true  }}</span>/mês
+                        </div>
+                    </div>
+                    <div class="cta-plano">
+                        <a *ngIf="selectedClass$" (click)="selecionarPlano($event, slide); "
+                            [ngx-scroll-to]="'selecao-cores-content'"
+                            class="button-secundary buttontextpink selectButton">
+                            Escolher
+                        </a>
+                        <a *ngIf="!selectedClass$" (click)="selecionarPlano($event, slide); "
+                            [ngx-scroll-to]="'selecao-cores-content'"
+                            class="button-secundary buttontextpink selectButton">
+                            Escolher
+                        </a>
+                        <a class="button-secundary buttontextpink selectedButton">
+                            <img src="/assets/images/simulador/check-white.svg" /> Selecionado
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ngx-slick-carousel *ngIf="!showCaroussel && innerWidth < 768" class="carousel row cars-carousel"
+            #slickModal="slick-carousel" [config]="slideConfigPlanos">
+            <div ngxSlickItem *ngFor="let slide of vehicleModelsList$ | filterlist: modeloFiltro"
+                class="slide col col-md-3">
+                <div class="slide-content" [ngClass]="selectedClass$?.modelId == slide.modelId ? 'active' : ''">
+                    <div class="car-flag" *ngIf="slide.importantText.length > 0">{{slide.importantText}}</div>
+                    <img src="{{mediaRepository}}{{ slide.featuredPhoto }}" alt="" width="100%">
+                    <div class="subtextdark-grey marca-classe">{{slide.brand}} {{slide.class}}</div>
+                    <div class="subtextdark-grey modelo"><strong>{{slide.model | className}}</strong>
+                        {{slide.model | classSpecifications}}</div>
+                    <perfect-scrollbar style="max-height: 100px;min-height: 100px;">
+                        <ul>
+                            <li class="textdark-grey" *ngFor="let serialItem of slide.vehicleSerialItems">
+                                {{serialItem.name}}
+                            </li>
+                        </ul>
+                    </perfect-scrollbar>
+                    <div class="preco-plano">
+                        <div [ngStyle]="{'visibility' : slide.priceOf !== null ? 'visible' : 'hidden'}"
+                            class="preco-de subtextdark-grey">de
+                            {{slide.priceOf  | currency:'BRL':true }}</div>
+                        <div class="preco-por subtextdark-grey">por <span
+                                class="desktopsubtittledark-grey">{{ slide.priceBy  | currency:'BRL':true  }}</span>/mês
+                        </div>
+                    </div>
+                    <div class="cta-plano">
+                        <a *ngIf="selectedClass$" (click)="selecionarPlano($event, slide); "
+                            [ngx-scroll-to]="'selecao-cores-content'"
+                            class="button-secundary buttontextpink selectButton">
+                            Escolher
+                        </a>
+                        <a *ngIf="!selectedClass$" (click)="selecionarPlano($event, slide); "
+                            [ngx-scroll-to]="'selecao-cores-content'"
+                            class="button-secundary buttontextpink selectButton">
+                            Escolher
+                        </a>
+                        <a class="button-secundary buttontextpink selectedButton">
+                            <img src="/assets/images/simulador/check-white.svg" /> Selecionado
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </ngx-slick-carousel>
+        <ngx-slick-carousel *ngIf="showCaroussel" class="carousel row cars-carousel" #slickModal="slick-carousel"
+            [config]="slideConfigPlanos">
+            <div ngxSlickItem *ngFor="let slide of featuredVehicleModelsList$ | filterlist: modeloFiltro"
+                class="slide col col-md-3">
+                <div class="slide-content" [ngClass]="selectedClass$?.modelId == slide.modelId ? 'active' : ''">
+                    <div class="car-flag" *ngIf="slide.importantText.length > 0">{{slide.importantText}}</div>
+                    <img src="{{mediaRepository}}{{ slide.featuredPhoto }}" alt="" width="100%">
+                    <div class="subtextdark-grey marca-classe">{{slide.brand}} {{slide.class}}</div>
+                    <div class="subtextdark-grey modelo"><strong>{{slide.model | className}}</strong>
+                        {{slide.model | classSpecifications}}</div>
+                    <perfect-scrollbar style="max-height: 100px;min-height: 100px;">
+                        <ul>
+                            <li class="textdark-grey" *ngFor="let serialItem of slide.vehicleSerialItems">
+                                {{serialItem.name}}
+                            </li>
+                        </ul>
+                    </perfect-scrollbar>
+                    <div class="preco-plano">
+                        <div [ngStyle]="{'visibility' : slide.priceOf !== null ? 'visible' : 'hidden'}"
+                            class="preco-de subtextdark-grey">de
+                            {{slide.priceOf  | currency:'BRL':true }}</div>
+                        <div class="preco-por subtextdark-grey">por <span
+                                class="desktopsubtittledark-grey">{{ slide.priceBy  | currency:'BRL':true  }}</span>/mês
+                        </div>
+                    </div>
+                    <div class="cta-plano">
+                        <a *ngIf="selectedClass$" (click)="selecionarPlano($event, slide); "
+                            [ngx-scroll-to]="'selecao-cores-content'"
+                            class="button-secundary buttontextpink selectButton">
+                            Escolher
+                        </a>
+                        <a *ngIf="!selectedClass$" (click)="selecionarPlano($event, slide); "
+                            [ngx-scroll-to]="'selecao-cores-content'"
+                            class="button-secundary buttontextpink selectButton">
+                            Escolher
+                        </a>
+                        <a class="button-secundary buttontextpink selectedButton">
+                            <img src="/assets/images/simulador/check-white.svg" /> Selecionado
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </ngx-slick-carousel>
+    </div>
+</div>
+
+<div *ngIf="selectedClass$" class="selecao-cores" id="selecao-cores-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-lg-6">
+                <div class="textwhite hidden-sm-down brand-name selecao-cores-content">{{selectedClass$.brand}}</div>
+                <div class="desktophighlightpink hidden-sm-down">{{selectedClass$.class }}</div>
+                <div class="hidden-md-up subtextwhite">{{selectedClass$.brand}} {{selectedClass$.class}}</div>
+                <div class="desktopsubtittlewhite">{{selectedClass$.model | className}}
+                    {{selectedClass$.model | classSpecifications}} - {{selectedClass$.modelYear}}</div>
+                <a class="detalhes-mobile hidden-md-up" (click)="toggleSerialItensList()">+ detalhes</a>
+                <p class="textwhite hidden-sm-down">
+                    {{ selectedClass$.description}}
+                </p>
+                <div (click)="toggleFundo()" class="fundo"
+                    [ngClass]="fundoModalAberto && listaItensSerieAberto ? '' : 'fundo-hidden'"></div>
+                <ul class="hidden-sm-down">
+                    <li class="textdark-grey" *ngFor="let serialItem of selectedClass$.vehicleSerialItems">
+                        {{serialItem.name}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="modal-car-details-mobile hidden-md-up" [ngClass]="!listaItensSerieAberto ? 'hidden-itens-serie' : ''">
+        <div class="close-details-modal" (click)="toggleSerialItensList()"></div>
+        <div class="textwhite">{{selectedClass$.brand}}</div>
+        <div class="desktophighlightpink">{{selectedClass$.class }}</div>
+        <div class="desktopsubtittlewhite"><strong>{{selectedClass$.model | className}}</strong>
+            {{selectedClass$.model | classSpecifications}} - {{selectedClass$.modelYear}}</div>
+        <p class="textwhite descricao">{{ selectedClass$.description}}
+        </p>
+        <ul>
+            <li class="textdark-grey" *ngFor="let serialItem of selectedClass$.vehicleSerialItems">
+                {{serialItem.name}}
+            </li>
+        </ul>
+    </div>
+    <div id="cores-carousel" class="cores-carousel">
+        <img class="destaque-carro" src="{{mediaRepository}}{{ modelColorPhoto }}" alt="">
+        <div class="tittledark-grey">Escolha a cor</div>
+        <ngx-slick-carousel class="carousel" #slickModalCores="slick-carousel" [config]="slideConfigCores">
+            <div *ngFor="let color of selectedClass$.vehicleColors;let i = index" ngxSlickItem
+                class="slide color-thumb">
+                <!-- <div *ngIf="i == 0" (click)="selectColor(color , $event)"  #inputFilter class="thumb-cor"
+                    [ngStyle]="{'background-color': color.primaryColor}">
+                    <img class="color-check" src="/assets/images/simulador/check-step.svg" />
+                    <span [ngStyle]="{'color': color.darkColor ? '#fff' : '#282832' }">{{color.color}}</span>
+                </div> -->
+                <div (click)="selectColor(color , $event)"
+                    [ngClass]="color.cmsId == selectedColorId ? 'thumb-cor selected-color' : 'thumb-cor'"
+                    [ngStyle]="{'background-color': color.primaryColor}">
+                    <img class="color-check" src="/assets/images/simulador/check-step.svg" />
+                    <span [ngStyle]="{'color': color.darkColor ? '#fff' : '#282832' }">{{color.color}}</span>
+                </div>
+            </div>
+        </ngx-slick-carousel>
+    </div>
+</div>
+
+<app-preco *ngIf="selectedClass$"></app-preco>

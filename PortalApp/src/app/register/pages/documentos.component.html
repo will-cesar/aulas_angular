@@ -1,0 +1,356 @@
+<div class="register-step"
+  [ngStyle]="{'background-color': (currentTab == 'face-photo' || currentTab == 'cnh-photo') && innerWidth < 768 ? '#282832' : '' }">
+  <div class="container">
+    <div (click)="toggleHelper()" class="fundo" [ngClass]="infoOpen ? '' : 'fundo-hidden'"></div>
+    <div class="row">
+      <div class="col-md-5 offset-md-1 hidden-md-down">
+        <h1 class="desktophighlightdark-grey register-title">Faça seu cadastro</h1>
+        <span class="textdark-grey register-subtitle" *ngIf="currentTab !== 'cnh-infos'">Envie a foto do seu rosto e da
+          sua CNH.
+          É muito simples, se estiver no seu celular você pode realizar a foto na hora!
+          Caso contrário, basta fazer o upload de uma foto já existente ;) No final,
+          você precisa apenas incluir os dados da sua CNH.</span>
+
+        <span class="textdark-grey register-subtitle" *ngIf="currentTab == 'cnh-infos'">Preencha os dados da sua
+          CNH</span>
+      </div>
+
+      <div [hidden]="currentTab !== 'infos-list'" class="col-md-6 form-box infos-list">
+        <h1 class="desktophighlightdark-grey register-title">Faça seu cadastro</h1>
+        <span class="textdark-grey">Para finalizar seu cadastro envie todas as informações solicitadas abaixo:</span>
+        <a class="doc-item" (click)="hasFacePhoto ? openFacePhoto(contentFacePhoto) : tabChange('face-photo')"
+          [ngClass]="hasFacePhoto ? 'active' : ''"><span class="see-photo" *ngIf="hasFacePhoto">Ver
+            foto</span>Foto do rosto</a>
+        <a class="doc-item" (click)="hasCNHPhoto ? openCNHPhoto(contentCNHPhoto) : tabChange('cnh-photo')"
+          [ngClass]="hasCNHPhoto ? 'active' : ''"><span class="see-photo" *ngIf="hasCNHPhoto">Ver
+            foto</span>Foto da CNH</a>
+        <a class="doc-item" (click)="tabChange('cnh-infos')">Dados da CNH</a>
+        <div *ngIf="hasFacePhoto && hasCNHPhoto && innerWidth > 991" class="actions-step">
+          <a [routerLink]="['/cadastro/endereco']" class="button-secundary left-button back-button">Voltar</a>
+          <button type="submit" name="submit" class="button-secundary buttontextpink right-button">Finalizar</button>
+        </div>
+      </div>
+
+      <div *ngIf="currentTab == 'face-photo'" class="col-md-6 form-box face-photo">
+        <div class="header" *ngIf="innerWidth > 767">
+          <h1>Foto do rosto</h1>
+          <p class="textdark-grey">Vamos precisar de uma foto sua para validação de seu cadastro. Você pode fazer upload
+            de uma imagem ou uma selfie.</p>
+        </div>
+        <div class="selfie-infos" *ngIf="innerWidth > 767">
+          <div class="item">
+            <img src="/assets/images/register/item-selfie-1.svg" />
+            <span class="textdark-grey">Verifique se sua postura está reta na foto, com os olhos e cabeça de frente para
+              a câmera.</span>
+          </div>
+          <div class="item">
+            <img src="/assets/images/register/item-selfie-2.svg" />
+            <span class="textdark-grey">Escolha uma foto em que você não use chapéus, óculos ou qualquer outro
+              acessório.</span>
+          </div>
+        </div>
+        <div class="actions-step" *ngIf="innerWidth > 767">
+          <button class="back-button left-button" (click)="tabChange('infos-list')">Voltar</button>
+          <div class="upload-btn-wrapper right-button">
+            <button class="btn-upload" style="position: relative;z-index: 10;" (click)="selfieInput.click()">Upload da
+              foto</button>
+            <input #file type="file" accept="image/x-png,image/jpeg" (change)="chooseFacePhoto(file.files)" class="custom-file-input"
+              #selfieInput />
+            {{message}}
+          </div>
+        </div>
+        <div class="mobile-photo" *ngIf="currentTab == 'face-photo' && currentSubTab == null && innerWidth < 768">
+          <h1 class="tittlewhite">Foto do rosto</h1>
+          <p class="textwhite">Vamos precisar de uma foto sua para validação de seu cadastro. Você pode fazer upload de
+            uma imagem ou uma selfie.</p>
+          <img class="selfie-moile" src="/assets/images/register/selfie.svg" />
+          <div class="photo-buttons">
+            <a class="button-secundary" (click)="subTabChange('uploadSelfie')">Upload</a>
+            <a class="button-secundary" (click)="subTabChange('cameraSelfie')">Usar Câmera</a>
+          </div>
+        </div>
+        <div style="color:#fff;" class="upload-mobile" *ngIf="currentSubTab == 'uploadSelfie'">
+          <div (click)="subTabChange(null)">voltar</div>
+          <h1 class="tittlewhite">Upload de foto</h1>
+          <p class="textwhite">Atenção para as orientações:</p>
+          <ul class="instructions-list">
+            <li>
+              <img src="./assets/icons/selfie/posture.svg" alt="Postura">
+              <p class="hidden-sm-down">Verifique se sua postura<br> está reta na foto, com <br>os olhos e
+                cabeça de frente<br> para a câmera.</p>
+              <p class="hidden-md-up">Verifique se sua postura está reta na foto, com os olhos e cabeça de
+                frente para a câmera.</p>
+            </li>
+            <li>
+              <img src="./assets/icons/selfie/no-hat.svg" alt="Postura">
+              <p class="hidden-sm-down">Escolha uma foto em que você<br> não use chapéus, óculos ou<br>
+                qualquer outro acessório.</p>
+              <p class="hidden-md-up">Escolha uma foto em que você não use chapéus, óculos ou qualquer
+                outro acessório.</p>
+            </li>
+          </ul>
+          <div class="actions-step-upload">
+            <div class="upload-btn-wrapper">
+              <button class="btn-upload" style="position: relative;z-index: 10;" (click)="selfieInput.click()">Upload da
+                foto</button>
+              <input #file type="file" accept="image/x-png,image/jpeg" (change)="chooseFacePhoto(file.files)" class="custom-file-input"
+                #selfieInput />
+              {{message}}
+            </div>
+          </div>
+        </div>
+        <div style="color:#fff;" class="camera-mobile" *ngIf="currentSubTab == 'cameraSelfie'">
+          <div (click)="subTabChange(null)">voltar</div>
+          <h1 class="tittlewhite">Selfie</h1>
+          <p class="textwhite">Atenção para as orientações:</p>
+          <ul class="instructions-list">
+            <li>
+              <img src="./assets/icons/selfie/size-eye.svg" alt="Postura do corpo">
+              <p>Posicione o celular<br> na altura dos olhos.</p>
+            </li>
+            <li>
+              <img src="./assets/icons/selfie/no-hat.svg" alt="Sem chapéu">
+              <p>Não use chapéus, óculos<br> ou qualquer acessório.</p>
+            </li>
+            <li>
+              <img src="./assets/icons/selfie/posture.svg" alt="Postura">
+              <p>Enquadre seu rosto na <br>área demarcada</p>
+            </li>
+          </ul>
+          <div class="actions-step-upload">
+            <div class="upload-btn-wrapper">
+              <button class="btn-upload" (click)="selfieInput.click()">Tirar foto</button>
+              <input #file type="file" accept="image/x-png,image/jpeg" (change)="chooseFacePhoto(file.files)" class="custom-file-input"
+                capture="camera" #selfieInput />
+              {{message}}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="currentTab == 'cnh-photo'" class="col-md-6 form-box cnh-photo">
+        <div class="header" *ngIf="innerWidth > 767">
+          <h1>Foto da CNH</h1>
+          <p class="textdark-grey">Vamos precisar de uma foto da sua CNH para validação de seu cadastro.
+            Escolha se você prefere fazer upload ou tirar uma foto.</p>
+        </div>
+        <div class="cnh-infos" *ngIf="innerWidth > 767">
+          <div class="item">
+            <img src="/assets/images/register/item-cnh-1.svg" />
+            <span class="textdark-grey cnh-tip">A CNH deve estar fora do plástico protetor.</span>
+          </div>
+          <div class="item">
+            <img src="/assets/images/register/item-cnh-2.svg" />
+            <span class="textdark-grey cnh-tip">
+              Enquadre a <strong>CNH aberta</strong> na área demarcada.
+              <a (click)="openCNHModalInfo(contentCNHInfo)">Veja aqui como deve estar sua CNH na foto</a>
+            </span>
+            
+          </div>
+          <div class="item">
+            <img src="/assets/images/register/item-cnh-3.svg" />
+            <span class="textdark-grey cnh-tip">Verifique se as informações estão nítidas.</span>
+          </div>
+        </div>
+        <div class="actions-step" *ngIf="innerWidth > 767">
+          <button class="back-button left-button" (click)="tabChange('infos-list')">Voltar</button>
+          <div class="upload-btn-wrapper right-button">
+            <button class="btn-upload" style="position: relative;z-index: 10;" (click)="cnhInput.click()">Upload da
+              foto</button>
+            <input #file type="file" accept="image/x-png,image/jpeg" (change)="chooseCNHPhoto(file.files)" class="custom-file-input"
+              #cnhInput />
+            {{message}}
+          </div>
+        </div>
+        <div class="mobile-photo" *ngIf="currentTab == 'cnh-photo' && currentSubTab == null && innerWidth < 768">
+          <h1 class="tittlewhite">Foto da CNH</h1>
+          <p class="textwhite">Vamos precisar de uma foto da sua CNH para validação de seu cadastro. Escolha
+            se você prefere fazer upload ou tirar uma foto.</p>
+          <img class="selfie-moile" src="/assets/images/register/cnh.svg" />
+          <div class="photo-buttons">
+            <a class="button-secundary" (click)="subTabChange('uploadCNH')">Upload</a>
+            <a class="button-secundary" (click)="subTabChange('cameraCNH')">Usar Câmera</a>
+          </div>
+        </div>
+        <div style="color:#fff;" class="upload-mobile" *ngIf="currentSubTab == 'uploadCNH'">
+          <div (click)="subTabChange(null)">voltar</div>
+          <h1 class="tittlewhite">Upload de foto</h1>
+          <p class="textwhite">Atenção para as orientações:</p>
+          <ul class="instructions-list">
+            <li>
+              <img src="/assets/icons/cnh/nitid-informations.svg" alt="Plástico Protetor">
+              <p>A CNH deve estar fora<br> do plástico protetor.</p>
+            </li>
+            <li>
+              <img src="/assets/icons/cnh/plastic-protector.svg" alt="Informações nítidas">
+              <p>Verifique se as informações <br>estão nítidas.</p>
+            </li>
+          </ul>
+          <div class="actions-step-upload">
+            <div class="upload-btn-wrapper">
+              <button class="btn-upload" style="position: relative;z-index: 10;" (click)="cnhInput.click()">Upload da
+                foto</button>
+              <input #file type="file" accept="image/x-png,image/jpeg" (change)="chooseCNHPhoto(file.files)" class="custom-file-input"
+                #cnhInput />
+              {{message}}
+            </div>
+          </div>
+        </div>
+        <div style="color:#fff;" class="camera-mobile" *ngIf="currentSubTab == 'cameraCNH'">
+          <div (click)="subTabChange(null)">voltar</div>
+          <h1 class="tittlewhite">Foto da CNH</h1>
+          <p class="textwhite">Atenção para as orientações:</p>
+          <ul class="instructions-list">
+            <li>
+              <img src="/assets/icons/cnh/nitid-informations.svg" alt="Plástico Protetor">
+              <p>Retire sua CNH do plástico<br> protetor.</p>
+            </li>
+            <li>
+              <img src="/assets/icons/cnh/frame-cnh.svg" alt="Informações nítidas">
+              <p>
+                Enquadre a CNH aberta na<br> área demarcada.
+                <a (click)="openCNHModalInfo(contentCNHInfo)">Veja aqui como deve estar sua CNH na foto</a>
+              </p>            
+            </li>
+          </ul>
+          <div class="actions-step-upload">
+            <div class="upload-btn-wrapper">
+              <button class="btn-upload" (click)="cnhInput.click()">Tirar foto</button>
+              <input #file type="file" accept="image/x-png,image/jpeg" (change)="chooseCNHPhoto(file.files)" class="custom-file-input"
+                capture="camera" #cnhInput />
+              {{message}}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div [hidden]="currentTab !== 'cnh-infos'" class="col-md-6 form-box cnh-infos">
+        <h1 class="tittledark-grey">Dados da CNH</h1>
+        <span class="textdark-grey">Informe os dados abaixo.</span>
+        <form [formGroup]="form" name="resume-form" class="floating-form">
+          <div class="floating-label floating-tooltip">
+            <input class="floating-input" name="cnhNumber" formControlName="cnhNumber" type="text" (focus)="onFocus()"
+              (blur)="onBlur()" mask="0000000000-9" placeholder=" ">
+            <label>Número CNH</label>
+            <span class="obs-campo-erro" *ngIf="verifyInvalidAndTouched('cnhNumber')">CNH inválida</span>
+            <span (click)="toggleHelper()" class="form-info">?</span>
+            <div class="info-box left-box" [ngClass]="infoOpen ? '' : 'hidden-info' ">
+              <div (click)="toggleHelper()" class="close-details-info"></div>
+              <img src="/assets/images/register/numero.jpg" />
+            </div>
+          </div>
+          <div class="floating-label floating-tooltip">
+            <input class="floating-input" name="cnhFirstDate" type="text" (focus)="onFocus()" (blur)="onBlur()"
+              mask="09/09/0009" [dropSpecialCharacters]="false" formControlName="cnhFirstDate" placeholder=" ">
+            <span class="obs-campo-erro" *ngIf="verifyInvalidAndTouched('cnhFirstDate')">Informe uma data
+              válida</span>
+            <label>Data da 1ª Habilitação</label>
+            <span (click)="toggleHelper()" class="form-info">?</span>
+            <div class="info-box left-box" [ngClass]="infoOpen ? '' : 'hidden-info' ">
+              <div (click)="toggleHelper()" class="close-details-info"></div>
+              <img src="/assets/images/register/data_1_habilitacao.jpg" />
+            </div>
+          </div>
+          <div class="floating-label floating-tooltip">
+            <input class="floating-input" name="cnhValidateDate" type="text" (focus)="onFocus()" (blur)="onBlur()"
+              mask="09/09/0009" [dropSpecialCharacters]="false" formControlName="cnhValidateDate" placeholder=" ">
+            <span class="obs-campo-erro" *ngIf="verifyInvalidAndTouched('cnhValidateDate')">Informe uma data
+              válida</span>
+            <label>Vigência CNH</label>
+            <span (click)="toggleHelper()" class="form-info">?</span>
+            <div class="info-box left-box" [ngClass]="infoOpen ? '' : 'hidden-info' ">
+              <div (click)="toggleHelper()" class="close-details-info"></div>
+              <img src="/assets/images/register/validade.jpg" />
+            </div>
+          </div>
+          <div class="floating-label floating-tooltip">
+            <input class="floating-input" name="cnhCategory" type="text" (focus)="onFocus()" (blur)="onBlur()"
+              formControlName="cnhCategory" placeholder=" ">
+            <span class="obs-campo-erro" *ngIf="verifyInvalidAndTouched('cnhCategory')">Preencha a
+              categoria da CNH, somente com letras </span>
+            <label>Categoria</label>
+            <span (click)="toggleHelper()" class="form-info">?</span>
+            <div class="info-box left-box" [ngClass]="infoOpen ? '' : 'hidden-info' ">
+              <div (click)="toggleHelper()" class="close-details-info"></div>
+              <img src="/assets/images/register/categoria.jpg" />
+            </div>
+
+          </div>
+          <p>*O prazo mínimo de emissão de cnh deve ser de 3 anos.</p>
+          <div class="actions-step">
+            <a (click)="tabChange('infos-list')"
+              class="button-secundary left-button back-button hidden-sm-down">Voltar</a>
+            <button type="submit" name="submit" (click)="onSubmit()"
+              class="button-secundary buttontextpink right-button">Continuar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="documents-modal">
+
+  <ng-template id="modal-selfie" #contentFacePhoto let-modal>
+    <div class="modal-header">
+      <h4 class="tittledark-grey hidden-sm-down" id="modal-termos-dados">Foto do rosto</h4>
+      <h4 class="tittledark-grey hidden-md-up" id="modal-termos-dados">Seu rosto está nítido?</h4>
+      <div class="textdark-grey hidden-sm-down">Verifique se a sua foto ficou nítida. Caso contrário, envie outra.</div>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body coverage-modal">
+      <img [src]="facePhotoImgURL" *ngIf="facePhotoImgURL">
+      <div class="actions-step">
+        <div class="upload-btn-wrapper left-button">
+          <button class="btn-upload" (click)="selfieInput.click()">Enviar outra foto</button>
+          <input #file type="file" accept="image/x-png,image/jpeg" (change)="chooseFacePhoto(file.files)" class="custom-file-input"
+            #selfieInput />
+        </div>
+        <button class="button-nitidez right-button" (click)="modal.dismiss('Cross click')">A foto está
+          nitida</button>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template id="modal-cnh" #contentCNHPhoto let-modal>
+    <div class="modal-header">
+      <h4 class="tittledark-grey hidden-sm-down" id="modal-termos-dados">Foto da CNH</h4>
+      <h4 class="tittledark-grey hidden-md-up" id="modal-termos-dados">O documento aparece inteiro e nítido?</h4>
+      <div class="textdark-grey">Verifique se a sua foto ficou nítida. Caso contrário, envie outra.</div>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body coverage-modal">
+      <img [src]="cnhImgURL" *ngIf="cnhImgURL">
+      <div class="actions-step">
+        <div class="upload-btn-wrapper left-button">
+          <button class="btn-upload" (click)="selfieInput.click()">Enviar outra foto</button>
+          <input #file type="file" accept="image/x-png,image/jpeg" (change)="chooseCNHPhoto(file.files)" class="custom-file-input"
+            #selfieInput />
+        </div>
+        <button class="button-nitidez right-button" (click)="modal.dismiss('Cross click')">A foto está
+          nitida</button>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template id="modal-cnh-info" #contentCNHInfo let-modal>
+    <div class="modal-header">
+      <!-- <h4 class="tittledark-grey" id="modal-termos-dados">Enquadre a CNH ABERTA - ela não pode estar dobrada</h4> -->
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body coverage-modal">
+      <img style="padding-bottom: 50px;" src="/assets/images/register/cnh-docs.png" />
+    </div>
+  </ng-template>
+
+</div>
+
+<app-breadCrumb *ngIf="showBreadcrumbMobile" breadCrumbStatus="has-step" step1Status="past-step" step2Status="past-step"
+  step3Status="past-step" step4Status="active" finalizacaoSimulador="last-step" #breadCrumbComponent>
+</app-breadCrumb>

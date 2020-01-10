@@ -1,0 +1,39 @@
+<!-- Generated template for the EvaluationModalComponent component -->
+<ion-header>
+    <ion-toolbar>
+        <ion-title color="primary">Detalhes da pasta</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+    <ion-row>
+        <div class="d-flex flex-center w-100">
+            <ion-button (click)="dismiss('salvar',imageLists)" class="card-button" color="primary">Salvar</ion-button>
+            <ion-button (click)="dismiss('voltar', null)" class="card-button" color="primary">Voltar</ion-button>
+        </div>
+    </ion-row>
+    <div *ngFor="let images of imageLists" class="list-holder">
+        <div class="images-wrapper">
+            <ion-card class="single-image-holder">
+                <ion-thumbnail class="icon-holder">
+                    <img [src]="images.sanitized.value" />
+                </ion-thumbnail>
+            </ion-card>
+        </div>
+        <ion-row class="inputs-wrapper">
+            <ion-col col-12>
+                <ion-item [ngClass]="{'invalidar': !images['descriptionValid']}">
+                    <ion-label class="input-label">Descrição</ion-label>
+                    <ion-input type="text" [(ngModel)]="images['description']" name="description"></ion-input>
+                </ion-item>
+                <ion-button (click)="excluirItem(imageLists.indexOf(images))" expand="block">Excluir</ion-button>
+            </ion-col>
+        </ion-row>
+    </div>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button (click)="takePicture(camera.PictureSourceType.CAMERA)">
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+</ion-content>

@@ -1,0 +1,193 @@
+<!-- <app-destaqueImagem *ngIf="innerWidth > 767" imagemDestaqueMobile="/wp-content/uploads/2019/10/background-simulador.jpg"
+    imagemDestaqueDesktop="/wp-content/uploads/2019/10/background-simulador.jpg"
+    tituloDestaque="Seu carro está a poucos passos de você" corTituloDestaque="#FF7900"
+    subTituloDestaque="Faça uma simulação escolhendo o carro e veja o quanto você pode economizar"
+    corSubTituloDestaque="#fff" descricaoDestaque="" corDescricaoDestaque="" #destaqueImagemComponent>
+</app-destaqueImagem> -->
+<app-breadCrumb breadCrumbStatus="has-step" step1Status="past-step" step2Status="past-step" step3Status="active"
+    step4Status="" finalizacaoSimulador="" hasBanner="" #breadCrumbComponent>
+</app-breadCrumb>
+
+<div class="simulador-content resumo-simulacao">
+    <div class="foto-carro hidden-sm-down">
+        <img src="{{mediaRepository}}{{simulationSession?.selectedColor?.featuredPhoto}}" />
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 coluna-carro">
+                <div class="seu-carro">Seu carro é o</div>
+                <div class="nome-carro desktophighlightdark-grey mobilehighlightdark-grey">
+                    {{simulationSession?.selectedClass?.brand}} {{simulationSession?.selectedClass?.class}}</div>
+                <div class="nome-versao tittledark-grey">{{simulationSession?.selectedClass?.model}}</div>
+                <div class="foto-carro hidden-md-up">
+                    <img src="{{mediaRepository}}{{simulationSession?.selectedColor?.featuredPhoto}}" />
+                </div>
+                <ul>
+                    <li *ngFor="let serialItem of simulationSession?.selectedClass?.vehicleSerialItems"
+                        class="textdark-grey">
+                        {{serialItem.name}}
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6 coluna-itens-aluguel">
+                <div class="tittledark-grey">
+                    Sua assinatura contempla:
+                </div>
+                <ul>
+                    <li>
+                        <div class="titulo-item">Seguro Auto</div>
+                        <span class="textdark-grey">O Seguro auto já está incluso na sua assinatura.
+                            <a (click)="open(content)">Acesse as principais informações do seu seguro.</a>
+                            <!-- Seguro auto incluso na sua assinatura. -->
+                        </span>
+                    </li>
+                    <li>
+                        <div class="titulo-item">Revisão</div>
+                        <span class="textdark-grey">Não se preocupe! A revisão preventiva do seu veículo já está inclusa
+                            na sua
+                            assinatura.</span>
+                    </li>
+                    <!-- <li>
+                        <div class="titulo-item">Pneus</div>
+                        <span class="textdark-grey">A troca de pneus do veículo está inclusa na sua assinatura, não se
+                            preocupe com isso.</span>
+                    </li> -->
+                    <li>
+                        <div class="titulo-item">Impostos e documentação</div>
+                        <span class="textdark-grey">Os impostos e documentações estão inclusos na sua assinatura, e
+                            serão
+                            gerenciados pela Loopster.</span>
+                    </li>
+                </ul>
+                <div class="forma-pagamento hidden-sm-down">
+                    <div class="garantia">Garantia de contrato:
+                        {{simulationPrice?.guaranteeDeposit  | currency:'BRL':true }}</div>
+                    <div class="garantia">Prazo contratado: {{simulationPrice?.numberOfInstallments }} meses</div>
+                    <div class="parcelamento"><span class="parcelas">Parcela mensal: </span>
+                        {{simulationPrice?.installmentAmount  | currency:'BRL':true }}</div>
+                </div>
+                <div class="cta-simulacao hidden-sm-down">
+                    <div class="tittledark-grey resultado-cta">Gostou do resultado?</div>
+                    <a (click)="toggleMailBox();" [ngx-scroll-to]="'resumo-email'"
+                        class="button-secundary buttontextpink">
+                        Enviar simulação por email
+                    </a>
+                    <a [routerLink]="['/simulador/contrate']" class="button-primary buttontextwhite">
+                        Contratar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="cta-mobile hidden-md-up">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 forma-pagamento">
+                <div class="garantia">Garantia de contrato:
+                    {{simulationPrice?.guaranteeDeposit  | currency:'BRL':true }}</div>
+                <div class="garantia">Prazo contratado: {{simulationPrice?.numberOfInstallments }} meses</div>
+                <div class="parcelamento"><span class="parcelas">Parcela mensal: </span>
+                    {{simulationPrice?.installmentAmount  | currency:'BRL':true }}</div>
+            </div>
+            <div class="col-12 cta-simulacao">
+                <div class="tittledark-grey resultado-cta">Gostou <br />do resultado?</div>
+                <a (click)="toggleMailBox();" class="button-secundary buttontextpink">
+                    Enviar simulação por email
+                </a>
+                <a [routerLink]="['/simulador/contrate']" class="button-primary buttontextwhite">
+                    Contratar
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div (click)="toggleMailBox()" class="fundo" [ngClass]="this.mailBoxVisibility == 'hidden-info' ? 'fundo-hidden' : '' ">
+</div>
+<div id="resumo-email" class="resumo-email" [ngClass]="mailBoxVisibility">
+    <div (click)="toggleMailBox()" class="close-details-info"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5  hidden-sm-down">
+                <div class="tittledark-grey">Envie o resultado para seu e-mail</div>
+                <p class="textdark-grey">Você receberá um e-mail com o resultado da sua simulação.</p>
+            </div>
+            <div class="col-md-6 offset-md-1">
+                <form *ngIf="!successMail" [formGroup]="form" name="resume-form" class="floating-form">
+                    <div class="floating-label">
+                        <input class="floating-input" formControlName="name" name="name" type="text" placeholder=" ">
+                        <label>Nome</label>
+                        <span class="obs-campo-erro" *ngIf="verifyInvalidAndTouched('name')">Informe seu nome</span>
+                    </div>
+                    <div class="floating-label">
+                        <input class="floating-input" formControlName="surname" name="surname" type="text"
+                            placeholder=" ">
+                        <label>Sobrenome</label>
+                        <span class="obs-campo-erro" *ngIf="verifyInvalidAndTouched('surname')">Informe seu sobrenome</span>
+                    </div>
+                    <div class="floating-label">
+                        <input class="floating-input" formControlName="email" name="email" type="text" placeholder=" ">
+                        <label>E-mail</label>
+                        <span class="obs-campo-erro" *ngIf="verifyInvalidAndTouched('email')">Informe um e-mail válido.</span>
+                    </div>
+                    <div class="floating-label">
+                        <div class="form-buttom">
+                            <button type="submit" (click)="submit()" name="submit"
+                                class="button-secundary buttontextpink">Enviar</button>
+                        </div>
+                    </div>
+                </form>
+                <div *ngIf="successMail" class="mail-success">
+                    <div class="hidden-sm-down">Simulação enviada<br /> para o seu e-mail <span>;)</span></div>
+                    <div class="hidden-md-up">Simulação<br />enviada para o<br /> seu e-mail <span>;)</span></div>
+                    <!-- <p class="textdark-grey hidden-md-up">Laboris nisi ut aliquip ex ea commodo consequat.</p> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="tittledark-grey" id="modal-basic-title">Seguro</h4>
+        <div class="textdark-grey">O que está contemplado na Cobertura completa:</div>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body coverage-modal">
+        <ul>
+            <li>
+                <div class="titulo-item">Roubo, Furto e Acidentes</div>
+                <span class="textdark-grey">Com o seguro auto, você terá proteção contra roubo, furto, incêndio e
+                    colisão.
+                    Coberturas e indenizações de acordo com as condições gerais do produto Auto
+                    SOMPO.</span>
+            </li>
+            <li>
+                <div class="titulo-item">Assistência 24h</div>
+                <span class="textdark-grey">Os serviços de reboque, chaveiro, retorno domicílio, hospedagem, troca de
+                    pneus e
+                    outros serviços emergenciais, estão inclusos para te deixar ainda mais tranquilo.
+                    Consulte condições e limites de utilização.</span>
+            </li>
+            <li>
+                <div class="titulo-item">Vidros</div>
+                <span class="textdark-grey">Em casos de imprevisto com os vidros laterais, para-brisa, faróis, lanternas
+                    e
+                    espelhos retrovisores haverá suporte para você. Para maiores informações sobre
+                    acionamento e franquias, consultar contrato de locação. <br></span>
+            </li>
+            <!-- <li>
+                <div class="titulo-item">Colisão</div>
+                <span class="textdark-grey">No caso de colisão sem conserto, a covertura de perda total reembolsa o
+                    valor e você não fica ano prejuízo.</span>
+            </li> -->
+        </ul>
+    </div>
+    <div class="modal-footer">
+        <!-- <div class="textdark-grey">Documento com todas as informações sobre o Seguro</div>
+        <button type="button" class="button-secundary buttontextpink"
+            (click)="modal.close('Save click')">Download</button> -->
+    </div>
+</ng-template>

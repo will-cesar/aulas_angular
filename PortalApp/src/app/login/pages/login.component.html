@@ -1,0 +1,61 @@
+<div isPage="true" class="login-form" [ngClass]="!isPage ? 'page-login' : ''">
+    <h1 *ngIf="!isPage && !resetPassContent && !successResetContent" class="tittledark-grey">Faça seu login</h1>
+    <span *ngIf="!isPage && !resetPassContent && !successResetContent" class="textdark-grey">Preencha os dados abaixo ou
+        cadastre-se.</span>
+    <form *ngIf="!resetPassContent && !successResetContent" class="form-horizontal" [formGroup]="form">
+        <div class="floating-label">
+            <input class="floating-input" formControlName="email" name="email" type="text" placeholder=" ">
+            <label>E-mail ou CPF</label>
+            <span class="obs-campo-erro" *ngIf="verifyInvalidAndTouched('email')">Login inválido</span>
+        </div>
+        <div class="floating-label">
+            <input class="floating-input" formControlName="password" name="password" type="password" placeholder=" ">
+            <label>Senha</label>
+            <span class="obs-campo-erro" *ngIf="verifyInvalidAndTouched('password')">Senha inválida</span>
+        </div>
+        <div class="floating-label login-label">
+            <div class="form-buttom">
+                <button class="button-secundary buttontextpink login-button" (click)="onSubmit()">Entrar</button>
+            </div>
+        </div>
+        <div class="floating-label forgot-label">
+            <a class="forgot-password subtextpink" (click)="toggleReset()">Esqueceu sua senha?</a>
+        </div>
+        <!-- <div class="social-login">
+            <button class="left-button" (click)="socialSignIn('google')"><img src="/assets/icons/google-fill.svg" /> Google</button>
+            <button class="right-button" (click)="socialSignIn('facebook')"><img src="/assets/icons/facebook-fill.svg" /> Facebook</button>
+        </div> -->
+        <div class="register-button">
+            <span class="textwhite">Não possui uma conta na Loopster?</span>
+            <button class="" [routerLink]="['/cadastro']">Cadastre-se</button>
+        </div>
+         <div class="float-label register-checkbox">
+            <input type="checkbox" [checked]="dealershipLogin" (change)="dealershipLogin = !dealershipLogin"
+                id="termos-compromisso">
+            <div>Acesso de concessionária.</div>
+        </div> 
+    </form>
+    <div *ngIf="resetPassContent" class="passflow">
+        <div class="title-passflow">Esqueci minha senha</div>
+        <p class="passflow-text">Informe seu e-mail para identificarmos seu cadastro</p>
+        <form class="form-horizontal" [formGroup]="formEmailPass">
+            <div class="floating-label">
+                <input class="floating-input" formControlName="email" name="email" type="text" placeholder=" ">
+                <label>E-mail</label>
+                <span class="obs-campo-erro" *ngIf="verifyInvalidAndTouched('email')">E-mail inválido</span>
+            </div>
+            <div class="floating-label login-label">
+                <div class="form-buttom">
+                    <button class="button-secundary buttontextpink login-button"
+                        (click)="submitEmailPass()">Enviar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div *ngIf="successResetContent" class="passflow">
+        <div class="title-passflow">Esqueci minha senha</div>
+        <p class="passflow-text">Você receberá uma mensagem com as orientações no seu e-mail cadastrado.</p>
+        <p class="sent-email"><strong>{{sentMail}}</strong></p>
+        <p class="passflow-text">Acesse seu e-mail e clique no link para redifinição de sua senha</p>
+    </div>
+</div>

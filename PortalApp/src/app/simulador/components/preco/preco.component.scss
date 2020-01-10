@@ -1,0 +1,65 @@
+  .price-calculator{
+    padding: 40px 0;
+    @media(max-width:767px){
+        padding: 5px 0 60px 0;
+    }
+    a{
+        width: 100%;
+    }
+    .titulo-preco{
+        font-size: 16px;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: #282832;
+        margin-bottom: 10px;
+        @media(max-width:767px){
+            font-size: 17px;
+            margin-bottom: 5px;
+        }
+        @media(max-width:320px){
+            font-size: 16px;
+        }
+    }
+    .preco{
+        font-size: 24px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.25;
+        letter-spacing: normal;
+        color: #FF7900;
+        @media(max-width:767px){
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        .parcelas{
+            font-size: 16px;
+            margin-right: 8px;
+            @media(max-width:767px){
+                margin-right: 0;
+            }
+        }
+        @media(max-width:320px){
+            font-size: 20px;
+        }
+    }
+    .result-label{
+        font-size: 16px;
+        font-weight: 300;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: #282832;
+        margin: 10% auto;
+        @media(max-width:767px){
+            margin: 6% auto;
+        }
+    }
+    a{
+        margin: 10% auto;
+    }
+  }

@@ -1,0 +1,71 @@
+.status-content{
+    margin-top: 100px;
+    background-color: #f7f7f7;
+    padding: 100px 0;
+    @media(min-width:2800px){
+        padding: 15vw 0;
+    }
+    .status{
+        text-align: center;
+        .icon{
+            width: 79px;
+            height: 79px;
+            background-color:#FF7900;
+            border-radius: 100%;
+            display: flex;
+            margin: 0 auto;
+            margin-bottom: 20px;
+            img{
+                position: relative;
+                display: block;
+                width: 50%;
+                margin: 0 auto;
+            }
+        }
+        .status-title{
+            font-size: 1.875em;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.27;
+            letter-spacing: -0.83px;
+            text-align: center;
+            color: #FF7900;
+            margin-bottom: 30px;
+        }
+        .status-info{
+            font-size: 1em;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            text-align: center;
+            color: #282832;
+        }
+        .status-buttons {
+            display: inline-block;
+            overflow: auto;
+            white-space: nowrap;
+            margin: 0px auto;
+            width: 25em;
+            padding: 25px 0 0 0;
+            .left-button {
+                float: left;
+                width: 180px;
+            }
+            .right-button {
+                float: right;
+                width: 180px;
+                background-color: #FF7900;
+                color: #fff !important;
+                border-color: #FF7900;
+            }
+            button, a{
+                @media(max-width:767px){
+                    width: 100% !important;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,74 @@
+ <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> 
+ <!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>  -->
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin" rel="stylesheet" type="text/css">
+    <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<script type="text/javascript" src="chat-rci.js"></script>
+<link rel="stylesheet" href="chat-rci.css"> 
+<link rel="stylesheet" href="chatInline.css"> 
+<link rel="stylesheet" href="bootstrap.min.css"> <!--caminho/local onde o arquivo está-->
+
+<div class="popup-box chat-popup" id="qnimate">
+    		  <div class="popup-head">
+				<div class="popup-head-left pull-left" style="font-size:16px !important;font-family:'Arial';"> Chat on-line</div>
+					  <div class="popup-head-right pull-right">
+						<!--<div class="btn-group">
+    								  <button class="chat-header-button" data-toggle="dropdown" type="button" aria-expanded="false">
+									   <i class="glyphicon glyphicon-minus"></i> </button></div>	-->
+						<button data-widget="minimiza" id="minimizarClass" class="chat-header-button pull-left" type="button" style="margin-right:5px;"><i class="glyphicon glyphicon-minus"></i></button>						
+						<button data-widget="remove" id="removeClass" class="chat-header-button pull-right" type="button"><i class="glyphicon glyphicon-remove"></i></button>
+                      </div>
+			  </div>
+			    <div id="messagebody" class="panel-body msg_container_base">
+				
+					<div class="row msg_container base_receive">                      
+                        <div class="col-md-10 col-xs-10">                             
+                            <img src="http://api_loopster.dbm.com.br/Chat/images/loopster.svg" class="chatimg img-responsive" style="width:150px;height:30px;"/>                         
+                        </div>
+                    </div>  
+					  <div class="row msg_container base_receive">                      
+                        <div class="col-md-10 col-xs-10">
+                            <div class="messages msg_receive">
+                                <p>Informe seu nome, por gentileza.</p>                              
+                            </div>
+                        </div>
+                    </div>         
+					  <div class="row msg_container base_sent">
+                        <div class="col-md-10 col-xs-10">
+                            <div class="messages msg_sent">
+                                <p>Mariane Ribeiro</p>
+                            </div>
+                        </div>
+                     
+                    </div>
+				   <div class="row msg_container base_receive">                      
+                        <div class="col-md-10 col-xs-10">
+                            <div class="messages msg_receive">
+                                <p>Ola Mariane Ribeiro, seja bem vindo a Loopster! Para iniciarmos o atendimento por favor informe o numero do seu CPF.</p>
+                            </div>
+                        </div>
+                    </div>         
+                    <div class="row msg_container base_sent">
+                        <div class="col-md-10 col-xs-10">
+                            <div class="messages msg_sent">
+                                <p>06409477945</p>
+                            </div>
+                        </div>
+                     
+                    </div>
+            
+					
+				</div>
+				         <div class="panel-footer">
+                    <div class="input-group">
+                        <input id="btn-input" type="text" class="form-control input-sm chat_input" placeholder="Escreva sua mensagem aqui..." required="required" />
+                        <span class="input-group-btn">
+                        <button class="btn btn-sm" id="btn-chat" style="height:30px;" title="Enviar"><span class="glyphicon glyphicon-send" style="color:#FF7900;"></span></button>
+                        </span>
+                    </div>
+                </div>
+
+	  </div>
+	  <button id="btnChatFlt" style="display:block;"> <span>Chat on-line</span></button>

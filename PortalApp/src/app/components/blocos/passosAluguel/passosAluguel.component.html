@@ -1,0 +1,42 @@
+<div id="{{postName}}" [ngStyle]="{'background-color': bgBloco}">
+        <div class="passos-alguel">
+            <div class="container">
+                <div class="row" [ngClass]="(layoutBloco == 'one_col' || innerWidth < 768) ? '' : 'hidden-lg-up m-b-50'">
+                    <div class="col-12">
+                        <div class="desktophighlightdark-grey mobilehighlightdark-grey" [ngStyle]="{'color': corTituloBloco}">{{tituloBloco}}</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div [ngClass]="layoutBloco == 'one_col' ? 'col-lg-12' : 'col-lg-6'">
+                        <div class="passo-alugar passo-1">
+                            <div class="tittlepink" [ngStyle]="{'color': corTitulos}">{{tituloPasso1}}</div>
+                            <div class="textdark-grey" [ngStyle]="{'color': corTextos}">{{textoPasso1}}</div>
+                        </div>
+                        <div class="passo-alugar passo-2">
+                            <div class="tittlepink" [ngStyle]="{'color': corTitulos}">{{tituloPasso2}}</div>
+                            <div class="textdark-grey" [ngStyle]="{'color': corTextos}">{{textoPasso2}}</div>
+                        </div>
+                        <div class="passo-alugar passo-3">
+                            <div class="tittlepink" [ngStyle]="{'color': corTitulos}">{{tituloPasso3}}</div>
+                            <div class="textdark-grey" [ngStyle]="{'color': corTextos}">{{textoPasso3}}</div>
+                        </div>
+                        <div class="passo-alugar passo-4">
+                            <div class="tittlepink" [ngStyle]="{'color': corTitulos}">{{tituloPasso4}}</div>
+                            <div class="textdark-grey" [ngStyle]="{'color': corTextos}">{{textoPasso4}}</div>
+                        </div>
+                        <a class="hidden-md-down">
+                            <img src="assets/images/arrow-down-black.svg" alt="Loopster - Próxima seção" />
+                        </a>
+                    </div>
+                    <div class="col-lg-4 offset-lg-1 " [ngClass]="layoutBloco == 'two_col' && innerWidth > 768 ? 'hidden-md-down' : 'hide'">
+                        <div class="desktophighlightdark-grey mobilehighlightdark-grey" [ngStyle]="{'color': corTituloBloco}">{{tituloBloco}}</div>
+                    </div>
+                    <div class="col-lg-4 offset-lg-1 hidden-md-up">
+                        <a [routerLink]="['/simulador']" class="button-secundary buttontextpink simule-mobile">
+                            Simule e compare os preços
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,6 @@
+<app-headbar #headBarComponent></app-headbar>
+<ngx-ui-loader></ngx-ui-loader>
+<div [ngStyle]="{'min-height': pageHeight}">
+    <router-outlet></router-outlet>
+</div>
+<app-footer #footerComponent></app-footer>

@@ -1,0 +1,167 @@
+.page-404 {
+    position: relative;
+    margin-top: 130px;
+    padding: 0px 30px;
+    overflow: hidden;
+    
+    @media (max-width: 767.98px) {
+        min-height: 715px;
+    }
+
+    @media (min-width: 768px) and (max-width: 991.98px) {
+        min-height: 800px;
+    }
+
+    @media (min-width: 992px) and (max-width: 1199.98px) {
+        margin-bottom: 50px;
+    }
+
+    @media (min-width: 1200px) and (min-width: 1299.98px) {
+        margin-top: 100px;
+    }
+
+    @media (min-width: 1300px) {
+        min-height: 70vh;
+        margin-top: 150px;
+        overflow: hidden;
+    }    
+    
+    .page-404__col-1 {
+        width: 100%;
+        max-width: 1140px;
+        margin: 0 auto;        
+        padding-right: 30%;
+
+        @media (max-width: 991.98px) {
+            padding: 0;
+        }
+
+        @media (min-width: 992px) and (max-width: 1199.98px) {
+            padding-right: 45%;
+            max-width: 960px;
+        }
+
+        @media (min-width: 1200px) and (max-width: 1299.98px) {
+            max-width: 1140px;
+            margin: 0 auto 90px;   
+            padding-right: 45%; 
+        }
+
+        @media (min-width: 1300px) and (max-width: 1399.98px) {
+            margin: 0 auto 90px;            
+            padding-right: 45%;
+        }
+    }
+
+    .page-404__col-2 {
+        background-position: right;
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 700px;
+        min-height: 460px;
+        position: relative;
+        right: 0px;
+
+        @media (min-width: 768px) and (max-width: 991.98px) {
+            width: 100%;
+            min-width: 1024px;
+            min-height: 550px;
+            right: 0px;
+        }
+
+        @media (min-width: 992px) and (max-width: 1199.98px) {
+            width: 100%;
+            min-height: 650px;
+            right: -130px;
+            min-width: 1099px;
+        }
+
+        @media (min-width: 1200px) and (max-width: 1299.98px) {
+            right: -170px;
+            width: 60%;
+            height: 480px;
+            position: absolute;
+            top: 0;
+        }
+
+        @media (min-width: 1300px) {
+            right: -165px;
+            width: 60%;
+            height: 500px;
+            position: absolute;
+            top: 0;
+        }
+    }
+
+    .page-404__titulo {
+        font-family: "RCI";
+        font-size: 72px;
+        margin-bottom: 40px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.11;
+        letter-spacing: -2px;
+
+        @media (max-width: 991.98px) {
+            font-size: 32px;
+            margin-bottom: 30px;
+        }
+    }
+
+    .page-404__p {
+        max-width: 400px;
+        margin-bottom: 30px;
+    }
+
+    .page-404__btn {
+        @media (min-width: 1200px) {
+            width: 260px;
+        }
+    }
+}
+
+.personalForm {
+    margin: 30px 0 0;
+    padding-right: 90px;
+
+    @media (max-width: 991.98px) {
+        padding-right: 50px;
+    }
+
+    .pay-button {
+        min-width: 230px;
+
+        @media (max-width: 991.98px) {
+            min-width: 170px;
+        }
+    }
+}
+
+.page-404__col-2-with-img {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+    @media (min-width: 768px) and (max-width: 991.98px) {
+        right: -160px;
+        max-width: 100%;
+    }
+
+    @media (min-width: 992px) and (max-width: 1199.98px) {
+        position: absolute;
+        top: 75px;
+        right: 0;
+        max-width: 725px;
+    }
+
+    @media (min-width: 1200px) {
+        max-width: 38vw;
+        top: 57px;
+        right: 0;
+    }
+
+    .page-404__col-2--img {
+        max-width: 100%;
+    }
+}

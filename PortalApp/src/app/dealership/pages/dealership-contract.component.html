@@ -1,0 +1,115 @@
+<div class="dashboard-content dashboard-content__mobile">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-1 hidden-md-down">
+                    <a [routerLink]="['/concessionaria/contratos']" class="dashboard-back">
+                        <img src="/assets/icons/nav-back.svg" />
+                    </a>
+                </div>
+    
+                <div class="col-md-4 hidden-md-down">
+                    <div class="desktophighlightdark-grey">Contratos</div>
+                    <p class="textdark-grey">Nossos contratos, Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+    
+                <div class="col-md-12 personalForm-header__mobile hidden-lg-up">
+                    <a [routerLink]="['/concessionaria/contratos']" class="dashboard-back">
+                        <img src="/assets/icons/nav-back.svg" />
+                    </a>
+                    <p class="personalForm-header__mobile-p">Contrato {{selectedContract?.annataRental?.rentId}}</p>
+                </div>
+    
+                <div class="col-lg-6">
+                    <div class="dashbox loader-dash" *ngIf="loadingStatus">
+                        <app-loading *ngIf="loadingStatus"></app-loading>
+                    </div>
+                    <div class="dashbox" *ngIf="!loadingStatus">
+                        <p class="hidden-lg-up font-weight-bold">Dados do contrato</p>
+                        <div class="dashbox-mobile" [ngClass]="!isVehicleClient ? 'vehicle-client-notAvailable' : ''">
+                            <div class="order-number hidden-md-down">
+                                Contrato {{selectedContract?.annataRental?.rentId}}
+                            </div>
+    
+                            <div class="order-date">
+                                Cliente: <strong>{{selectedContract?.annataRental?.rentalTableGet?.dirPartyTable_Name}}</strong>
+                            </div>
+
+                            <div class="order-date hidden-lg-up">
+                                Nº do contrato: <strong>{{selectedContract?.annataRental?.rentId}}</strong>
+                            </div>
+    
+                            <div class="order-date">
+                                Data do pedido: <strong>{{selectedContract?.contractDate | date:'dd/MM/yyyy'}}</strong>
+                            </div>
+    
+                            <div class="status-flag" [innerHTML]="statusOrder(selectedContract)"></div>
+                            <div class="status-flag status-not-available hide">Encerrado</div>
+
+                            <div class="order-status-vehicle hidden-lg-up" *ngIf="isVehicleClient">Veículo com o cliente</div>
+                        </div>
+
+                        <div class="order-progress" *ngIf="!isVehicleClient">
+                            <div class="status-progress first-status" [ngClass]="firstClass">
+                                <div class="status-bullet first-bullet"></div>
+                                <span>Veículo em<br /> preparação</span>
+                            </div>
+                            <div class="status-progress second-status" [ngClass]="secondClass">
+                                <div class="status-bullet second-bullet"></div>
+                                <span>Veículo a<br /> caminho</span>
+                            </div>
+                            <div class="status-progress third-status" [ngClass]="thirdClass">
+                                <div class="status-bullet third-bullet"></div>
+                                <span>Veículo<br /> recebido</span>
+                            </div>
+                            <div class="status-progress last-status" [ngClass]="fourClass">
+                                <div class="status-bullet last-bullet"></div>
+                                <span>Veículo<br /> retirado</span>
+                            </div>
+                        </div>
+
+                        <div class="order-status-vehicle hidden-md-down" *ngIf="isVehicleClient">Veículo com o cliente</div>
+
+                        <div class="order-date">Previsão de chegada: <strong>até {{selectedContract?.annataRental?.rcI_EstimatedDeliveryDate | date:'dd/MM/yyyy'}}</strong></div>
+                        <div class="order-date hide">Veículo entregue no dia: <strong>até 14/11/2019</strong></div>
+                        <div class="order-date hide mb-3">Agendado para retirada: <strong>até 18/11/2019</strong></div>
+                        <a class="button-secundary buttontextpink hide">Veículo retirado</a>
+
+                        <ul>
+                            <li>
+                                <div class="titulo-pergunta" (click)="expandRow($event);">
+                                    Informações do contrato <span><img src="/assets/images/accordion-arrow.svg" /></span>
+                                </div>
+                                <div class="resposta-pergunta hidden-teste">
+                                    <div class="order-date">Veículo: <strong>{{selectedContract?.annataRental?.name}}</strong></div>
+                                    <div class="order-date">Cor: <strong>{{selectedContract?.contractVehicleColor?.color}}</strong></div>
+                                    <div class="order-date">Chassi: <strong>{{selectedContract?.annataRental?.deviceTableGet?.chassi}}</strong></div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="titulo-pergunta" (click)="expandRow($event);">
+                                    Checklist do veículo <span><img src="/assets/images/accordion-arrow.svg" /></span>
+                                </div>
+                                <div class="resposta-pergunta hidden-teste">
+                                    <p class="resposta-pergunta__p">Preencha o checklist e faça o upload da imagem para finalizar a entrega.</p>
+                                    <a class="button-secundary buttontextpink button-icon">Download do checklist</a>
+                                    <a class="button-secundary buttontextpink" (click)="OnFileSelected($event)">Upload</a>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="titulo-pergunta" (click)="expandRow($event);">
+                                    Documentos <span><img src="/assets/images/accordion-arrow.svg" /></span>
+                                </div>
+                                <div class="resposta-pergunta hidden-teste">
+                                    <a class="button-secundary buttontextpink button-icon">Contrato completo</a>
+                                    <a class="button-secundary buttontextpink button-icon">Procuração / Termo de aceite</a>
+                                    <a class="button-secundary buttontextpink button-icon">Termo de devolução do veículo</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

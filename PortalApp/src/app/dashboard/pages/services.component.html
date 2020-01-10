@@ -1,0 +1,89 @@
+<div class="dashboard-content dashboard-content__mobile">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-1 hidden-md-down">
+                <a [routerLink]="['/dashboard']" class="dashboard-back">
+                    <img src="/assets/icons/nav-back.svg" />
+                </a>
+            </div>
+
+            <div class="col-md-4 hidden-md-down">
+                <div class="desktophighlightdark-grey">
+                    Meus serviços
+                </div>
+                <!-- <p class="textdark-grey">Saiba mais sobre os serviços que contemplam sua assinatura.</p> -->
+            </div>
+
+            <div class="col-md-12 personalForm-header__mobile hidden-lg-up">
+                <a [routerLink]="['/dashboard']" class="dashboard-back">
+                    <img src="/assets/icons/nav-back.svg" />
+                </a>
+                <p class="personalForm-header__mobile-p">Meus serviços</p>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="dashbox loader-dash" *ngIf="loadingStatus">
+                        <app-loading *ngIf="loadingStatus"></app-loading>
+                </div>
+                <div *ngIf="hasOrder && !loadingStatus" class="dashbox">
+                    <div class="dashbox__title">Saiba mais sobre os serviços que contemplam sua assinatura</div>
+                    <ul>
+                        <li>
+                            <div class="titulo-pergunta" (click)="expandRow($event);">
+                                Assistência 24h <span><img src="/assets/images/accordion-arrow.svg" /></span>
+                            </div>
+                            <div class="resposta-pergunta hidden-teste">
+                                7 dias por semana, 24 horas por dia. Estamos sempre prontos para te ajudar em situações de panes e acidentes.
+                            </div>
+                        </li>
+                        <li>
+                            <div class="titulo-pergunta" (click)="expandRow($event);">
+                                Documentação e IPVA inclusos <span><img src="/assets/images/accordion-arrow.svg" /></span>
+                            </div>
+                            <div class="resposta-pergunta hidden-teste">
+                                Não se preocupe com burocracias, entregamos o seu veículo com os documentos e as taxas pagas.
+                            </div>
+                        </li>
+                        <li>
+                            <div class="titulo-pergunta" (click)="expandRow($event);">
+                                Vender o veículo? <span><img src="/assets/images/accordion-arrow.svg" /></span>
+                            </div>
+                            <div class="resposta-pergunta hidden-teste">
+                                Alugando seu carro na Loopster você nunca mais irá precisar se preocupar com toda a burocracia na hora de trocar de carro, e ainda tem a vantagem de dirigir um 0KM todo ano.
+                            </div>
+                        </li>
+                        <li>
+                            <div class="titulo-pergunta" (click)="expandRow($event);">
+                                Revisão preventiva de fábrica <span><img src="/assets/images/accordion-arrow.svg" /></span>
+                            </div>
+                            <div class="resposta-pergunta hidden-teste">
+                                Preparamos para você um pacote de serviços, já inclusos no seu plano, que irá garantir os cuidados necessários com seu veículo.
+                            </div>
+                        </li>
+                        <li>
+                            <div class="titulo-pergunta" (click)="expandRow($event);">
+                                Proteção para seu veículo <span><img src="/assets/images/accordion-arrow.svg" /></span>
+                            </div>
+                            <div class="resposta-pergunta hidden-teste">
+                                Nosso seguro auto irá te auxiliar com todos os eventuais problemas do seu carro.
+                            </div>
+                        </li>
+                        <!-- <li>
+                            <div class="titulo-pergunta" (click)="expandRow($event);">
+                                Pacote de mobilidade <span><img src="/assets/images/accordion-arrow.svg" /></span>
+                            </div>
+                            <div class="resposta-pergunta hidden-teste">
+                                Não te deixamos na mão! Na Loopster oferecemos serviço de mobilidade em casos de acidente com seu veículo. Sabemos que hoje em dia é impossível ficar sem carro, por isso conte com nosso pacote de mobilidade, criado especialmente para você. 
+                            </div>
+                        </li> -->
+                    </ul>
+                </div>
+                <div *ngIf="!hasOrder && !loadingStatus" class="dashbox no-order-box">
+                    <div class="no-order last-order">
+                        <p class="no-order__p mb-0">Não existem novos pedidos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

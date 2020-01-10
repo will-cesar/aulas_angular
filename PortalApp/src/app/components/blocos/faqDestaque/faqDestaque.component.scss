@@ -1,0 +1,111 @@
+.duvidas{
+  &:before{
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 65px;
+      background-color: #f7f7f7;
+      top: -65px;
+      left: 0;
+      z-index: 1;
+  }
+  padding: 188px 0;
+  .desktophighlightdark-grey{
+      margin-bottom: 20px;
+      @media (max-width:767px) {
+          margin-bottom: 42px;
+      }
+  }
+  .textdark-grey{
+      margin-bottom: 224px;
+      @media (max-width:767px) {
+          margin-bottom: 35px;
+      }
+  }
+  @media (max-width:767px) {
+      padding: 70px 0;
+      background-color: #f7f7f7;
+      border-radius: 0 0 60px 0;
+      position: relative;
+      padding-top: 140px;
+      margin-top: -70px;
+      z-index: 1;
+  }
+  ul{
+      padding-left: 0;
+      margin-left: 0;
+      margin-bottom: 30px;
+      li{
+   
+          list-style: none;
+          border-bottom: 2px solid #cccccc;
+          padding: 25px 0;
+          &:first-child{
+              border-top: 2px solid #cccccc;
+          }
+          .titulo-pergunta{
+              font-family: 'RCI';
+              font-size: 16px;
+              font-weight: bold;
+              font-style: normal;
+              font-stretch: normal;
+              line-height: normal;
+              letter-spacing: normal;
+              color: #282832;
+              cursor: pointer;
+              @media (max-width:767px){
+                  padding-right: 35px;
+              }
+              span{
+                  position: relative;
+                  display: inline-block;
+                  float: right;
+                  @media (max-width:767px){
+                      position: absolute;
+                      display: inline-flex;
+                      right: 25px;
+                  }
+                  img{
+                      transition: all 300ms ease;
+                  }
+                  &.opened-item{
+                      img{
+                          transition: all 300ms ease;
+                          transform: rotate(-180deg);
+                      }
+                      
+                  }
+              }
+          }
+          .resposta-pergunta{
+              margin-top: 20px;
+              transition: 300ms linear;
+              max-height: 15em;
+              overflow: hidden;
+              &.hidden-teste{
+                  margin-top: 0px;
+                  max-height: 0;
+                  overflow: hidden;
+                  transition: 300ms linear;
+              }
+          }
+      }
+  }
+  .cta-faq{
+      font-family: "RCI";
+      font-size: 16px;
+      font-weight: 300;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      color: #282832;
+      @media (max-width:767px) {
+          font-size: 14px;
+      }
+      a{
+          color: #FF7900;
+          text-decoration: underline;
+      }
+  }
+}

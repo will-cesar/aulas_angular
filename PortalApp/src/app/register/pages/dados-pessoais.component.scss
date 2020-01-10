@@ -1,0 +1,76 @@
+.register-step{
+    .register-checkbox{
+        a{
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        input{
+            display: block;
+            position: relative;
+            width: 20.8px;
+            height: 20.8px;
+            box-sizing: unset;
+            border: none;
+            -webkit-appearance: none;
+            cursor: pointer;
+            border: none;
+            border-radius: 100%;
+            display: inline-block;
+            &:after{
+                content: "";
+                position: absolute;
+                width: 20.8px;
+                height: 20.8px;
+                -o-object-fit: contain;
+                object-fit: contain;
+                background-color: #FF7900;
+                border-radius: 100%;
+                top: 0;
+                left: 0;
+            }
+            &:checked{
+                &:after{
+                    content: '';
+                    position: absolute;
+                    width: 20.8px;
+                    height: 20.8px;
+                    background-image: url('/assets/images/simulador/check-white.svg');
+                    background-size: 11px;
+                    background-repeat: no-repeat;
+                    background-position: center center;
+                    object-fit: contain;
+                    background-color: #FF7900;
+                    border-radius: 100%;
+                    top: 0;
+                    left: 0;
+                }
+            }
+        }
+        div{
+            top: -7px;
+            left: 10px;
+            font-size: 12px;
+            font-weight: 300;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #282832;
+            position: relative;
+            width: 85%;
+            display: inline-table;
+        }
+        a{
+            font-size: 12px;
+            font-weight: 300;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #282832;
+            position: relative;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    }
+}

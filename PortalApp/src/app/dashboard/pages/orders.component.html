@@ -1,0 +1,81 @@
+<div class="dashboard-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1 hidden-md-down">
+        <a [routerLink]="['/dashboard']" class="dashboard-back">
+          <img src="/assets/icons/nav-back.svg" />
+        </a>
+      </div>
+
+      <div class="col-md-4 hidden-md-down">
+        <div class="desktophighlightdark-grey">
+          Meus pedidos
+        </div>
+        <p class="textdark-grey">Acompanhe e gerencie seus pedidos em tempo real</p>
+      </div>
+
+      <div class="col-md-12 personalForm-header__mobile hidden-lg-up">
+        <a [routerLink]="['/dashboard']" class="dashboard-back">
+          <img src="/assets/icons/nav-back.svg" />
+        </a>
+        <p class="personalForm-header__mobile-p">Meus pedidos</p>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="dashbox loader-dash" *ngIf="loadingStatus">
+          <app-loading *ngIf="loadingStatus"></app-loading>
+        </div>
+        <div *ngIf="hasNewOrders && !loadingStatus" class="lastOrder">
+          <a *ngIf="showPendingDocuments" class="button-secundary buttontextpink" style="margin-bottom: 3px;"
+            [routerLink]="['/dashboard/meu-perfil']">Você tem
+            documentos pendentes, clique aqui para verificar</a>
+          <div class="order-type-title hidden-md-down">Meu último pedido</div>
+
+          <div *ngFor="let order of ordersList">
+            <div [routerLink]="['/dashboard/pedido', order.contract.idContract]"
+              *ngIf="order.annataStatus !== 'Reproved'" class="dashbox new-order-box">
+              <div class="last-order">
+                <div class="order-type-title hidden-lg-up">Meu último pedido</div>
+                <div class="order-infos">
+                  <span>Nº do pedido: <strong>{{order.contract.rentId}}</strong></span>
+                  <span>Data do pedido:
+                    <strong>{{order?.contract?.contractDate | date:'dd/MM/yyyy'}}</strong></span>
+                  <span class="hidden-lg-up">Status: <strong [innerHTML]="statusOrder(order)"></strong></span>
+                </div>
+                <div class="order-status hidden-md-down" [innerHTML]="statusOrder(order)">
+                </div>
+                <img src="/assets/icons/nav-back.svg" class="lastOrder-img hidden-lg-up" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!hasNewOrders && !loadingStatus" class="dashbox no-order-box">
+          <div class="no-order last-order">
+            <p class="no-order__p mb-0">Não existem novos pedidos.</p>
+          </div>
+        </div>
+        <div *ngIf="hasNewOrders && !loadingStatus" class="order-type-title order-type-title__mobile">Pedidos anteriores
+        </div>
+        <!-- <div *ngIf="ordersList && ordersList.length == 1">
+                    <div class="no-order last-order">
+                        <p class="no-order__p mb-0">Não existem pedidos anteriores.</p>
+                    </div>
+                </div> -->
+        <div *ngFor="let order of ordersList">
+          <div *ngIf="order.annataStatus == 'Reproved'" class="dashbox dashbox-mobile">
+            <div>
+              <div class="order-number">
+                Nº do pedido: <strong>{{order.contract.rentId}}</strong>
+              </div>
+              <div class="old-order-infos">
+                <span>Data do pedido:
+                  <strong>{{order?.contract?.contractDate | date:'dd/MM/yyyy'}}</strong></span>
+                <span>Status: <strong [innerHTML]="order.annataStatus == 'Reproved' ? 'Reprovado' : ''"></strong></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

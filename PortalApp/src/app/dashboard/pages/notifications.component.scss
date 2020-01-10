@@ -1,0 +1,229 @@
+.dashbox{
+    .tab-header{
+        position: relative;
+        margin: 0 auto;
+        margin-bottom: 20px;
+        @media(max-width:767px){
+            width: 100%;
+        }
+        .tab-button{
+            font-size: 16px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            text-align: center;
+            color:#cfcece;
+            border-bottom: 1px solid #282832;
+            position: relative;
+            display: inline-table;
+            width: 50%;
+            padding: 15px;
+            cursor: pointer;
+            &.active{
+                color: #282832;
+                border-bottom: 5px solid #FF7900;
+                padding-bottom: 13px;
+            }
+            &.inactive{
+                color: #282832;
+            }
+        }
+    }
+    .messages-list{
+        position: relative;
+        display: block;
+        padding-left: 0;
+        &.read-list{
+            padding-left: 0;
+            margin-left: 0;
+        }
+        &.no-read-list{
+            li{
+                &:before{
+                    content: "";
+                    width: 12px;
+                    height: 12px;
+                    background-color: #FF7900;
+                    display: block;
+                    position: absolute;
+                    left: 0;
+                    top: 50%;
+                    border-radius: 100%;
+                }    
+            }
+            
+        }
+        li{
+            position: relative;
+            display: block;
+            list-style: none;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #f7f7f7;
+            padding: 20px 10px 20px 30px;
+            cursor: pointer;
+
+            @media (max-width: 991.98px) {
+                border-bottom: 1px solid #000;
+            }
+
+            &:last-child{
+                border:none;
+            }
+            .date{
+                font-size: 12px;
+                font-weight: 300;
+                font-stretch: normal;
+                font-style: normal;
+                line-height: normal;
+                letter-spacing: normal;
+                color: #282832;
+            }
+            .title{
+                font-size: 16px;
+                font-weight: 600;
+                font-stretch: normal;
+                font-style: normal;
+                line-height: normal;
+                letter-spacing: normal;
+                color: #282832;
+            }
+        }
+    }
+    .notification-content{
+        .date{
+            font-size: 16px;
+            font-weight: 300;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #282832;
+            margin-bottom: 15px;
+        }
+        .title{
+            font-size: 16px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #282832;
+            margin-bottom: 15px;
+        }
+        .text{
+            font-size: 16px;
+            font-weight: 300;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #282832;
+            margin-bottom: 15px;
+        }
+        .back-button{
+            border-radius: 20px;
+            border: solid 2px #adadad;
+            color: #adadad;
+            position: relative;
+            padding: 10px 50px;
+            font-size: 12px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            text-align: center;
+            color: #999999;
+            margin-top: 15px;
+            display: inline-block;
+            cursor: pointer;
+        }
+    }
+}
+
+.dashboard-content {
+    @media (max-width: 991.98px) {
+        margin-top: 0 !important;
+        padding: 0 !important;
+        background-color: #fff !important;
+    }
+
+    .container {
+        @media (max-width: 991.98px) {
+            padding: 0;
+            margin: 0;
+            max-width: 991px;
+
+            .col-md-12, .col-lg-6 {
+                padding: 0;
+            }
+        }
+    }
+
+    .container > .row {
+        @media (max-width: 991.98px) {
+            margin: 0;
+        }
+    }
+
+    .col-lg-6 {
+        @media (max-width: 991.98px) {
+            padding: 0;
+        }
+
+        .dashbox {
+            @media (max-width: 991.98px) {
+                padding: 30px;
+                box-shadow: none;
+                background-color: #f7f7f7;
+                border-radius: 0;
+                margin: 0;
+            }
+        }
+    }
+}
+
+.personalForm-header__mobile {
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: #fff;
+
+    .dashboard-back {
+        position: absolute;
+        left: 30px;
+    }
+
+    .personalForm-header__mobile-p {
+        margin: 0;
+        font-size: 16px;
+        color: #FF7900;
+        font-weight: 600;
+    }
+}
+
+.dashbox-notifications__mobile-p {
+    font-size: 13px;
+    
+    .dashbox-notifications__mobile-span {
+        color: #FF7900;
+    }
+}
+
+.personalForm-header__mobile-numberNotification {
+    background-color: #FF7900;
+    position: absolute;
+    left: 70px;
+    border-radius: 50%;
+    font-size: 12px;
+    width: 22px;
+    height: 22px;
+    line-height: 20px;
+    font-weight: 500;
+    text-align: center;
+    color: #fff;
+}
