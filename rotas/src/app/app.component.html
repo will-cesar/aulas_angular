@@ -1,4 +1,4 @@
-<nav>
+<nav *ngIf="mostrarMenu">
   <div>
     <ul>
       <li [routerLinkActive]="['active']">
@@ -14,7 +14,11 @@
       </li>
 
       <li [routerLinkActive]="['active']">
-        <a [routerLink]="['/curso', idCurso.value]">Curso com id</a>
+        <a [routerLink]="['/cursos', idCurso.value]">Curso com id</a>
+      </li>
+
+      <li [routerLinkActive]="['active']">
+        <a [routerLink]="['/alunos']">Alunos</a>
       </li>
     </ul>
   </div>

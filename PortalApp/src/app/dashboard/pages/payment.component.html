@@ -1,0 +1,169 @@
+<div class="dashboard-content dashboard-content__mobile">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-1 hidden-md-down">
+                <a [routerLink]="['/dashboard']" class="dashboard-back">
+                    <img src="/assets/icons/nav-back.svg" />
+                </a>
+            </div>
+
+            <div class="col-md-5 hidden-md-down">
+                <div class="desktophighlightdark-grey">
+                    Forma de pagamento escolhida
+                </div>
+                <p class="textdark-grey">Confira aqui os dados cadastrados para pagamento de sua assinatura mensal.</p>
+            </div>
+
+            <div class="col-md-12 personalForm-header__mobile hidden-lg-up">
+                <a [routerLink]="['/dashboard']" class="dashboard-back">
+                    <img src="/assets/icons/nav-back.svg" />
+                </a>
+                <p class="personalForm-header__mobile-p">Dados de pagamento</p>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="dashbox loader-dash" *ngIf="loadingStatus">
+                    <app-loading *ngIf="loadingStatus"></app-loading>
+                </div>
+                <div *ngIf="hasOrder && !loadingStatus" class="dashbox dashbox-payment__form">
+                    <p class="hidden-lg-up dashbox-payment__title">Forma de pagamento escolhida</p>
+                    <div *ngIf="hasSignedContract" class="payment-item">
+                        <img *ngIf="guaranteeDepositMethod != 'CreditCard'" src="/assets/icons/bars.svg" />
+                        <img *ngIf="guaranteeDepositMethod == 'CreditCard'" src="/assets/icons/card.svg" />
+                        <div class="payment-infos">
+                            <div class="payment-type">Garantia de contrato</div>
+                            <div *ngIf="guaranteeDepositDone && guaranteeDepositMethod != 'CreditCard'" class="payment-method">
+                                Boleto Bancário
+                            </div>
+                            <div *ngIf="guaranteeDepositDone && guaranteeDepositMethod == 'CreditCard'" class="payment-method">
+                                Cartão de Crédito: (Final: {{guaranteeDepositCreditCardFinal}})
+                            </div>
+                            <div *ngIf="!guaranteeDepositDone" class="payment-method">
+                                A Definir
+                            </div>
+                            <div class="payment-value">Valor:
+                                {{ dataPayments?.contract?.guaranteeDeposit  | currency:'BRL':true  }}
+                            </div>
+                        </div>
+                        <div class="payment-actions">
+                            <div *ngIf="hasPayments && guaranteeDepositDone" class="paymentp-status status-flag"
+                                [innerHTML]="guaranteeDepositDone ? 'Pago' : ''"></div>
+                            <a *ngIf="hasPayments && !guaranteeDepositDone"
+                                [routerLink]="['/dashboard/pagamento/efetuarPagamento', dataPayments?.contract?.idContract]"
+                                class="button-secundary buttontextpink">
+                                Efetuar pagamento
+                            </a>
+                        </div>
+                    </div>
+                    <div *ngIf="guaranteeDepositDone && hasSignedContract" class="payment-item">
+                        <img *ngIf="installmentsPaymentMethod != 'CreditCard'" src="/assets/icons/bars.svg" />
+                        <img *ngIf="installmentsPaymentMethod == 'CreditCard'" src="/assets/icons/card.svg" />
+                        <div class="payment-infos">
+                            <div class="payment-type">Mensalidade</div>
+                            <div *ngIf="installmentsPaymentDone && installmentsPaymentMethod != 'CreditCard'" class="payment-method">
+                                Boleto Bancário
+                            </div>
+                            <div *ngIf="installmentsPaymentDone && installmentsPaymentMethod == 'CreditCard'" class="payment-method">
+                                Cartão de Crédito (Final: {{installmentsCreditCardFinal}})
+                            </div>
+                            <div *ngIf="!installmentsPaymentDone" class="payment-method">
+                                A Definir
+                            </div>
+                            <div class="payment-value">
+                                {{ dataPayments?.contract?.installmentAmount  | currency:'BRL':true  }}</div>
+                        </div>
+                        <div class="payment-actions">
+                            <a [routerLink]="['/dashboard/pagamento/alterar', dataPayments?.contract?.idContract]"
+                                class="button-secundary buttontextpink">
+                                Alterar
+                            </a>
+                        </div>
+                    </div>
+                    <div *ngIf="!hasSignedContract" class="no-order last-order">
+                        <p class="no-order__p mb-0">O contrato ainda não foi assinado.</p>
+                    </div>
+                </div>
+
+                <!-- <div *ngIf="hasOrder && !loadingStatus" class="payments-list">
+                    <div class="title">Meus pagamentos</div>
+                    <div class="warn">
+                        <span>Atenção:</span>
+                        Em caso de inadimplência por mais de 60 dias, o contrato será cancelado.
+                    </div>
+
+                    <div *ngIf="hasPayments" class="tab-header">
+                        <div class="tab-button" [ngClass]="!pastPayments ? 'active' : ''"
+                            (click)="changePaymentsList()">Em aberto</div>
+                        <div class="tab-button" [ngClass]="pastPayments ? 'active' : ''" (click)="changePaymentsList()">
+                            Histórico</div>
+                    </div>
+
+                    <div *ngIf="!pastPayments && hasPayments" class="open-payments">
+                        <div *ngFor="let payment of dataPayments?.contract?.contractPayments; let i = index">
+                            <div *ngIf="payment.type == 1 && payment.done == false" class="dashbox"
+                                (click)="selectPlot(payment.idContractPayment, $event)">
+                                <div class="plot-checkbox"></div>
+                                <div class="payment-values">
+                                    <div class="plot-info">Mensalidade {{ i }} de
+                                        {{ dataPayments?.contract?.numberOfInstallments }}</div>
+                                    <div class="payment-info">
+                                        Vencimento:
+                                        <strong>{{ payment.previewPaymentDate | date:'dd/MM/yyyy' }}</strong>
+                                    </div>
+                                    <div class="payment-info">
+                                        Valor corrigido: <strong>{{ payment.value  | currency:'BRL':true  }}</strong>
+                                    </div>
+                                </div>
+                                <div *ngIf="payment.previewPaymentDate > today" class="payment-status"
+                                    [innerHTML]="payment?.done ? 'Paga' : 'Em Aberto'"></div>
+                                <div *ngIf="payment.previewPaymentDate < today" class="payment-status"
+                                    [innerHTML]="payment?.done ? 'Paga' : 'Atrasada'"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="pastPayments && hasPayments" class="past-payments">
+                        <div *ngFor="let payment of dataPayments?.contract?.contractPayments; let i = index">
+                            <div *ngIf="payment.type == 1 && payment.done == true" class="dashbox">
+                                <div class="payment-values">
+                                    <div class="plot-info">Mensalidade {{ i }} de
+                                        {{ dataPayments?.contract?.numberOfInstallments }}</div>
+                                    <div class="payment-info">
+                                        Vencimento:
+                                        <strong>{{ payment.previewPaymentDate | date:'dd/MM/yyyy' }}</strong>
+                                    </div>
+                                    <div class="payment-info">
+                                        Valor corrigido: <strong>{{ payment.value  | currency:'BRL':true  }}</strong>
+                                    </div>
+                                </div>
+                                <div class="payment-status" [innerHTML]="payment.done ? 'Paga' : 'Atrasada'"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="no-payments" *ngIf="!hasPayments">
+                        Não existem mensalidades em aberto.
+                    </div>
+                </div> -->
+                <div *ngIf="!hasOrder && !loadingStatus" class="dashbox no-order-box">
+                    <div class="no-order last-order">
+                        <p class="no-order__p mb-0">Não existem pedidos para efetuar pagamento.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="plots-total" *ngIf="hasSelectedPlots">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 offset-md-6">
+                <div class="plot-item">Mensalidades: {{selectedPlots.length}} ({{selectedPlots.length | numberToWords}})
+                </div>
+                <div class="plot-item">Total: {{ totalValue  | currency:'BRL':true  }}</div>
+            </div>
+            <div class="col-md-2">
+                <a class="generate">Gerar Boleto</a>
+            </div>
+        </div>
+    </div>
+</div>

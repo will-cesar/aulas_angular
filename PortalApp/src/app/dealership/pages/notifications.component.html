@@ -1,0 +1,99 @@
+<div class="dashboard-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-1 hidden-md-down">
+                <a [routerLink]="['/concessionaria']" class="dashboard-back">
+                    <img src="/assets/icons/nav-back.svg" />
+                </a>
+            </div> 
+
+            <div class="col-md-5 hidden-md-down">
+                <div class="desktophighlightdark-grey">
+                    Notificações
+                </div>
+                <p class="textdark-grey">Preencha seus dados pessoais., Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+
+            <div class="col-md-12 personalForm-header__mobile hidden-lg-up">
+                <a href="javascript:void(0)" class="dashboard-back" (click)="arrowNavigation()">
+                    <img src="/assets/icons/nav-back.svg" />
+                </a>
+                <span class="personalForm-header__mobile-numberNotification" [hidden]="!notificationOpen">02</span>
+                <p class="personalForm-header__mobile-p">Notificações</p>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="dashbox">
+                    <div class="dashbox-notifications__mobile d-flex align-items-center mb-3" *ngIf="!notificationOpen">
+                        <img src="../../../assets/images/bell-black.svg" alt="" class="dashbox-notifications__mobile-img mr-2">
+                        <p class="dashbox-notifications__mobile-p mb-0">6 notificações <span class="ml-1 mr-1"> | </span><span class="dashbox-notifications__mobile-span">3 novas</span></p>
+                    </div>
+
+                    <div *ngIf="!notificationOpen" class="tab-header">
+                        <div class="tab-button" [ngClass]="!readList ? 'active' : ''" (click)="changeMessagesList()">Não Lidas</div>
+                        <div class="tab-button" [ngClass]="readList ? 'active' : ''" (click)="changeMessagesList()">Lidas</div>
+                    </div>
+                    <ul *ngIf="!readList && !notificationOpen" class="messages-list no-read-list">
+                        <li (click)="openNotification()">
+                            <div class="date">
+                                04 de Novembro de 2019
+                            </div>
+                            <div class="title">
+                                Informações de  documentação cadastral pendente
+                            </div>
+                        </li>
+                        <li (click)="openNotification()">
+                            <div class="date">
+                                04 de Novembro de 2019
+                            </div>
+                            <div class="title">
+                                Informações de  documentação cadastral pendente
+                            </div>
+                        </li>
+                        <li (click)="openNotification()">
+                            <div class="date">
+                                04 de Novembro de 2019
+                            </div>
+                            <div class="title">
+                                Informações de  documentação cadastral pendente
+                            </div>
+                        </li>
+                    </ul>
+                    <ul *ngIf="readList && !notificationOpen" class="messages-list read-list">
+                        <li (click)="openNotification()">
+                            <div class="date">
+                                04 de Novembro de 2019
+                            </div>
+                            <div class="title">
+                                Informações de  documentação cadastral pendente
+                            </div>
+                        </li>
+                        <li (click)="openNotification()">
+                            <div class="date">
+                                04 de Novembro de 2019
+                            </div>
+                            <div class="title">
+                                Informações de  documentação cadastral pendente
+                            </div>
+                        </li>
+                    </ul>
+                    <div *ngIf="notificationOpen" class="notification-content">
+                        <div class="date">
+                                04 de Novembro de 2019
+                        </div>
+                        <div class="title">
+                                Informações de  documentação cadastral pendente
+                        </div>
+                        <div class="text">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ultricies viverra ipsum, quis maximus sapien pulvinar nec. Nunc vel lorem quis arcu aliquet porta id vitae lacus. Suspendisse ut commodo justo. Praesent imperdiet lacus at tincidunt facilisis. Etiam venenatis, quam non auctor tempor, ipsum justo finibus erat, ac viverra sapien lacus ut ligula. Nam diam felis, laoreet eu placerat ac, maximus at arcu. Phasellus finibus mauris elit, sit amet placerat risus imperdiet eu. Aenean sit amet nisi dictum, euismod nisi ut, sodales orci. Phasellus eu est in orci molestie convallis eu ultrices ligula.
+
+                                Acesse o link para atualizar:
+                                www.loopster.com.br/cadastro
+                        </div>
+                        <div class="back-button hidden-md-down" (click)="closeNotification()">Voltar</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

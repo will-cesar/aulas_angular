@@ -3,16 +3,44 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
-import { CursosComponent } from './cursos/cursos.component';
-import { CursoDetalheComponent } from './curso-detalhe/curso-detalhe.component'; 
-import { CursoNaoEncontradoComponent } from './curso-nao-encontrado/curso-nao-encontrado.component';
+import { AuthGuard } from './guards/auth.guard';
+import { CursosGuard } from './guards/cursos.guard';
+import { AlunosGuard } from './guards/alunos.guard';
+import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao-encontrada.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'curso/:id', component: CursoDetalheComponent },
-  { path: 'cursos', component: CursosComponent },
-  { path: 'não-encontrado', component: CursoNaoEncontradoComponent }
+  { 
+    path: 'login', 
+    component: LoginComponent 
+  },
+  { 
+    path: 'cursos', 
+    loadChildren: './cursos/cursos.module#CursosModule', 
+    canActivate: [AuthGuard], 
+    canActivateChild: [CursosGuard],
+    canLoad: [AuthGuard]
+  },
+  { 
+    path: 'alunos', 
+    loadChildren: './alunos/alunos.module#AlunosModule', 
+    canActivate: [AuthGuard],
+    canLoad: [AuthGuard]
+    // canActivateChild: [AlunosGuard]
+  },
+  { 
+    path: 'home', 
+    component: HomeComponent, 
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: '', 
+    redirectTo: '/home',
+    pathMatch: 'full'
+  },
+  {
+    path: '**', // página não encontrada
+    component: PaginaNaoEncontradaComponent
+  }
 ];
 
 @NgModule({

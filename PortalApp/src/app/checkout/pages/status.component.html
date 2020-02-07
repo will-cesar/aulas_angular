@@ -1,0 +1,287 @@
+<div class="status-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+
+        <app-loading loaderClass="price-loader" *ngIf="loadingStatus"></app-loading>
+
+        <div *ngIf="isApproved && !needDocuments && !inAnalysis && !docReceived && !fullDocumentation && !loadingStatus"
+          class="status approved">
+          <div class="status-mobile__div1">
+            <div class="icon">
+              <img src="/assets/images/checkout/approved.svg" />
+            </div>
+            <div class="status-title">A análise do seu crédito foi aprovada.</div>
+          </div>
+          <div class="status-info status-info--mobile">Você pode conferir seu pedido completo clicando no
+            botão abaixo.</div>
+          <div class="status-buttons">
+            <a (click)="openProposal(contentProposal)" class="button-secundary buttontextpink left-button">Proposta
+              completa</a>
+            <a [routerLink]="['/pagamento/contrato', contract?.contract?.idContract]"
+              class="button-secundary buttontextpink right-button">Continuar</a>
+          </div>
+        </div>
+
+        <div
+          *ngIf="!isApproved && !needDocuments && !inAnalysis && !docReceived && !fullDocumentation && !loadingStatus"
+          class="status reproved">
+          <div class="status-mobile__div1">
+            <div class="icon">
+              <img src="/assets/images/checkout/exclamation.svg" />
+            </div>
+            <div class="status-title">Status do seu pedido</div>
+          </div>
+          <div class="status-info status-info--mobile">Infelizmente não foi possível aprovar sua solicitação.
+          </div>
+        </div>
+
+        <div *ngIf="!isApproved && needDocuments && !inAnalysis && !docReceived && !fullDocumentation && !loadingStatus"
+          class="status need-documents">
+          <div class="status-mobile__div1">
+            <div class="icon">
+              <img src="/assets/images/checkout/document-request.svg" />
+            </div>
+            <div class="status-title">Documentos adicionais</div>
+          </div>
+          <div class="status-info status-info--mobile">Precisamos que nos envie o(s) seguinte(s) documento(s):
+          </div>
+        </div>
+
+        <div *ngIf="!isApproved && !needDocuments && inAnalysis && !docReceived && !fullDocumentation && !loadingStatus"
+          class="status analysis">
+          <div class="status-mobile__div1">
+            <div class="icon">
+              <img src="/assets/images/checkout/document-request.svg" />
+            </div>
+            <div class="status-title">Sua proposta está em análise.</div>
+          </div>
+          <div class="status-info status-info--mobile">Aguarde, você receberá uma notificação no e-mail
+            cadastrado.<br />Você pode
+            acompanhar o status de sua contratação também pela área do cliente, clicando no botão abaixo.
+          </div>
+          <div class="status-buttons" style="width: 27em !important;">
+            <a (click)="openProposal(contentProposal)" class="button-secundary buttontextpink left-button">Proposta
+              completa</a>
+            <a [routerLink]="['/dashboard/pedido',contract?.contract?.idContract ]"
+              class="button-secundary buttontextpink right-button">Status do
+              pedido</a>
+          </div>
+        </div>
+
+        <div *ngIf="!isApproved && !needDocuments && !inAnalysis && docReceived && !fullDocumentation && !loadingStatus"
+          class="status received-docs">
+          <div class="status-mobile__div1">
+            <div class="icon">
+              <img src="/assets/images/checkout/white-check.svg" />
+            </div>
+            <div class="status-title">Documentos recebidos</div>
+          </div>
+          <div class="status-info status-info--mobile">Aguarde, você receberá uma notificação no e-mail
+            cadastrado.<br />Você pode
+            acompanhar o status de sua contratação.</div>
+          <div class="status-buttons">
+            <a [routerLink]="['/pagamento/contrato', contract?.contract?.idContract]"
+              class="button-secundary buttontextpink">Status do pedido</a>
+          </div>
+        </div>
+
+        <div *ngIf="!isApproved && !needDocuments && !inAnalysis && !docReceived && fullDocumentation && !loadingStatus"
+          class="status received-docs">
+          <div class="status-mobile__div1">
+            <div class="icon">
+              <img src="/assets/images/checkout/approved.svg" />
+            </div>
+            <div class="status-title">Pedido aprovado</div>
+          </div>
+          <div class="status-info status-info--mobile">Sua documentação está completa!<br />Prossiga com a
+            contratação.</div>
+          <div class="status-buttons">
+            <a [routerLink]="['/pagamento/contrato', contract?.contract?.idContract]"
+              class="button-secundary buttontextpink">Continuar</a>
+          </div>
+        </div>
+
+        <ng-template id="modal-proposal" #contentProposal let-modal>
+          <div class="d-none d-md-block">
+            <div class="modal-header">
+              <div class="container">
+                <div class="row">
+                  <div class="col">
+                    <h1 class="proposal-title hidden-sm-down">Sua assinatura contempla:</h1>
+                    <h1 class="proposal-title hidden-md-up">Detalhes:</h1>
+                    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-body">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-6 coluna-carro">
+                    <div class="nome-carro desktophighlightdark-grey mobilehighlightdark-grey">
+                      {{ contract?.model?.brand }}
+                      {{ contract?.model?.class }}</div>
+                    <div class="nome-versao tittledark-grey">
+                      {{ contract?.model?.model }}</div>
+                    <ul>
+                      <li class="textdark-grey" *ngFor="let item of contract?.serialItems">
+                        {{ item.name }}
+                      </li>
+                    </ul>
+                    <div class="foto-carro">
+                      <img src="{{mediaRepository}}{{contract?.color?.featuredPhoto}}" />
+                    </div>
+                  </div>
+                  <div class="col-md-6 coluna-itens-aluguel">
+                    <ul>
+                      <li>
+                        <div class="titulo-item">Seguro Anual - Cobertura completa</div>
+                        <span class="textdark-grey">O seguro está incluso na sua assinatura, não
+                          se
+                          preocupe com isso.
+                          <!-- <a (click)="open(content)">Acesse todas as coberturas do seu
+                                                        seguro.</a> --></span>
+                      </li>
+                      <li>
+                        <div class="titulo-item">Revisão</div>
+                        <span class="textdark-grey">A revisão do veículo está inclusa, não se
+                          preocupe com isso.</span>
+                      </li>
+                      <!-- <li>
+                        <div class="titulo-item">Pneus</div>
+                        <span class="textdark-grey">A troca de pneus do veículo está inclusa na
+                          sua
+                          assinatura, não se
+                          preocupe com isso.</span>
+                      </li> -->
+                      <li>
+                        <div class="titulo-item">Impostos e documentação</div>
+                        <span class="textdark-grey">Os impostos e documentações estão inclusos
+                          na
+                          sua assinatura, não se
+                          preocupe com isso.</span>
+                      </li>
+                    </ul>
+                    <div class="proposal-values">
+                      <div class="value-item">Prazo contratado:
+                        {{ contract?.contract?.timeDeadline}} meses</div>
+                      <div class="value-item">Depósito de garantida:
+                        {{ contract?.contract?.guaranteeDeposit  | currency:'BRL':true }}</div>
+                      <div class="value-item">Mensalidade: <span
+                          class="monthly-value">{{ contract?.contract?.installmentAmount  | currency:'BRL':true }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-block d-md-none">
+
+            <div class="custom-modal-div">
+              <div class="modal-header">
+                <div class="container">
+                  <div class="row">
+                    <div class="col">
+                      <h1 class="proposal-title hidden-sm-down">Sua assinatura contempla:</h1>
+                      <h1 class="proposal-title hidden-md-up">Detalhes:</h1>
+                      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="modal-body">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-12 coluna-carro">
+                      <div class="nome-carro desktophighlightdark-grey mobilehighlightdark-grey">
+                        {{ contract?.model?.brand }}
+                        {{ contract?.model?.class }}</div>
+                      <div class="nome-versao tittledark-grey">
+                        {{ contract?.model?.model }}</div>
+                      <ul>
+                        <li class="textdark-grey">
+                          Sensores de chuva e luminosidade
+                        </li>
+                        <li class="textdark-grey">
+                          Media Nav Evolution
+                        </li>
+                        <li class="textdark-grey">
+                          Chave-cartão Handsfree Walk Away Closing
+                        </li>
+                      </ul>
+                      <div class="foto-carro">
+                        <img src="{{mediaRepository}}{{contract?.color?.featuredPhoto}}" />
+                      </div>
+                    </div>
+
+                    <div class="col-md-12 coluna-itens-aluguel">
+                      <ul>
+                        <li>
+                          <div class="titulo-item">Seguro Anual - Cobertura completa</div>
+                          <span class="textdark-grey">O seguro está incluso na sua assinatura,
+                            não se
+                            preocupe com isso.
+                            <!-- <a (click)="open(content)">Acesse todas as coberturas do seu
+                                                            seguro.</a> --></span>
+                        </li>
+                        <li>
+                          <div class="titulo-item">Revisão</div>
+                          <span class="textdark-grey">A revisão do veículo está inclusa, não
+                            se
+                            preocupe com isso.</span>
+                        </li>
+                        <!-- <li>
+                          <div class="titulo-item">Pneus</div>
+                          <span class="textdark-grey">A troca de pneus do veículo está inclusa
+                            na sua
+                            assinatura, não se
+                            preocupe com isso.</span>
+                        </li> -->
+                        <li>
+                          <div class="titulo-item">Impostos e documentação</div>
+                          <span class="textdark-grey">Os impostos e documentações estão
+                            inclusos na
+                            sua assinatura, não se
+                            preocupe com isso.</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="modal-body">
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="proposal-values">
+                      <div class="value-item">Vigência do contrato:
+                        {{ contract?.contract?.timeDeadline}} meses</div>
+                      <div class="value-item">Depósito de garantida:
+                        {{ contract?.contract?.guaranteeDeposit}}</div>
+                      <div class="value-item">Mensalidade: <span
+                          class="monthly-value">{{ contract?.contract?.totalValue  | currency:'BRL':true }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,86 @@
+<div class="checkout-contract">
+    <div  class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Confira o que você está contratando:</h1>
+                <app-loading loaderClass="progress-loader" *ngIf="!hasContract"></app-loading>
+            </div>
+        </div>
+        <div *ngIf="hasContract" class="row">
+            <div class="col-md-6">
+                <div class="contract-wrapper">
+                    <div class="contract-title">veículo alocado</div>
+                    <div class="contract-item">
+                        <strong>Marca:</strong> {{ contract?.model?.brand }}
+                    </div>
+                    <div class="contract-item">
+                        <strong>Modelo:</strong> {{ contract?.model?.class}}
+                        {{ contract?.model?.model}}
+                    </div>
+                    <div class="contract-item">
+                        <strong>Ano/mod:</strong> {{ contract?.model?.modelYear }}
+                    </div>
+                    <div class="contract-item">
+                        <strong>Cor:</strong> {{ contract?.color?.color }}
+                    </div>
+                    <div class="contract-item">
+                        <strong>Especificação dos acessórios:</strong><br />
+                        <span *ngFor="let item of contract?.serialItems; let last = last;">
+                            {{item.name}}<span *ngIf="!last">,</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="car-photo hidden-sm-down">
+                    <img src="{{mediaRepository}}{{contract?.color?.featuredPhoto}}" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="contract-wrapper">
+                    <div class="contract-title">prazo de locação e quilometragem</div>
+                    <div class="contract-item">
+                        <strong>Prazo da locação:</strong> {{ contract?.contract?.timeDeadline }} meses
+                    </div>
+                    <div class="contract-item">
+                        <strong>Plano de KM:</strong> {{ contract?.contract?.kmLimit }} km ao mês
+                    </div>
+                    <div class="contract-item">
+                        <strong>Valor do KM excedente:</strong> R$ 0,50 / km
+                    </div>
+                </div>
+                <div class="contract-wrapper">
+                    <div class="contract-title">preço e condições de pagamento</div>
+                    <div class="contract-item">
+                        <strong>Valor da mensalidade:</strong>
+                        {{ contract?.contract?.installmentAmount  | currency:'BRL':true  }}
+                    </div>
+                    <div class="contract-item">
+                        <strong>Valor do sinal de
+                            reserva:</strong>{{ contract?.contract?.guaranteeDeposit  | currency:'BRL':true  }}
+                    </div>
+                </div>
+                <div class="contract-wrapper">
+                    <div class="contract-title">LOCAL DE RETIRADA E DEVOLUÇão do veículo</div>
+                    <div class="contract-item">
+                        <strong>Concessionária:</strong> {{contract?.dealership?.name}}
+                    </div>
+                    <div class="contract-item">
+                        <strong>Endereço:</strong> {{contract?.dealership?.address}}
+                    </div>
+                    <div class="contract-item">
+                        <strong>Cidade / UF:</strong> {{contract?.dealership?.city}} / {{contract?.dealership?.state}}
+                        <!-- Curitiba / PR -->
+                    </div>
+                    <div class="contract-item">
+                        <strong>Tel. contato:</strong> {{contract?.dealership?.phoneNumber}}
+                    </div>
+                </div>
+                <div class="contract-buttons">
+                    <a [routerLink]="['/pagamento/informacoes-adicionais', contract?.contract?.idContract]"
+                        class="button-secundary buttontextpink left-button">Saiba mais sobre o seu contrato</a>
+                    <a (click)="goToSign()" class="button-secundary buttontextpink right-button">Assinar contrato</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

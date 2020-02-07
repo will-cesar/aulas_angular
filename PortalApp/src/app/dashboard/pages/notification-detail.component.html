@@ -1,0 +1,39 @@
+<div class="dashboard-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-1 hidden-md-down">
+                <a [routerLink]="['/dashboard/notificacoes']" class="dashboard-back">
+                    <img src="/assets/icons/nav-back.svg" />
+                </a>
+            </div>
+
+            <div class="col-md-5 hidden-md-down">
+                <div class="desktophighlightdark-grey">
+                    Notificações
+                </div>
+                <p class="textdark-grey">Confira as suas notificações.</p>
+            </div>
+
+            <div class="col-md-12 personalForm-header__mobile hidden-lg-up">
+                <a href="javascript:void(0)" class="dashboard-back" (click)="arrowNavigation()">
+                    <img src="/assets/icons/nav-back.svg" />
+                </a>
+                <span class="personalForm-header__mobile-numberNotification">02</span>
+                <p class="personalForm-header__mobile-p">Notificações</p>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="dashbox">
+                    <div class="notification-content">
+                        <div class="date">{{ notification?.CreatedDateTimeNotification | date:'dd' }} de
+                            {{ notification?.CreatedDateTimeNotification | date:'MMMM' }} de
+                            {{ notification?.CreatedDateTimeNotification | date:'yyyy' }}</div>
+                        <div class="title">{{ notification?.Title }}</div>
+                        <div class="text">{{ notification?.Notes }}</div>
+                        <div class="back-button hidden-md-down" (click)="closeNotification()">Voltar</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

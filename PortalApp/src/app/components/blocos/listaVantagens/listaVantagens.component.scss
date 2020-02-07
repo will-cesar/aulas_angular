@@ -1,0 +1,58 @@
+.vantagens{
+    background-color: #fff;
+    @media(max-width:991px){
+        border-radius: 0px 0 60px 0;
+        margin-bottom: -100px;
+        z-index: 4;
+        position: relative;
+        padding-bottom:0; 
+    }
+    .icone-vantagem{
+        display: -ms-flexbox !important;
+        height: 129px;
+        background: #fff;
+        border-radius: 15px;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 50px 0 rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        margin-bottom: 20px;
+        @media (max-width:991px){
+            height: 80px;
+        }
+        img{
+            width: 50%;
+            object-fit: contain;
+            max-height: 65px;
+            @media (max-width:991px){
+                width: 40%;
+            }
+        }
+    }
+    .titulo-vantagem{
+        font-size: 16px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: center;
+        color: #282832;
+        padding: 0 15px;
+        margin-bottom: 45px;
+        @media (max-width:991px){
+            font-size: 12px;
+            padding: 0;
+        }
+    }
+    .desktophighlightdark-grey{
+        margin-bottom: 45px;
+    }
+    .textdark-grey{
+        margin-bottom: 110px;
+        @media (max-width:991px){
+            margin-bottom: 40px;
+        }
+    }
+}

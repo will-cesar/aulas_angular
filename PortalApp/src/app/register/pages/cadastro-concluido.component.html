@@ -1,0 +1,70 @@
+<div class="register-step">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5 coluna-titulo">
+        <h1 class="desktophighlightdark-grey conclusion-title">{{conclusionStatus}}</h1>
+      </div>
+      <div class="col-md-4 offset-md-1 coluna-infos-conclusao">
+        <div class="textdark-grey">
+          Enviamos um link de confirmação para o seu e-mail cadastrado
+        </div>
+        <div *ngIf="user" class="conclusion-mail">
+          {{user.email}}
+        </div>
+        <div class="textdark-grey">
+          Acesse seu e-mail, clique no link e finalize seu cadastro.
+        </div>
+        <div class="conclusion-cta">
+          <div class="cta-title">
+            Não recebeu o e-mail?
+          </div>
+          <a class="cta-button button-secundary buttontextpink" [ngClass]="resubmittedMail ? 'resubmited-mail' : ''"
+            (click)="resend()"><img *ngIf="resubmittedMail"
+              src="/assets/images/simulador/check-step-white.svg">{{resubmitButtonText}}</a>
+          <div class="cta-title">
+            O e-mail cadastrado não está correto?
+          </div>
+          <a class="cta-button button-secundary buttontextpink" (click)="openDados(contentDados)">Atualizar
+            e-mail</a>
+
+          <!-- <div class="cta-title" *ngIf="simulation">Continuar simulação?</div>
+                    <a class="cta-button button-secundary buttontextpink" *ngIf="simulation"
+                        (click)="redirectSimulation()">Continuar</a> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #contentDados let-modal>
+  <div class="modal-header">
+    <h4 class="tittledark-grey" id="modal-termos-dados">Atualizar e-mail</h4>
+    <!-- <div class="textdark-grey">Laboris nisi ut aliquip ex ea commodo consequat.</div> -->
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body coverage-modal">
+    <form [formGroup]="form" name="resume-form" class="floating-form">
+      <div class="floating-label">
+        <input class="floating-input" formControlName="email" name="email" type="email" placeholder=" ">
+        <label>E-mail</label><span class="obs-campo-erro" *ngIf="verifyInvalidAndTouched('email')">E-mail
+          inválido</span>
+      </div>
+      <div class="floating-label">
+        <input class="floating-input" formControlName="confirmationEmail" name="confirmationEmail" type="email"
+          placeholder=" ">
+        <label>Confirmação de e-mail</label><span class="obs-campo-erro"
+          *ngIf="verifyInvalidAndTouched('confirmationEmail')">E-mail diferente do informado</span>
+        <span class="obs-campo-erro" *ngIf="form.value.confirmationEmail != form.value.email">E-mail não
+          confere</span>
+
+      </div>
+      <div class="floating-label">
+        <div class="form-buttom">
+          <button type="submit" (click)="onSubmit()" name="submit" class="button-secundary buttontextpink">Atualizar
+            e-mail</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>

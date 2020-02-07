@@ -1,0 +1,254 @@
+.resumo-contratacao{
+    position: relative;
+    padding: 100px 0;
+    padding-bottom: 0;
+    @media(max-width:767px){
+        background-color: #f7f7f7;
+        padding: 115px 0;
+        padding-bottom: 115px;
+    }
+    &:after{
+        content: "";
+        top: 14%;
+        position: absolute;
+        right: 0;
+        width: 50%;
+        height: 100%;
+        background-color: #f7f7f7;
+        border-radius: 60px 0px 0px 60px;
+        z-index: -1;
+        @media(max-width:767px){
+            top: 0;
+            width: 100%;
+            background: white;
+            z-index: 0;
+            height: 35%;
+            height: 42%;
+            border-radius: 0px 0px 0px 60px;
+        }
+    }
+    .foto-carro{
+        position: absolute;
+        bottom: 0;
+        width: 35%;
+        left: 60px;
+        img{
+            width: 100%;
+        }
+        @media(max-width:767px){
+            position: absolute;
+            top: 0;
+            width: 80%;
+            left: 10%;
+            margin-top: 73%;
+            z-index: 3;
+            bottom: auto;
+        }
+    }
+    .coluna-carro {
+        margin-bottom: 20vw;
+        @media(max-width:767px){
+            margin-bottom: 0;
+            display: block;
+            z-index: 1;
+            margin-bottom: 130px;
+        }
+        .seu-carro{
+            font-size: 16px;
+            font-weight: bold;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #282832;
+            margin-bottom: 20px;
+            padding-top: 25px;
+            @media(max-width:767px){
+                margin-bottom: 5px;
+            }
+        }
+        .nome-carro{
+            margin-bottom: 30px;
+            @media(max-width:767px){
+                margin-bottom: 10px;
+            }
+        }
+        .nome-versao{
+            margin-bottom: 110px;
+            @media(max-width:767px){
+                font-size: 1.375em;
+            }
+        }
+    }
+    .coluna-itens-aluguel{
+        padding-top: 100px;
+        padding-left: 70px;
+        @media(max-width:767px){
+            padding-left: 15px;
+            padding-top: 0;
+        }
+        .desktopsubtittledark-grey{
+            margin-bottom: 20px;
+        }
+        .textdark-grey{
+            margin-bottom: 30px;
+        }
+        ul{
+            padding-left: 0;
+            margin-left: 0;
+            li{
+                border-radius: 10px;
+                box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
+                background-color: #fff;
+                font-size: 16px;
+                font-weight: 600;
+                font-stretch: normal;
+                font-style: normal;
+                line-height: normal;
+                letter-spacing: normal;
+                color: #282832;
+                cursor: pointer;
+                list-style: none;
+                display: flex;
+                width: 60%;
+                height: 60px;
+                margin-bottom: 15px;
+                align-items: center;
+                padding-left: 30px;
+                transition: all .2s ease-in-out;
+                position: relative;
+                img{
+                    display: none;
+                }
+                &.active,
+                &:hover{
+                    color:#fff;
+                    background-color: #FF7900;
+                }
+                &.active{
+                    img{
+                        position: absolute;
+                        top: 10px;
+                        right: 20px;
+                        display: block;
+                        @media(min-width: 768px){
+                            top: 18px;
+                        }
+                    }
+                }
+                @media(max-width:767px){
+                    width: 100%;
+                    height: 45px;
+                }
+            }
+        }
+        .buttontextpink{
+            width: 45%;
+            padding: 15px 27px;
+            font-size: 22px;
+            margin-top: 15px;
+            border-radius: 30px;
+            @media(max-width:767px){
+                width: 100%;
+                padding: 10px 27px;
+                font-size: 0.75em;
+                margin-top: 0;
+                border-radius: 30px;
+            }
+        }
+    }
+}
+
+.simulador-content__regiao {
+    margin: 120px auto;
+
+    .simulador-content__regiao--h2 {
+        font-size: 2.5em;
+    }
+
+    .simulador-content__regiao--p {
+        @media (min-width: 1200px) {
+            max-width: 475px;
+            margin: 0 auto; 
+        }        
+    }
+
+    .simulador-content__concessionaria {
+        padding: 30px;
+        box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.15);
+        border-radius: 15px;
+        background-color: #fff;
+        max-width: 99%;
+        margin: 15px auto;
+    }
+}
+
+.arrow-colapse {
+    cursor: pointer;
+}
+
+.arrow-colapse-active {
+    transform: rotate(180deg);
+}
+
+.concessionaria-content {
+    margin-top: 10px;
+    transition: .3s;
+}
+
+.concessionaria-content--collapsed {
+    margin-top: 0px;
+    transition: .3s;
+    overflow: hidden;
+    height: 0;
+}
+
+.concessionaria-scollbar {
+    position: relative;
+    max-height: 400px;
+    padding: 0px 6px;
+
+    &:after {
+        content: "";
+        position: absolute;
+        bottom: -50px;
+        width: 100%;
+        height: 75px;
+        background: rgba(255,255,255,1);
+        background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 43%, rgba(255,255,255,0) 100%);
+        background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,255,255,1)), color-stop(43%, rgba(255,255,255,1)), color-stop(100%, rgba(255,255,255,0)));
+        background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 43%, rgba(255,255,255,0) 100%);
+        background: -o-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 43%, rgba(255,255,255,0) 100%);
+        background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 43%, rgba(255,255,255,0) 100%);
+        background: linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 43%, rgba(255,255,255,0) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff', GradientType=0 );
+    }
+}
+
+.concessionaria-selected__btn-left {
+    width: 48%;
+    border: solid 2px #adadad;
+    color: #adadad !important;
+}
+
+.concessionaria-selected__btn-right {
+    width: 48%;
+    border: solid 2px #FF7900;
+    background-color: #FF7900;
+    color: #fff !important;
+}
+
+.custom-arrow-back {
+    position: absolute;
+    top: 125px;
+    left: 22%;
+    cursor: pointer;
+
+    @media (max-width: 991.98px) {
+        display: none;
+    }
+}
+
+.row-position {
+    position: relative;
+}

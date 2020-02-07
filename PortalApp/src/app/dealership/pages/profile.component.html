@@ -1,0 +1,139 @@
+<div class="dashboard-content">
+    <div class="container" *ngIf="!IsMobile">
+        <div class="row">
+            <div class="col-md-1">
+                <a [routerLink]="['/concessionaria']" class="dashboard-back">
+                    <img src="/assets/icons/nav-back.svg" />
+                </a>
+            </div>
+
+            <div class="col-md-4">
+                <div class="desktophighlightdark-grey">
+                    Meu<br /> perfil
+                </div>
+                <p class="textdark-grey">Preencha seus dados pessoais., Lorem ipsum dolor sit amet, consectetur
+                    adipiscing elit.</p>
+            </div>
+
+            <div class="col-md-6">
+                <div *ngIf="profileItens" class="dashbox">
+                    <div class="avatar" [ngStyle]="{'background-image': 'url(' + userInfos?.profileImageUrl + ')'}">
+                    </div>
+                    <div class="username"><strong>{{ userInfos?.name}}</strong></div>
+                    <div class="dealership-address">
+                        {{ userInfos?.address}}
+                    </div>
+                    <div (click)="editPassword()" class="profile-nav">
+                        <div class="title">Alterar senha de acesso</div>
+                        <div class="subtitle">Altere sua senha de acesso.</div>
+                    </div>
+                </div>
+
+                <div *ngIf="password" class="dashbox">
+                    <div class="personal-data-tile">
+                        Criar nova senha
+                    </div>
+                    <form class="form-horizontal" [formGroup]="form">
+                        <div class="floating-label">
+                            <input class="floating-input" formControlName="oldPassword" name="oldPassword"
+                                type="password" placeholder=" ">
+                            <label>Senha atual</label>
+                            <span class="obs-campo-erro" *ngIf="verifyInvalidAndTouched('oldPassword')">Senha
+                                inválida</span>
+                        </div>
+                        <div class="floating-label">
+                            <input class="floating-input" formControlName="password" name="password" type="password"
+                                placeholder=" ">
+                            <label>Senha</label>
+                            <span class="obs-campo-erro" *ngIf="verifyInvalidAndTouched('password')">Senha
+                                inválida</span>
+                        </div>
+                        <div class="floating-label">
+                            <input class="floating-input" formControlName="confirmPassWord" name="confirmPassWord"
+                                type="password" placeholder=" ">
+                            <label>Repetir a senha</label>
+                            <span class="obs-campo-erro" *ngIf="verifyInvalidAndTouched('confirmPassWord')">As senhas
+                                digitadas são
+                                diferentes</span>
+                        </div>
+                        <span class="pass-disclaimer">Mínimo: 1 caracter especial e 6 dígitos</span>
+                        <div class="actions-step">
+                            <a (click)="backProfileItens()"
+                                class="button-secundary left-button back-button hidden-md-down">Voltar</a>
+                            <button type="submit" name="submit" (click)="onSubmit()"
+                                class="button-secundary buttontextpink right-button">Criar senha</button>
+                        </div>
+                    </form>
+                    <!-- <div *ngIf="passSuccess" class="passflow">
+                        <div class="title-passflow success-title">Nova senha criada com sucesso <span>;)</span></div>
+                        <div class="actions-step">
+                            <a (click)="backProfileItens()"
+                                class="button-secundary left-button back-button hidden-md-down">Voltar</a>
+                        </div>
+                    </div> -->
+                </div>
+
+                <div *ngIf="personalData" class="dashbox">
+                    <div class="personal-data-tile">
+                        Meus dados cadastrais
+                    </div>
+                    <div class="tab-header">
+                        <div class="tab-button" [ngClass]="personalDataForm ? 'active' : ''"
+                            (click)="changePersonalDataTab()">Dados pessoais</div>
+                        <div class="tab-button" [ngClass]="!personalDataForm ? 'active' : ''"
+                            (click)="changePersonalDataTab()">Endereço</div>
+                    </div>
+
+                </div>
+
+                <div *ngIf="IsUpdateData" class="dashbox text-center finalizao-dados">
+                    <div class="personal-data-tile">Meus dados cadastrais</div>
+                    <p class="text-center finalizao-dados__text-msg">Dados atualizados com sucesso ;)</p>
+                    <p class="text-center finalizao-dados__text-p">Lorem ipsum dolor sit amet, consectetur adipiscing
+                        elit. Curabitur orci augue, elementum eu sollicitudin eget, accumsan in lorem.</p>
+                    <a href="javascript:void(0)" class="button-secundary buttontextpink mt-4"
+                        [routerLink]="['/']">Voltar para a home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard-content__mobile" *ngIf="IsMobile">
+        <div class="dashbox" *ngIf="profileItens">
+            <a [routerLink]="['/concessionaria']" class="dashboard-back">
+                <img src="/assets/icons/nav-back-white.svg" />
+            </a>
+            <img src="assets/images/loopster-white.svg" alt="Loopster" class="icon-loopster">
+            <div class="div-avatar-camera">
+                <div class="avatar" [ngStyle]="{'background-image': 'url(' + userInfos?.profileImageUrl + ')'}"></div>
+                <div class="camera-icon">
+                    <img src="assets/images/camera.svg" alt="">
+                </div>
+            </div>
+            <div class="username"><strong>{{ userInfos?.name}}</strong></div>
+            <div class="dealership-address">
+                {{ userInfos?.address}}
+            </div>
+        </div>
+
+        <div class="dashbox dashbox__options" *ngIf="profileItens">
+
+            <div class="profile-nav">
+                <div class="title">Alterar senha de acesso</div>
+                <div class="subtitle">Altere sua senha de acesso.</div>
+            </div>
+        </div>
+
+        <div *ngIf="IsUpdateData" class="finalizao-dados">
+            <div class="personalForm-header__mobile">
+                <a (click)="backProfileItens()" class="dashboard-back">
+                    <img src="/assets/icons/nav-back.svg" />
+                </a>
+                <p class="personalForm-header__mobile-p">Meus dados cadastrais</p>
+            </div>
+            <p class="finalizao-dados__text-msg">Dados atualizados com sucesso ;)</p>
+            <p class="finalizao-dados__text-p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur orci
+                augue, elementum eu sollicitudin eget, accumsan in lorem.</p>
+        </div>
+    </div>
+</div>

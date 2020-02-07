@@ -1,0 +1,53 @@
+<div class="dashboard-content dashboard-content__mobile">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-1 hidden-md-down">
+                <a [routerLink]="['/dashboard']" class="dashboard-back">
+                    <img src="/assets/icons/nav-back.svg" />
+                </a>
+            </div>
+
+            <div class="col-md-4 hidden-md-down">
+                <div class="desktophighlightdark-grey">
+                    Meus contratos
+                </div>
+                <p class="textdark-grey">Faça o download dos seus documentos sempre que precisar</p>
+            </div>
+
+            <div class="col-md-12 personalForm-header__mobile hidden-lg-up">
+                <a [routerLink]="['/dashboard']" class="dashboard-back">
+                    <img src="/assets/icons/nav-back.svg" />
+                </a>
+                <p class="personalForm-header__mobile-p">Meus contratos</p>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="dashbox loader-dash" *ngIf="loadingStatus">
+                    <app-loading *ngIf="loadingStatus"></app-loading>
+                </div>
+                <div *ngIf="hasContract && !loadingStatus" class="dashbox">
+                    <div class="order-infos">
+                        <span>Nº do pedido: <strong>{{contract?.contract?.rentId}}</strong></span>
+                        <span>Data do pedido:
+                            <strong>{{contract?.contract?.contractDate | date:'dd/MM/yyyy'}}</strong></span>
+                        <div class="status-flag hidden-lg-up">Ativo</div>
+                    </div>
+                    <div class="status-flag hidden-md-down">Ativo</div>
+                    <div *ngIf="attachedDocuments.length > 0" class="download-buttons">
+                        <a href="{{attachedDocuments[0].fileUrl}}" class="button-secundary buttontextpink">Contrato
+                            completo</a>
+                        <!-- <a class="button-secundary buttontextpink">Termo de Multa</a> -->
+                        <!-- <a class="button-secundary buttontextpink">Termo de retirada do veículo</a>
+                        <a class="button-secundary buttontextpink">Termo de entrega do veículo</a>
+                        <a class="button-secundary buttontextpink">Outros documentos</a> -->
+                    </div>
+                </div>
+                <div *ngIf="!hasContract && !loadingStatus" class="dashbox no-order-box">
+                    <div class="no-order last-order">
+                        <p class="no-order__p mb-0">Não existem novos pedidos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

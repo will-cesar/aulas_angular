@@ -1,0 +1,24 @@
+<ion-header color="primary">
+  <ion-toolbar color="primary">
+      <div class="back-button" *ngIf="step != 1" (click)="back(step, pictureStep)">
+        <ion-icon name="arrow-round-back"  ></ion-icon>
+      </div>
+    <div class="d-flex flex-center">
+      <img src="assets/imgs/logo.png" />
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-step-indicator [step]="step"></app-step-indicator>
+  <div class="main-message d-flex flex-center">
+    <ion-label>
+      {{mainMessage}}
+    </ion-label>
+  </div>
+  <div class="main-section">
+  <app-vehicle-form *ngIf="step == 1" (onSubmit)="formFinished($event)"></app-vehicle-form>    
+  <app-photo-upload *ngIf="step == 2" [imagesToSet]="getImagesToSet()" [pendingResult]="pendingResult" (onSubmit)="uploadFinished($event)" [minPhotoUpload]="stepIndicators[pictureStep]['minPhotoPerStep']" [kindOfPhoto]="pictureStep" [hideDescription]="getDescripitionField()" hideSelect="true" style="height: 100%;"></app-photo-upload>    
+  <app-photos-checkout *ngIf="step == 3" (onSubmit)="photoCheckedout($event)" [image]="imagesToUpload"></app-photos-checkout>
+  </div>
+</ion-content>

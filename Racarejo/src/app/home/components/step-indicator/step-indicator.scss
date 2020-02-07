@@ -1,0 +1,27 @@
+.step-indicator{
+    padding: 10px 0;
+    box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.2), 0 0px 1px 0 rgba(0, 0, 0, 0.19);
+    background-color: #fff;
+}
+
+.step-indicator-icon-holder {
+    min-height: 30px;
+    min-width: 50px;
+    margin: 0 4px;
+    background-color: var(--ion-color-primary);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    margin-right: 2px;
+}
+
+.step-indicator-icon-holder ion-icon{
+    margin-right: 4px;    
+}
+.disable{
+    background-color: grey;
+    min-width: 30px;
+}
+
