@@ -349,3 +349,12 @@ ActivatedRoute:
 
 Router:
 - é possível redirecionar para qual rota desejar através da classe "Router", que é importanda e instanciada no construtor
+- exemplo: rotas -> curso-detalhe.component
+
+QueryParams:
+- [queryParams]
+- utilizado para passar uma query na rota
+- a query irá aparecer logo após o ponto de interrogação criado pelo próprio comando
+    - exemplo: "/cursos?pagina=1"
+    - cursos no caso já existe, o qu está após o "?" é a query
+- exemplo: rotas -> app.component.html // rotas -> cursos.component
