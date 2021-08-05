@@ -1,27 +1,22 @@
-O que precisa ter para instalar o angular no computador:
-- node.js
-- angular CLI === npm i -g @angular/cli
-- instalar o TypeScript === npm i -g typescript
+## Comandos úteis:
+- ng new nome-do-projeto --> cria o novo projeto angular;
+- ng serve --> roda a aplicação;
+- ng g c nome-do-componente --> cria um novo componente. O "g" significa gerar, "c" significa componente;
+- ng g m nome-do-modulo --> cria um novo modulo. O "m" significa módulo;
+- ng g s nome-do-servico --> cria um novo servico. O "s" significa servico;
+- ng g d node-da-diretiva --> cria uma nova diretiva. O "d" significa diretiva;
+- ng g p node-do-pipe --> cria um novo pipe. O "p" significa pipe;
+- ng g class node-da-diretiva --> cria uma nova class;
+- ng g interface node-do-interface --> cria uma nova interface;
+- ng g enum node-do-enum --> cria um novo enum;
+- ng build --> gera o build de desenvolvimento;
+- ng build --prod --> gera o build de produção; 
+- ng lint --> escanear todo o código, verificar boas práticas do style guides, erros como ponto e vírgula, etc;
+- ng test --> executa os testes unitários no projeto;
+- ng e2e --> executa os testes end 2 end no projeto;
 
-================================================================================================================================================
 
-Comandos:
-- ng new nome-do-projeto == cria o novo projeto angular;
-- ng serve == roda a aplicação;
-- ng g c nome-do-componente == cria um novo componente. O "g" significa gerar, "c" significa componente;
-- ng g m nome-do-modulo == cria um novo modulo. O "m" significa módulo;
-- ng g s nome-do-servico == cria um novo servico. O "s" significa servico;
-- ng g d node-da-diretiva == cria uma nova diretiva. O "d" significa diretiva;
-- ng g p node-do-pipe == cria um novo pipe. O "p" significa pipe;
-- ng g class node-da-diretiva == cria uma nova class;
-- ng g interface node-do-interface == cria uma nova interface;
-- ng g enum node-do-enum == cria um novo enum;
-- ng build == gera o build de desenvolvimento;
-- ng build --prod == gera o build de produção; 
-
-================================================================================================================================================
-
-Componentes:
+## Componentes:
 - há duas formas de criar um componente, via CLI ou sem o CLI.
 - sem o CLI:
     - é preciso criar o arquivo.component.ts dentro da pasta de componente;
@@ -34,16 +29,7 @@ Componentes:
     tudo automaticamente;
     - já adiciona o componente dentro do modulo da pasta desejada;
 
-================================================================================================================================================
-
-Comandos especiais:
-- ng lint: escanear todo o código, verificar boas práticas do style guides, erros como ponto e vírgula, etc;
-- ng test: executa os testes unitários no projeto;
-- ng e2e: executa os testes end 2 end no projeto;
-
-================================================================================================================================================
-
-Modulos:
+## Modulos:
 - ajuda a organizar a aplicação, desenvolvendo diretórios para armazenar arquivos relacionados ao módulo.
 - o app.module.ts é o módulo raiz da aplicação.
 - dentro do módulo utilizasse o decorator @NgModule, nele é declarados alguns metadados, dentre eles o declarations, imports, providers, exports;
@@ -58,16 +44,12 @@ Modulos:
 - para que seja possível compartilhar esse módulo com o restante da aplicação, é necessário importar ele dentro do módulo principal (app.module.ts) 
 dentro do metadado "imports" e, dentro do módulo que quer exportar é necessário colocar o metadado "exports" e colocar o nome do componente dentro.
 
-================================================================================================================================================
-
-Templates: 
+## Templates: 
 - são os arquivos html dentro da pasta do componente
 - para passar variáveis de forma dinâmica entre componente e html é necessário criar ela dentro do arquivo do componente (component.ts);
     - no arquivo html, pegar a variável pela interpolação {{ nome da variável declarada no component.ts }}
 
-================================================================================================================================================
-
-Diretivas:
+## Diretivas:
 - Diretivas são instruções;
 - Diretivas estruturais:
     - Loop:
@@ -86,57 +68,65 @@ Diretivas:
     - utilizado no caso de switch and case;
     - Olhar exemplo em diretivas -> diretiva-ngswitch;
 
-================================================================================================================================================
-
-Serviços:
+## Serviços:
+- Classes responsáveis por buscar dados no servidor e enfiar dados ao mesmo;
+- serviços também são uteis para não repetição de código na aplicação;
+- fornece lógica de negócio e evita código duplicado;
+- também podera utilizar classes utilitárias;
+- o construtor é o primeiro método que é executado, pois constroe a classe;
+- quando declarada uma variável "static", não é preciso instânciar o serviço para acessar ela em outro componente;
+    - servicos -> cursos -> cursos.service
 - para criar um serviço é necessário criar um arquivo .service.ts;
 - comando para criar: ng g s nome-do-servico;
     - será criado os arquivos nome-do-arquivo.service.spec.ts e nome-do-arquivo.service.ts.
 - para chamar um service dentro de um componente é necessário importar o mesmo dentro do arquivo do componente.ts desejado;
+- Injeção de dependência:
+    - fazer com que o angular forneça uma instância da classe de serviço, sem precisar instânciar manualmente;
+    - o decorator @Injectable() fornece essa possibilidade de injetar a classe sem instânciar ela;
+    - para fazer a injeção é necessário declarar a classe dentro do constructor no componente
+        - exemplo: constructor(private primeiroServico: PrimeiroServicoService) == declara a variavel "primeiroServico" do tipo "PrimeiroServicoService", 
+        que é a classe importada no arquivo;
+        - o "private" guarda o escopo desse acesso da classe dentro do constructor;
+    - a injeção de dependencia cria a instância do service, dentro do construtor, passando a referencia dessa instância para que uma outra classe
+    possa utilizar também;
+    - O decorator @Injectable() diz para o angular que é uma classe injetável; Exemplo: servicos -> cursos -> cursos.service;
+    - é necessário declarar nos providers do module que será utilizado o serviço com injeção;
+    - exemplo sem e com o uso de injeção de dependencia: servicos -> cursos -> cursos.component;
 
-Injeção de dependência:
-- fazer com que o angular forneça uma instância da classe de serviço, sem precisar instânciar manualmente;
-- o decorator @Injectable() fornece essa possibilidade de injetar a classe sem instânciar ela;
-- para fazer a injeção é necessário declarar a classe dentro do constructor no componente
-    - exemplo: constructor(private primeiroServico: PrimeiroServicoService) == declara a variavel "primeiroServico" do tipo "PrimeiroServicoService", 
-    que é a classe importada no arquivo;
-    - o "private" guarda o escopo desse acesso da classe dentro do constructor;
+- Padrão singleton:
+    - ter apenas uma instância da classe para toda a aplicação;
+    - dividir em módulos, declarar os componentes dentro desses módulos, exportar os mesmos e declarar o módulo no app.component;
+    - assim terão componentes replicáveis dentro da aplicação, mas com apenas uma instância dentro do módulo;
+    - com cada componente declarando no provider um serviço, e esse serviço seja replicado em diversos componente, cada um se comportará da maneira
+    em que o componente manipula o serviço, apenas afetando aquele componente, e não outros componente da aplicação;  
+    - é preciso declarar o "providers: []" dentro do decorator @Component;
+        - exemplo: servicos -> criar-curso // servicos -> cursos; 
 
-================================================================================================================================================
-
-Property Binding e Interpolação
+## Property Binding e Interpolação
 - Data Binding: uma forma de associar informações que estão no componente para o template, e vice e versa. Tipos:
     - Interpolação "{{ valor }}": (componente -> template);
     - Property binding "[propriedade]="valor": (componente -> template);
         - (evento)="handler": (template -> componente);
     - Two way data binding [(ngModel)]="propriedade";
 
-================================================================================================================================================    
-
-Class e style binding:
+## Class e style binding:
 - é possível criar uma váriavel dentro de um elemento html através da # mais o nome da variável
     - exemplo <select #classe (change)="0">
     - assim fica armazenado dentro da var classe as propriedades do elemento
     - exemplos de class e style binding: projeto data-binding -> app -> data-binding -> data-binding.component.html
 
-================================================================================================================================================
-
-Event binding:
+## Event binding:
 - eventos pré definidos no angular;
 - https://developer.mozilla.org/pt-BR/docs/Web/API/Event;
 - exemplos em: projeto data-binding -> app -> data-binding -> data-binding.component.html;
 
-================================================================================================================================================
-
-Two-way data binding:
+## Two-way data binding:
 - junta o binding de propriedade e de evento em um lugar só;
 - [(ngModel)]="nome" dentro do elemento;
 - exemplos em: projeto data-binding -> app -> meu-form -> meu-form.component.html;
 - ngModel é uma diretiva do angular que pertence ao "FormsModule", onde precisa ser importado no module
 
-================================================================================================================================================
-
-Input properties:
+## Input properties:
 - é utilizado para passar dados pelo html para outro componente;
 - dentro de um componente pai, colocar um componente pelo seu seletor, dentro dele adicionar uma propriedade que tenha o mesmo nome da váriavel 
 dentro do componente filho, assim essa variável poderá ser acessada no html do componente filho.
@@ -144,20 +134,17 @@ dentro do componente filho, assim essa variável poderá ser acessada no html do
     - no decorator é possível colocar o nome da propriedade externa, que é recebida, e o nome da propriedade interna, armazenada em uma variável;
         - exemplo: @Input('nome') nomeCurso: string = '';
 
-- Exemplo: <app-curso [nome]="nomeDoCurso"></app-curso>
+- Exemplo: 
+    - <app-curso [nome]="nomeDoCurso"></app-curso>
     - Esse exemplo está em: data-binding -> app -> data-binding -> data-binding.component.html;
     - o app-curso está em: data-binding -> app -> input-property -> input-property.component.html;
 
-================================================================================================================================================
-
-Output properties:
+## Output properties:
 - é utilizado para exibir os dados para fora do elemento, pelo componente pai;
 - Esse exemplo está em: data-binding -> app -> data-binding -> data-binding.component.html;
 - o app-curso está em: data-binding -> app -> input-property -> output-property.component.html; 
 
-================================================================================================================================================
-
-Ciclo de vida do componente:
+## Ciclo de vida do componente:
 - ngOnChanges: ativado antes do ngOnInit e quando o valor property-binding é atualizado;
 - ngOnInit: quando o Component é inicializado;
 - ngDoCheck: ativado a cada ciclo de verificação de mudanças;
@@ -166,9 +153,7 @@ Ciclo de vida do componente:
 - ngAfterViewChecked: a cada verificação de conteúdo / conteúdo filho;
 - ngOnDestroy: antes da diretiva/component ser destruído;
 
-================================================================================================================================================
-
-Utilizando pré-processadores:
+## Utilizando pré-processadores:
 - Sass, Lass, stylus
 - é possível gerar um novo projeto já com esses pré processadores instalados:
     - ng new nome-do-projeto --style=sass;
@@ -180,9 +165,7 @@ Utilizando pré-processadores:
     - ng set defaults.styleExt less;
     - ng set defaults.styleExt styl;
 
-================================================================================================================================================
-
-Gerando build de desenvolvimento:
+## Gerando build de desenvolvimento:
 - ng build;
 - o build é gerado dentro do diretório dist;
 - apresentam 3 arquivos:
@@ -190,26 +173,20 @@ Gerando build de desenvolvimento:
     - main.bundle.js == possui todo o código fonte da aplicação (css e html);
     - polyfills.bundle.js == código auxiliar ao browser para ler a aplicação;
 
-Gerando build de produção:
+## Gerando build de produção:
 - ng build --prod;
 - minifica o código js da aplicação;
 - css e templates html já minificados e incluídos em main.bundle.js
 
-================================================================================================================================================
-
-Operador Elvis:
+# Operador Elvis:
 - Utilizado para identificar caso seja um valor nulo ou não e exibir na tela
 - Exemplo: diretivas -> operador-elvis
 
-================================================================================================================================================
-
-ng-content:
+## ng-content:
 - Utilizado para passar a informação digitada dentro do seletor principal do componente para dentro do html do componente
 - Exemplo: diretivas -> exemplo-ng-content.component e diretivas -> app.component.html
 
-================================================================================================================================================
-
-Diretiva de atributo:
+## Diretiva de atributo:
 - com o ng g d nome-da-diretiva é possível criar uma diretiva nova no projeto
 - utiliza o decorator de @Directive;
 - no seletor é possível filtrar o tipo de elemento que você quer usar, exemplo:
@@ -222,9 +199,7 @@ Diretiva de atributo:
 - Seta o elemento dentro de algum método vindo da injeção de dependencia com 3 elementos ('elemento renderizado', 'nome do atributo', 'valor');
 - exemplo: diretivas -> shared -> fundo-amarelo.directive.ts;
 
-================================================================================================================================================
-
-HostListener e HostBinding
+## HostListener e HostBinding
 - HostListener "escuta" o elemento host, ou seja, o elemento hospedeiro da diretiva;
 - pode colocar o nome do evento que será "escutado" no elemento;
 - metadado + nome do evento + function
@@ -235,17 +210,13 @@ HostListener e HostBinding
 - associa o atributo a uma variável;
     - exemplo: diretivas -> shared -> highlight-mouse.diretives.ts;
 
-================================================================================================================================================
-
-Diretiva Input com property binding
+## Diretiva Input com property binding
 - com o metadado @Input é posivel colocar um valor na diretiva dentro do html.
 - exemplo: <p [highlight]="'red'" [dafaultColor]="'grey'">
 - assim, o valor colocado no html é passado para o arquivo .ts e tratado conforme solicitado
 - exemplo: diretivas -> shared -> highlight.diretives.ts;
 
-================================================================================================================================================
-
-Diretiva de estrutura:
+## Diretiva de estrutura
 - com o ng g d nome-da-diretiva é possível criar uma diretiva de estrutura nova no projeto;
 - uma diretiva que irá modificar a estrutura do DOM;
 - exemplo: diretivas -> shared -> ng-else.diretives.ts;
@@ -255,9 +226,7 @@ Diretiva de estrutura:
     - TemplateRef: faz referencia ao template;
     - ViewContainerRef: faz referencia ao container da view, ou seja, o conteúdo q será renderizado;
 
-================================================================================================================================================
-
-Serviços:
+## Serviços:
 - Classes responsáveis por buscar dados no servidor e enfiar dados ao mesmo;
 - serviços também são uteis para não repetição de código na aplicação;
 - fornece lógica de negócio e evita código duplicado;
@@ -282,9 +251,7 @@ em que o componente manipula o serviço, apenas afetando aquele componente, e n�
 - é preciso declarar o "providers: []" dentro do decorator @Component;
     - exemplo: servicos -> criar-curso // servicos -> cursos; 
 
-================================================================================================================================================
-
-Pipes:
+## Pipes:
 - é como se fosse um filtro de front, onde há formatações de valores dentro do DOM sem passar pelo ts
 - nos pipes é possível colocar parâmetros neles
     - por exemplo nos pipes de number, nele é possível formatar casas decimais 
@@ -324,9 +291,7 @@ Pipes:
     - exemplo: pipes -> filtro-array-impuro
     - nesse exemplo, é utilizado o "extends" do FiltroArrayPipe, dessa forma é herdado para dentro do método as outras functions do método extendido
 
-================================================================================================================================================
-
-Rotas:
+## Rotas:
 - é gerado automaticamente pelo angular cli um arquivo chamado app-routing.module
 - nele é possível configurar as rotas principais da aplicação;
 - para configurar, é necessário criar uma varial de rotas, instanciando o "Routes" e aplicando cada objeto especificando qual é a rota a ser utilizada
@@ -334,92 +299,88 @@ Rotas:
     - component: renderiza um componente;
 - exemplo: rotas -> app-routing.modules.ts;
 
-[routerLink]:
-- é utilizado para redirecionar para a url que desejar, como se fosse o "href"
-- exemplo: rotas -> app.component.html;
+- [routerLink]:
+    - é utilizado para redirecionar para a url que desejar, como se fosse o "href"
+    - exemplo: rotas -> app.component.html;
 
-[routerLinkActive]:
-- utilizado para sinalizar qual é a rota ativa no momento;
-- é possível adicionar uma classe no elemento sinalizado;
-- exemplo: rotas -> app.component.html;
+- [routerLinkActive]:
+    - utilizado para sinalizar qual é a rota ativa no momento;
+    - é possível adicionar uma classe no elemento sinalizado;
+    - exemplo: rotas -> app.component.html;
 
-ActivatedRoute:
-- classe do angular onde é possível capturar um atributo dentro da rota;
+- ActivatedRoute:
+    - classe do angular onde é possível capturar um atributo dentro da rota;
+        - exemplo: rotas -> curso-detalhe.component
+        - também pode ser utilizado com o snapshot da rota
+            - ex: "this.route.snapshot.params['id'];"
+
+- Router:
+    - é possível redirecionar para qual rota desejar através da classe "Router", que é importanda e instanciada no construtor
     - exemplo: rotas -> curso-detalhe.component
-    - também pode ser utilizado com o snapshot da rota
-        - ex: "this.route.snapshot.params['id'];"
 
-Router:
-- é possível redirecionar para qual rota desejar através da classe "Router", que é importanda e instanciada no construtor
-- exemplo: rotas -> curso-detalhe.component
+- QueryParams:
+    - [queryParams]
+    - utilizado para passar uma query na rota
+    - a query irá aparecer logo após o ponto de interrogação criado pelo próprio comando
+        - exemplo: "/cursos?pagina=1"
+        - cursos no caso já existe, o qu está após o "?" é a query
+    - exemplo: rotas -> app.component.html // rotas -> cursos.component
 
-QueryParams:
-- [queryParams]
-- utilizado para passar uma query na rota
-- a query irá aparecer logo após o ponto de interrogação criado pelo próprio comando
-    - exemplo: "/cursos?pagina=1"
-    - cursos no caso já existe, o qu está após o "?" é a query
-- exemplo: rotas -> app.component.html // rotas -> cursos.component
+- Lazy loading:
+    - é utilizado para carregar apenas o modulo por vez, quando entrar na rota
+    - no "app-routing.module.ts" é necessário criar uma rota padrão para o módulo, onde dentro do modulo havera outro arquivo routing
+        - nesse arquivo routing interno do modulo, é configurada as rotas filhas dele
+    - no "app-routing.module.ts" colocar assim:
+        - Exemplo: { path: 'cursos', loadChildren: './cursos/cursos.module#CursosModule'}
+        - loadChildren para carregar as rotas filhas desse modulo em questão
+        - é necessário também retirar dos imports do app.module o modulo que está configurado para o lazy loading 
 
-Lazy loading:
-- é utilizado para carregar apenas o modulo por vez, quando entrar na rota
-- no "app-routing.module.ts" é necessário criar uma rota padrão para o módulo, onde dentro do modulo havera outro arquivo routing
-    - nesse arquivo routing interno do modulo, é configurada as rotas filhas dele
-- no "app-routing.module.ts" colocar assim:
-    - Exemplo: { path: 'cursos', loadChildren: './cursos/cursos.module#CursosModule'}
-    - loadChildren para carregar as rotas filhas desse modulo em questão
-    - é necessário também retirar dos imports do app.module o modulo que está configurado para o lazy loading 
+- Guarda de rotas:
+    - é um tipo de serviço que implementa um determinado um método que é usado como um guarda de rota
+    - os guardas de rotas sempre precisam ser chamados nos "providers" dos modulos
+    - é injetado diretamente na rota pelo atributo "canActivate"
+        - esse atributo espera o nome da classe onde está configurado o guarda de rota
+        - dentro dessa classe é configurado o método "canActivate", que o mesmo espera dois atributos
+    - exemplo: rotas -> guards -> auth.guard.ts // rotas -> app-routing.module.ts
 
-Guarda de rotas:
-- é um tipo de serviço que implementa um determinado um método que é usado como um guarda de rota
-- os guardas de rotas sempre precisam ser chamados nos "providers" dos modulos
-- é injetado diretamente na rota pelo atributo "canActivate"
-    - esse atributo espera o nome da classe onde está configurado o guarda de rota
-    - dentro dessa classe é configurado o método "canActivate", que o mesmo espera dois atributos
-- exemplo: rotas -> guards -> auth.guard.ts // rotas -> app-routing.module.ts
+- canActivate:
+    - parametro utilizado para verificar um modulo por inteiros
 
-canActivate:
-- parametro utilizado para verificar um modulo por inteiros
+- canActivateChild:
+    - verifica as rotas filhas de um modulo
+    - exemplo: rotas -> alunos -> alunos.routing.module.ts // rotas -> guards -> alunos.guard.ts
 
-canActivateChild:
-- verifica as rotas filhas de um modulo
-- exemplo: rotas -> alunos -> alunos.routing.module.ts // rotas -> guards -> alunos.guard.ts
+- CanDeactivate:
+    - verifica se o usuário pode desativar uma rota específica
+    - é utilizado quando "trava" o redirecionamento para uma outra rota, nisso é possível validar se deseja trocar de rota ou não
+        - exemplo: rotas -> guards -> alunos-deactivate.guard.ts // rotas -> alunos -> aluno-form -> aluno-form.component.ts  
 
-CanDeactivate:
-- verifica se o usuário pode desativar uma rota específica
-- é utilizado quando "trava" o redirecionamento para uma outra rota, nisso é possível validar se deseja trocar de rota ou não
-    - exemplo: rotas -> guards -> alunos-deactivate.guard.ts // rotas -> alunos -> aluno-form -> aluno-form.component.ts  
+- Resolver:
+    - utilizado para obter informações antes do componente ser renderizado
+    - é útil para carregar informações dos services, assim os resultados aparecem no html de forma mais rápida
+        - exemplos: rotas -> alunos -> guards -> aluno-detalhe.resolver.ts // 
+                    rotas -> alunos -> alunos.routing.module.ts
 
-Resolver:
-- utilizado para obter informações antes do componente ser renderizado
-- é útil para carregar informações dos services, assim os resultados aparecem no html de forma mais rápida
-    - exemplos: rotas -> alunos -> guards -> aluno-detalhe.resolver.ts // 
-                rotas -> alunos -> alunos.routing.module.ts
+- canLoad:
+    - verifica se o usuário tem permissão para carregar o script do módulo
+        - exemplo: rotas -> guards -> auth.guard.ts
 
-canLoad:
-- verifica se o usuário tem permissão para carregar o script do módulo
-    - exemplo: rotas -> guards -> auth.guard.ts
+- Rota para "Página não encontrada":
+    - Exemplo: rotas -> app-routing.module.ts
 
-Rota para "Página não encontrada":
-- Exemplo: rotas -> app-routing.module.ts
+- Rota "home":
+    - redirecionar as rotas vazias para uma com "/home"
+    - utilizar os atributos "redirectTo", onde será o endereço que for direcionado
+    - "pathMatch" onde serão verificados os pacotes de rotas
+        - exemplo: rotas -> app-routing.module.ts
 
-Rota "home":
-- redirecionar as rotas vazias para uma com "/home"
-- utilizar os atributos "redirectTo", onde será o endereço que for direcionado
-- "pathMatch" onde serão verificados os pacotes de rotas
-    - exemplo: rotas -> app-routing.module.ts
-
-================================================================================================================================================
-
-Interface:
+## Interface:
 - é um arquivo typescript onde é possível implementar métodos que podem ser utilizados em outros componentes quando for ativado;
     - exemplo: rotas -> guards -> iform-candeactivate.ts // 
                rotas -> guards -> alunos-deactivate.guard.ts //
                rotas -> alunos -> aluno-form -> aluno-form.component.ts
 
-================================================================================================================================================
-
-Forms:
+## Forms:
 - o angular apresenta um formato específico para utilizar formulários dentro da sua estrutura.
 - o [(ngModel)] dentro do input é utilizado para guardar as informações e atualizar elas nas variáveis
 - forms template x reactive (data driven)

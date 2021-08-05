@@ -1,9 +1,13 @@
-# aulas_angular
-Curso de angular
+# Aulas - Angular 2+
 
-Link: https://www.youtube.com/watch?v=tPOMG0D57S0&list=PLGxZ4Rq3BOBoSRcKWEdQACbUCNWLczg2G
+> Repositório dedicado aos estudos de Angular 2+ </br>
 
-Observações:
+## Links
+```
+- Playlist curso de angular da Loiane Groner: https://www.youtube.com/watch?v=tPOMG0D57S0&list=PLGxZ4Rq3BOBoSRcKWEdQACbUCNWLczg2G
+```
+
+## Projetos
 - primeiro-projeto: aulas 1 a 8
 - data-binding: aulas 9 a 16
 - diretivas: aulas 25 a 36
