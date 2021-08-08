@@ -389,3 +389,34 @@ em que o componente manipula o serviço, apenas afetando aquele componente, e n�
         
     - Orientado a dados: Formulário é criado programaticamente e é sincronizado com o DOM/HTML
         - exemplos: forms -> app -> data-form
+
+## Estruturação de uma aplicação Angular:
+- Sugestão de estrutura:
+    - Authentication Module
+        - Login
+        - Registration
+        - Reset-password
+        - Forgot-password
+        - Main confirmation
+    
+    - Core Module
+        - Services
+            - Common Services:
+                - HTTP Service - responsável por todas as operações CRUD da aplicação
+                - Error Handling - responsável por mostrar o erro no console ou exibir uma mensagem de erro para o usuário
+                - Utility Services - todas as funções reutilizáveis para a manipulação de dados, como data, strings e helper functions
+                - Storage Service - serviço para salvar dados dentro da aplicação
+        - Guards
+        - Reusable Components
+        - Common Pages
+        - Common Modules
+
+    - Main Dashboard
+        - Application Pages
+        - Navigation
+        - User Interface
+        - Templates
+
+## NgRx
+- https://next.ngrx.io
+- Entity data - https://next.ngrx.io/guide/data

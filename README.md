@@ -5,6 +5,7 @@
 ## Links
 ```
 - Playlist curso de angular da Loiane Groner: https://www.youtube.com/watch?v=tPOMG0D57S0&list=PLGxZ4Rq3BOBoSRcKWEdQACbUCNWLczg2G
+- Como estruturar corretamente o código Angular(How to Properly Structure Angular Code): https://youtu.be/WA95EJGhbLc 
 ```
 
 ## Projetos
