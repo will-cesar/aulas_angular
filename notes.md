@@ -1,4 +1,21 @@
-## Comandos úteis:
+## Definições gerais do Angular
+
+### Ciclo de vida do componente:
+- ngOnChanges: ativado antes do ngOnInit e quando o valor property-binding é atualizado;
+- ngOnInit: quando o Component é inicializado;
+- ngDoCheck: ativado a cada ciclo de verificação de mudanças;
+- ngAfterContentInit: depois de inserir conteúdo externo na view;
+- ngAfterContentChecked: a cada verificação de conteúdo inserido;
+- ngAfterViewChecked: a cada verificação de conteúdo / conteúdo filho;
+- ngOnDestroy: antes da diretiva/component ser destruído;
+
+### Class e style binding:
+- é possível criar uma váriavel dentro de um elemento html através da # mais o nome da variável
+    - exemplo <select #classe (change)="0">
+    - assim fica armazenado dentro da var classe as propriedades do elemento
+    - exemplos de class e style binding: projeto data-binding -> app -> data-binding -> data-binding.component.html
+
+### Comandos úteis:
 - ng new nome-do-projeto --> cria o novo projeto angular;
 - ng serve --> roda a aplicação;
 - ng g c nome-do-componente --> cria um novo componente. O "g" significa gerar, "c" significa componente;
@@ -16,7 +33,7 @@
 - ng e2e --> executa os testes end 2 end no projeto;
 
 
-## Componentes:
+### Componentes:
 - há duas formas de criar um componente, via CLI ou sem o CLI.
 - sem o CLI:
     - é preciso criar o arquivo.component.ts dentro da pasta de componente;
@@ -29,27 +46,14 @@
     tudo automaticamente;
     - já adiciona o componente dentro do modulo da pasta desejada;
 
-## Modulos:
-- ajuda a organizar a aplicação, desenvolvendo diretórios para armazenar arquivos relacionados ao módulo.
-- o app.module.ts é o módulo raiz da aplicação.
-- dentro do módulo utilizasse o decorator @NgModule, nele é declarados alguns metadados, dentre eles o declarations, imports, providers, exports;
-    - declarations: listar todos os componentes, diretivas e pipes que serão utilizados no módulo;
-    - imports: adiciona outros módulos que serão utilizados dentro do módulo específico ou componentes que utilizam módulos externos ao módulo configurado;
-    - providers: declar os serviços que ficarão disponíveis para outros módulos;
-    - bootstrap: é declarado apenas no módulo raiz, o app.module;
-    - exports: exportar as declarações (componentes, diretivas e pipes) para outros módulos;
-    - providers: serviços fornecedores utilizados pelos componentes de dentro do módulo;
 
-- para criar um módulo é só utilizar o comando ng g m node-do-modulo;
-- para que seja possível compartilhar esse módulo com o restante da aplicação, é necessário importar ele dentro do módulo principal (app.module.ts) 
-dentro do metadado "imports" e, dentro do módulo que quer exportar é necessário colocar o metadado "exports" e colocar o nome do componente dentro.
 
-## Templates: 
-- são os arquivos html dentro da pasta do componente
-- para passar variáveis de forma dinâmica entre componente e html é necessário criar ela dentro do arquivo do componente (component.ts);
-    - no arquivo html, pegar a variável pela interpolação {{ nome da variável declarada no component.ts }}
 
-## Diretivas:
+
+
+
+
+### Diretivas:
 - Diretivas são instruções;
 - Diretivas estruturais:
     - Loop:
@@ -68,125 +72,7 @@ dentro do metadado "imports" e, dentro do módulo que quer exportar é necessár
     - utilizado no caso de switch and case;
     - Olhar exemplo em diretivas -> diretiva-ngswitch;
 
-## Serviços:
-- Classes responsáveis por buscar dados no servidor e enfiar dados ao mesmo;
-- serviços também são uteis para não repetição de código na aplicação;
-- fornece lógica de negócio e evita código duplicado;
-- também podera utilizar classes utilitárias;
-- o construtor é o primeiro método que é executado, pois constroe a classe;
-- quando declarada uma variável "static", não é preciso instânciar o serviço para acessar ela em outro componente;
-    - servicos -> cursos -> cursos.service
-- para criar um serviço é necessário criar um arquivo .service.ts;
-- comando para criar: ng g s nome-do-servico;
-    - será criado os arquivos nome-do-arquivo.service.spec.ts e nome-do-arquivo.service.ts.
-- para chamar um service dentro de um componente é necessário importar o mesmo dentro do arquivo do componente.ts desejado;
-- Injeção de dependência:
-    - fazer com que o angular forneça uma instância da classe de serviço, sem precisar instânciar manualmente;
-    - o decorator @Injectable() fornece essa possibilidade de injetar a classe sem instânciar ela;
-    - para fazer a injeção é necessário declarar a classe dentro do constructor no componente
-        - exemplo: constructor(private primeiroServico: PrimeiroServicoService) == declara a variavel "primeiroServico" do tipo "PrimeiroServicoService", 
-        que é a classe importada no arquivo;
-        - o "private" guarda o escopo desse acesso da classe dentro do constructor;
-    - a injeção de dependencia cria a instância do service, dentro do construtor, passando a referencia dessa instância para que uma outra classe
-    possa utilizar também;
-    - O decorator @Injectable() diz para o angular que é uma classe injetável; Exemplo: servicos -> cursos -> cursos.service;
-    - é necessário declarar nos providers do module que será utilizado o serviço com injeção;
-    - exemplo sem e com o uso de injeção de dependencia: servicos -> cursos -> cursos.component;
-
-- Padrão singleton:
-    - ter apenas uma instância da classe para toda a aplicação;
-    - dividir em módulos, declarar os componentes dentro desses módulos, exportar os mesmos e declarar o módulo no app.component;
-    - assim terão componentes replicáveis dentro da aplicação, mas com apenas uma instância dentro do módulo;
-    - com cada componente declarando no provider um serviço, e esse serviço seja replicado em diversos componente, cada um se comportará da maneira
-    em que o componente manipula o serviço, apenas afetando aquele componente, e não outros componente da aplicação;  
-    - é preciso declarar o "providers: []" dentro do decorator @Component;
-        - exemplo: servicos -> criar-curso // servicos -> cursos; 
-
-## Property Binding e Interpolação
-- Data Binding: uma forma de associar informações que estão no componente para o template, e vice e versa. Tipos:
-    - Interpolação "{{ valor }}": (componente -> template);
-    - Property binding "[propriedade]="valor": (componente -> template);
-        - (evento)="handler": (template -> componente);
-    - Two way data binding [(ngModel)]="propriedade";
-
-## Class e style binding:
-- é possível criar uma váriavel dentro de um elemento html através da # mais o nome da variável
-    - exemplo <select #classe (change)="0">
-    - assim fica armazenado dentro da var classe as propriedades do elemento
-    - exemplos de class e style binding: projeto data-binding -> app -> data-binding -> data-binding.component.html
-
-## Event binding:
-- eventos pré definidos no angular;
-- https://developer.mozilla.org/pt-BR/docs/Web/API/Event;
-- exemplos em: projeto data-binding -> app -> data-binding -> data-binding.component.html;
-
-## Two-way data binding:
-- junta o binding de propriedade e de evento em um lugar só;
-- [(ngModel)]="nome" dentro do elemento;
-- exemplos em: projeto data-binding -> app -> meu-form -> meu-form.component.html;
-- ngModel é uma diretiva do angular que pertence ao "FormsModule", onde precisa ser importado no module
-
-## Input properties:
-- é utilizado para passar dados pelo html para outro componente;
-- dentro de um componente pai, colocar um componente pelo seu seletor, dentro dele adicionar uma propriedade que tenha o mesmo nome da váriavel 
-dentro do componente filho, assim essa variável poderá ser acessada no html do componente filho.
-- dentro do componente filho é necessário utilizar o decorator @Input();
-    - no decorator é possível colocar o nome da propriedade externa, que é recebida, e o nome da propriedade interna, armazenada em uma variável;
-        - exemplo: @Input('nome') nomeCurso: string = '';
-
-- Exemplo: 
-    - <app-curso [nome]="nomeDoCurso"></app-curso>
-    - Esse exemplo está em: data-binding -> app -> data-binding -> data-binding.component.html;
-    - o app-curso está em: data-binding -> app -> input-property -> input-property.component.html;
-
-## Output properties:
-- é utilizado para exibir os dados para fora do elemento, pelo componente pai;
-- Esse exemplo está em: data-binding -> app -> data-binding -> data-binding.component.html;
-- o app-curso está em: data-binding -> app -> input-property -> output-property.component.html; 
-
-## Ciclo de vida do componente:
-- ngOnChanges: ativado antes do ngOnInit e quando o valor property-binding é atualizado;
-- ngOnInit: quando o Component é inicializado;
-- ngDoCheck: ativado a cada ciclo de verificação de mudanças;
-- ngAfterContentInit: depois de inserir conteúdo externo na view;
-- ngAfterContentChecked: a cada verificação de conteúdo inserido;
-- ngAfterViewChecked: a cada verificação de conteúdo / conteúdo filho;
-- ngOnDestroy: antes da diretiva/component ser destruído;
-
-## Utilizando pré-processadores:
-- Sass, Lass, stylus
-- é possível gerar um novo projeto já com esses pré processadores instalados:
-    - ng new nome-do-projeto --style=sass;
-    - ng new nome-do-projeto --style=less;
-    - ng new nome-do-projeto --style=stylus;
-
-- ou utilizar já em um projeto existente:
-    - ng set defaults.styleExt scss;
-    - ng set defaults.styleExt less;
-    - ng set defaults.styleExt styl;
-
-## Gerando build de desenvolvimento:
-- ng build;
-- o build é gerado dentro do diretório dist;
-- apresentam 3 arquivos:
-    - index.html == index.html limpo;
-    - main.bundle.js == possui todo o código fonte da aplicação (css e html);
-    - polyfills.bundle.js == código auxiliar ao browser para ler a aplicação;
-
-## Gerando build de produção:
-- ng build --prod;
-- minifica o código js da aplicação;
-- css e templates html já minificados e incluídos em main.bundle.js
-
-# Operador Elvis:
-- Utilizado para identificar caso seja um valor nulo ou não e exibir na tela
-- Exemplo: diretivas -> operador-elvis
-
-## ng-content:
-- Utilizado para passar a informação digitada dentro do seletor principal do componente para dentro do html do componente
-- Exemplo: diretivas -> exemplo-ng-content.component e diretivas -> app.component.html
-
-## Diretiva de atributo:
+### Diretiva de atributo:
 - com o ng g d nome-da-diretiva é possível criar uma diretiva nova no projeto
 - utiliza o decorator de @Directive;
 - no seletor é possível filtrar o tipo de elemento que você quer usar, exemplo:
@@ -199,7 +85,51 @@ dentro do componente filho, assim essa variável poderá ser acessada no html do
 - Seta o elemento dentro de algum método vindo da injeção de dependencia com 3 elementos ('elemento renderizado', 'nome do atributo', 'valor');
 - exemplo: diretivas -> shared -> fundo-amarelo.directive.ts;
 
-## HostListener e HostBinding
+### Diretiva de estrutura
+- com o ng g d nome-da-diretiva é possível criar uma diretiva de estrutura nova no projeto;
+- uma diretiva que irá modificar a estrutura do DOM;
+- exemplo: diretivas -> shared -> ng-else.diretives.ts;
+    - Utilizado o metadado @Input para receber um valor;
+    - utiliza o "set" para "escutar" toda vez q ele for setado, modificado;
+    - quando modificado, o "set" modifica o valor do template da diretiva;
+    - TemplateRef: faz referencia ao template;
+    - ViewContainerRef: faz referencia ao container da view, ou seja, o conteúdo q será renderizado;
+
+### Diretiva Input com property binding
+- com o metadado @Input é posivel colocar um valor na diretiva dentro do html.
+- exemplo: <p [highlight]="'red'" [dafaultColor]="'grey'">
+- assim, o valor colocado no html é passado para o arquivo .ts e tratado conforme solicitado
+- exemplo: diretivas -> shared -> highlight.diretives.ts;
+
+### Event binding:
+- eventos pré definidos no angular;
+- https://developer.mozilla.org/pt-BR/docs/Web/API/Event;
+- exemplos em: projeto data-binding -> app -> data-binding -> data-binding.component.html;
+
+### Forms:
+- o angular apresenta um formato específico para utilizar formulários dentro da sua estrutura.
+- o [(ngModel)] dentro do input é utilizado para guardar as informações e atualizar elas nas variáveis
+- forms template x reactive (data driven)
+    - Orientado a template: Fomulário é criado e configurado no HTML. Angular deduz um FormGroup a partir do HTML
+        - exemplos: forms -> app -> template-form
+        
+    - Orientado a dados: Formulário é criado programaticamente e é sincronizado com o DOM/HTML
+        - exemplos: forms -> app -> data-form
+
+### Gerando build de desenvolvimento:
+- ng build;
+- o build é gerado dentro do diretório dist;
+- apresentam 3 arquivos:
+    - index.html == index.html limpo;
+    - main.bundle.js == possui todo o código fonte da aplicação (css e html);
+    - polyfills.bundle.js == código auxiliar ao browser para ler a aplicação;
+
+### Gerando build de produção:
+- ng build --prod;
+- minifica o código js da aplicação;
+- css e templates html já minificados e incluídos em main.bundle.js
+
+### HostListener e HostBinding
 - HostListener "escuta" o elemento host, ou seja, o elemento hospedeiro da diretiva;
 - pode colocar o nome do evento que será "escutado" no elemento;
 - metadado + nome do evento + function
@@ -210,48 +140,54 @@ dentro do componente filho, assim essa variável poderá ser acessada no html do
 - associa o atributo a uma variável;
     - exemplo: diretivas -> shared -> highlight-mouse.diretives.ts;
 
-## Diretiva Input com property binding
-- com o metadado @Input é posivel colocar um valor na diretiva dentro do html.
-- exemplo: <p [highlight]="'red'" [dafaultColor]="'grey'">
-- assim, o valor colocado no html é passado para o arquivo .ts e tratado conforme solicitado
-- exemplo: diretivas -> shared -> highlight.diretives.ts;
+### Input properties:
+- é utilizado para passar dados pelo html para outro componente;
+- dentro de um componente pai, colocar um componente pelo seu seletor, dentro dele adicionar uma propriedade que tenha o mesmo nome da váriavel 
+dentro do componente filho, assim essa variável poderá ser acessada no html do componente filho.
+- dentro do componente filho é necessário utilizar o decorator @Input();
+    - no decorator é possível colocar o nome da propriedade externa, que é recebida, e o nome da propriedade interna, armazenada em uma variável;
+        - exemplo: @Input('nome') nomeCurso: string = '';
 
-## Diretiva de estrutura
-- com o ng g d nome-da-diretiva é possível criar uma diretiva de estrutura nova no projeto;
-- uma diretiva que irá modificar a estrutura do DOM;
-- exemplo: diretivas -> shared -> ng-else.diretives.ts;
-    - Utilizado o metadado @Input para receber um valor;
-    - utiliza o "set" para "escutar" toda vez q ele for setado, modificado;
-    - quando modificado, o "set" modifica o valor do template da diretiva;
-    - TemplateRef: faz referencia ao template;
-    - ViewContainerRef: faz referencia ao container da view, ou seja, o conteúdo q será renderizado;
+- Exemplo: 
+    - <app-curso [nome]="nomeDoCurso"></app-curso>
+    - Esse exemplo está em: data-binding -> app -> data-binding -> data-binding.component.html;
+    - o app-curso está em: data-binding -> app -> input-property -> input-property.component.html;
 
-## Serviços:
-- Classes responsáveis por buscar dados no servidor e enfiar dados ao mesmo;
-- serviços também são uteis para não repetição de código na aplicação;
-- fornece lógica de negócio e evita código duplicado;
-- também podera utilizar classes utilitárias;
-- o construtor é o primeiro método que é executado, pois constroe a classe;
-- quando declarada uma variável "static", não é preciso instânciar o serviço para acessar ela em outro componente;
-    - servicos -> cursos -> cursos.service
+### Interface:
+- é um arquivo typescript onde é possível implementar métodos que podem ser utilizados em outros componentes quando for ativado;
+    - exemplo: rotas -> guards -> iform-candeactivate.ts // 
+               rotas -> guards -> alunos-deactivate.guard.ts //
+               rotas -> alunos -> aluno-form -> aluno-form.component.ts
 
-- Injeção de dependencia:
-- a injeção de dependencia cria a instância do service, dentro do construtor, passando a referencia dessa instância para que uma outra classe
-possa utilizar também;
-- O decorator @Injectable() diz para o angular que é uma classe injetável; Exemplo: servicos -> cursos -> cursos.service;
-- é necessário declarar nos providers do module que será utilizado o serviço com injeção;
-    - exemplo sem e com o uso de injeção de dependencia: servicos -> cursos -> cursos.component;
+### Modulos:
+- ajuda a organizar a aplicação, desenvolvendo diretórios para armazenar arquivos relacionados ao módulo.
+- o app.module.ts é o módulo raiz da aplicação.
+- dentro do módulo utilizasse o decorator @NgModule, nele é declarados alguns metadados, dentre eles o declarations, imports, providers, exports;
+    - declarations: listar todos os componentes, diretivas e pipes que serão utilizados no módulo;
+    - imports: adiciona outros módulos que serão utilizados dentro do módulo específico ou componentes que utilizam módulos externos ao módulo configurado;
+    - providers: declar os serviços que ficarão disponíveis para outros módulos;
+    - bootstrap: é declarado apenas no módulo raiz, o app.module;
+    - exports: exportar as declarações (componentes, diretivas e pipes) para outros módulos;
+    - providers: serviços fornecedores utilizados pelos componentes de dentro do módulo;
 
-- Padrão singleton:
-- ter apenas uma instância da classe para toda a aplicação;
-- dividir em módulos, declarar os componentes dentro desses módulos, exportar os mesmos e declarar o módulo no app.component;
-- assim terão componentes replicáveis dentro da aplicação, mas com apenas uma instância dentro do módulo;
-- com cada componente declarando no provider um serviço, e esse serviço seja replicado em diversos componente, cada um se comportará da maneira
-em que o componente manipula o serviço, apenas afetando aquele componente, e não outros componente da aplicação;  
-- é preciso declarar o "providers: []" dentro do decorator @Component;
-    - exemplo: servicos -> criar-curso // servicos -> cursos; 
+- para criar um módulo é só utilizar o comando ng g m node-do-modulo;
+- para que seja possível compartilhar esse módulo com o restante da aplicação, é necessário importar ele dentro do módulo principal (app.module.ts) 
+dentro do metadado "imports" e, dentro do módulo que quer exportar é necessário colocar o metadado "exports" e colocar o nome do componente dentro.
 
-## Pipes:
+### ng-content:
+- Utilizado para passar a informação digitada dentro do seletor principal do componente para dentro do html do componente
+- Exemplo: diretivas -> exemplo-ng-content.component e diretivas -> app.component.html
+
+### Operador Elvis:
+- Utilizado para identificar caso seja um valor nulo ou não e exibir na tela
+- Exemplo: diretivas -> operador-elvis
+
+### Output properties:
+- é utilizado para exibir os dados para fora do elemento, pelo componente pai;
+- Esse exemplo está em: data-binding -> app -> data-binding -> data-binding.component.html;
+- o app-curso está em: data-binding -> app -> input-property -> output-property.component.html; 
+
+### Pipes:
 - é como se fosse um filtro de front, onde há formatações de valores dentro do DOM sem passar pelo ts
 - nos pipes é possível colocar parâmetros neles
     - por exemplo nos pipes de number, nele é possível formatar casas decimais 
@@ -291,7 +227,14 @@ em que o componente manipula o serviço, apenas afetando aquele componente, e n�
     - exemplo: pipes -> filtro-array-impuro
     - nesse exemplo, é utilizado o "extends" do FiltroArrayPipe, dessa forma é herdado para dentro do método as outras functions do método extendido
 
-## Rotas:
+### Property Binding e Interpolação
+- Data Binding: uma forma de associar informações que estão no componente para o template, e vice e versa. Tipos:
+    - Interpolação "{{ valor }}": (componente -> template);
+    - Property binding "[propriedade]="valor": (componente -> template);
+        - (evento)="handler": (template -> componente);
+    - Two way data binding [(ngModel)]="propriedade";
+
+### Rotas:
 - é gerado automaticamente pelo angular cli um arquivo chamado app-routing.module
 - nele é possível configurar as rotas principais da aplicação;
 - para configurar, é necessário criar uma varial de rotas, instanciando o "Routes" e aplicando cada objeto especificando qual é a rota a ser utilizada
@@ -374,23 +317,73 @@ em que o componente manipula o serviço, apenas afetando aquele componente, e n�
     - "pathMatch" onde serão verificados os pacotes de rotas
         - exemplo: rotas -> app-routing.module.ts
 
-## Interface:
-- é um arquivo typescript onde é possível implementar métodos que podem ser utilizados em outros componentes quando for ativado;
-    - exemplo: rotas -> guards -> iform-candeactivate.ts // 
-               rotas -> guards -> alunos-deactivate.guard.ts //
-               rotas -> alunos -> aluno-form -> aluno-form.component.ts
+### Serviços:
+- Classes responsáveis por buscar dados no servidor e enfiar dados ao mesmo;
+- serviços também são uteis para não repetição de código na aplicação;
+- fornece lógica de negócio e evita código duplicado;
+- também podera utilizar classes utilitárias;
+- o construtor é o primeiro método que é executado, pois constroe a classe;
+- quando declarada uma variável "static", não é preciso instânciar o serviço para acessar ela em outro componente;
+    - servicos -> cursos -> cursos.service
+- para criar um serviço é necessário criar um arquivo .service.ts;
+- comando para criar: ng g s nome-do-servico;
+    - será criado os arquivos nome-do-arquivo.service.spec.ts e nome-do-arquivo.service.ts.
+- para chamar um service dentro de um componente é necessário importar o mesmo dentro do arquivo do componente.ts desejado;
+- Injeção de dependência:
+    - fazer com que o angular forneça uma instância da classe de serviço, sem precisar instânciar manualmente;
+    - o decorator @Injectable() fornece essa possibilidade de injetar a classe sem instânciar ela;
+    - para fazer a injeção é necessário declarar a classe dentro do constructor no componente
+        - exemplo: constructor(private primeiroServico: PrimeiroServicoService) == declara a variavel "primeiroServico" do tipo "PrimeiroServicoService", 
+        que é a classe importada no arquivo;
+        - o "private" guarda o escopo desse acesso da classe dentro do constructor;
+    - a injeção de dependencia cria a instância do service, dentro do construtor, passando a referencia dessa instância para que uma outra classe
+    possa utilizar também;
+    - O decorator @Injectable() diz para o angular que é uma classe injetável; Exemplo: servicos -> cursos -> cursos.service;
+    - é necessário declarar nos providers do module que será utilizado o serviço com injeção;
+    - exemplo sem e com o uso de injeção de dependencia: servicos -> cursos -> cursos.component;
 
-## Forms:
-- o angular apresenta um formato específico para utilizar formulários dentro da sua estrutura.
-- o [(ngModel)] dentro do input é utilizado para guardar as informações e atualizar elas nas variáveis
-- forms template x reactive (data driven)
-    - Orientado a template: Fomulário é criado e configurado no HTML. Angular deduz um FormGroup a partir do HTML
-        - exemplos: forms -> app -> template-form
-        
-    - Orientado a dados: Formulário é criado programaticamente e é sincronizado com o DOM/HTML
-        - exemplos: forms -> app -> data-form
+- Padrão singleton:
+    - ter apenas uma instância da classe para toda a aplicação;
+    - dividir em módulos, declarar os componentes dentro desses módulos, exportar os mesmos e declarar o módulo no app.component;
+    - assim terão componentes replicáveis dentro da aplicação, mas com apenas uma instância dentro do módulo;
+    - com cada componente declarando no provider um serviço, e esse serviço seja replicado em diversos componente, cada um se comportará da maneira
+    em que o componente manipula o serviço, apenas afetando aquele componente, e não outros componente da aplicação;  
+    - é preciso declarar o "providers: []" dentro do decorator @Component;
+        - exemplo: servicos -> criar-curso // servicos -> cursos; 
 
-## Estruturação de uma aplicação Angular:
+### Templates: 
+- são os arquivos html dentro da pasta do componente
+- para passar variáveis de forma dinâmica entre componente e html é necessário criar ela dentro do arquivo do componente (component.ts);
+    - no arquivo html, pegar a variável pela interpolação {{ nome da variável declarada no component.ts }}
+
+
+
+
+
+### Two-way data binding:
+- junta o binding de propriedade e de evento em um lugar só;
+- [(ngModel)]="nome" dentro do elemento;
+- exemplos em: projeto data-binding -> app -> meu-form -> meu-form.component.html;
+- ngModel é uma diretiva do angular que pertence ao "FormsModule", onde precisa ser importado no module
+
+
+
+
+
+### Utilizando pré-processadores:
+- Sass, Lass, stylus
+- é possível gerar um novo projeto já com esses pré processadores instalados:
+    - ng new nome-do-projeto --style=sass;
+    - ng new nome-do-projeto --style=less;
+    - ng new nome-do-projeto --style=stylus;
+
+- ou utilizar já em um projeto existente:
+    - ng set defaults.styleExt scss;
+    - ng set defaults.styleExt less;
+    - ng set defaults.styleExt styl;
+
+
+### Estruturação de uma aplicação Angular:
 - Sugestão de estrutura:
     - Authentication Module
         - Login
@@ -416,7 +409,3 @@ em que o componente manipula o serviço, apenas afetando aquele componente, e n�
         - Navigation
         - User Interface
         - Templates
-
-## NgRx
-- https://next.ngrx.io
-- Entity data - https://next.ngrx.io/guide/data
